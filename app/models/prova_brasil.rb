@@ -1,6 +1,6 @@
 class ProvaBrasil < ActiveRecord::Base
 
-	attr_accessor :prova_brasil_request_result, :portuguese_average_score,
+	attr_accessor :prova_brasil_hash, :portuguese_average_score,
 	:math_average_score
 
 
@@ -14,37 +14,42 @@ class ProvaBrasil < ActiveRecord::Base
 
 	def request_prova_brasil_report
 		@prova_brasil_request_result = Array.new
+		@math_score_result = Array.new
+		@portuguese_score_result = Array.new
 
 		(@year..@final_year).each do |year|
 			current_prova_brasil = request_prova_brasil(year,@id_state,@id_grade)
+
+			@math_score_result.push(current_prova_brasil.portuguese_score)
+			@portuguese_score_result.push(current_prova_brasil.math_score)
+
 			@prova_brasil_request_result.push(current_prova_brasil)
 		end
+
+		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, :math_score => @math_score_result}
+
 		request_average_to_portuguese
 		request_average_to_math
 	end
 	private :request_prova_brasil_report
 
 	def request_average_to_portuguese
-		total_years = @final_year - @year
-		total_score = 0.0
-
-		@prova_brasil_request_result.each do |current_prova_brasil|
-			total_score += current_prova_brasil.portuguese_score
-		end
-		@portuguese_average_score = total_score/total_years
+		@portuguese_average_score = compute_average_for(@portuguese_score_result)
 	end
 	private :request_average_to_portuguese
 
 	def request_average_to_math
-		total_years = @final_year - @year
-		total_score = 0.0
-
-		@prova_brasil_request_result.each do |current_prova_brasil|
-			total_score += current_prova_brasil.math_score
-		end
-		@math_average_score = total_score/total_years
+		@math_average_score = compute_average_for(@math_score_result)
 	end
 	private :request_average_to_math
+
+	def compute_average_for(data)
+		total_score = 0.0
+		data.each do |current_data|
+			total_score += current_data
+		end
+		return total_score/data.count
+	end
 
 	def request_prova_brasil(year, id_state, id_grade)
 		return ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
