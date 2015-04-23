@@ -7,3 +7,20 @@ $(document).ready ->
     $("#new-request").append "<p>sucesso</p>"
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#new-request").append "<p>ERROR</p>"
+
+jQuery ->
+	Morris.Line({
+	
+		element: 'year',
+		data: [
+			{y: '2012', a:100} ,
+			{y: '2013', a: 75} ,
+			{y: '2014', a:120}
+
+		],
+
+		xkey: 'y'
+		ykeys: ['a']
+		labels: ['Series A']
+
+});
