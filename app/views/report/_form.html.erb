@@ -1,17 +1,23 @@
-<%= form_tag("/report/request_report", method: "get") do %>
+<%= form_tag("/report/request_report", method: "get", :class =>'form-inline') do %>
 
+  <div class="form-group">
   <%= label_tag(:year, "Ano de inicio") %>
-  <%= text_field_tag(:year) %>
-  <br />
+  <%= text_field_tag(:year,nil, class: 'form-control')%>
+  </div>
+  <div class="form-group">
   <%= label_tag(:id_state, "Estado") %>
-  <%= text_field_tag(:id_state) %>
-  <br />
+  <%= text_field_tag(:id_state,nil, class: 'form-control') %>
+  </div>
+  <div class="form-group">
   <%= label_tag(:id_grade, "Turma") %>
-  <%= text_field_tag(:id_grade) %>
-  <br />
+  <%= text_field_tag(:id_grade,nil, class: 'form-control') %>
+  </div>
+  <div class="form-group">
   <%= label_tag(:final_year, "Ano final") %>
-  <%= text_field_tag(:final_year) %>
+  <%= text_field_tag(:final_year,nil, class: 'form-control') %>
+  </div>
 
 
-  <%= submit_tag("Gerar Relatório") %>
+  <%= submit_tag("Gerar Relatório", :class => 'btn btn-default') %>
 <% end %>
+
