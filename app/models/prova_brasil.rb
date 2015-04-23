@@ -10,6 +10,7 @@ class ProvaBrasil < ActiveRecord::Base
 		@id_state = id_state
 		@final_year = final_year
 		request_prova_brasil_report
+	
 	end
 
 	def request_prova_brasil_report
