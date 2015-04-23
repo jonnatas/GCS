@@ -26,10 +26,10 @@ class ProvaBrasil < ActiveRecord::Base
 			@prova_brasil_request_result.push(current_prova_brasil)
 		end
 
-		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, :math_score => @math_score_result}
-
 		request_average_to_portuguese
 		request_average_to_math
+		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, :portguese_average => @portuguese_average_score,
+		 :math_score => @math_score_result, :math_average => @math_average_score}
 	end
 	private :request_prova_brasil_report
 

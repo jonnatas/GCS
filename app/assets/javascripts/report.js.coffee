@@ -4,6 +4,6 @@
 
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
-    $("#new-request").append "<p>sucesso</p>"
+    document.write(data.prova_brasil)
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#new-request").append "<p>ERROR</p>"

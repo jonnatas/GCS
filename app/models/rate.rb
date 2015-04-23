@@ -27,11 +27,12 @@ class Rate < ActiveRecord::Base
 			@rate_request_result.push(current_rate)
 		end
 
-		@rate_hash = {:evasion => @evasion_result, :performance => @performance_result, :distortion => @distortion_result}
-
 		request_average_to_evasion
 		request_average_to_performance
 		request_average_to_distortion
+
+		@rate_hash = {:evasion => @evasion_result, :performance => @performance_result, :distortion => @distortion_result,
+			:evasion_average => @evasion_average, :performance_average => @performance_average, :distortion_average => @distortion_average}
 	end
 	private :request_rate_report
 
@@ -47,7 +48,7 @@ class Rate < ActiveRecord::Base
 	private :request_average_to_performance
 
 	def request_average_to_distortion
-		@performance_average = compute_average_for(@distortion_result)
+		@distortion_average = compute_average_for(@distortion_result)
 	end
 	private :request_average_to_distortion
 

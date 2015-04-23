@@ -1,4 +1,4 @@
-<%= form_tag("/report/request_report",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
+<%= form_tag("/report/request_report.json",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
 
   <div class="form-group">
   <%= label_tag(:year, "Ano de inicio") %>
@@ -16,7 +16,6 @@
   <%= label_tag(:final_year, "Ano final") %>
   <%= text_field_tag(:final_year,nil, class: 'form-control') %>
   </div>
-
 
   <%= submit_tag("Gerar Relatório", :class => 'btn btn-default') %>
 <% end %>
