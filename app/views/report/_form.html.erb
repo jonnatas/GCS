@@ -1,0 +1,17 @@
+<%= form_tag("/report/request_report", method: "get") do %>
+
+  <%= label_tag(:year, "Ano de inicio") %>
+  <%= text_field_tag(:year) %>
+  <br />
+  <%= label_tag(:id_state, "Estado") %>
+  <%= text_field_tag(:id_state) %>
+  <br />
+  <%= label_tag(:id_grade, "Turma") %>
+  <%= text_field_tag(:id_grade) %>
+  <br />
+  <%= label_tag(:final_year, "Ano final") %>
+  <%= text_field_tag(:final_year) %>
+
+
+  <%= submit_tag("Gerar Relatório") %>
+<% end %>
