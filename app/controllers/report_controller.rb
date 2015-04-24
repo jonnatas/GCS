@@ -10,8 +10,9 @@ class ReportController < ApplicationController
 		report_result_hash = {:prova_brasil => @report.prova_brasil.prova_brasil_hash, :rates => @report.rates.rate_hash}
 
 		respond_to do |format|
-			format.json { render json: @report.prova_brasil.prova_brasil_hash}
+			format.json { render json: report_result_hash}
 		end
+		puts report_result_hash
 	end
 
 
