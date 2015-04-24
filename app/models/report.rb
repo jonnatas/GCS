@@ -1,6 +1,6 @@
 class Report
 
-	attr_accessor :prova_brasil, :rates
+	attr_accessor :prova_brasil, :rates, :year
 
 	def initialize(year, id_grade, id_state,final_year)
 		@year = year

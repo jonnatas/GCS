@@ -4,24 +4,29 @@
 
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+  		result = formatDataToPlot(data.prova_brasil.math_score, data.year)
+  		console.log result
     $("#row").append "<div id='prova-brasil-portuguese-report'></div>"
-    plot(data, 'prova-brasil-portuguese-report')
+    plot(result, 'prova-brasil-portuguese-report')
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
 
-
+#Generic Method to plot an array of data at specific div
 plot = (data,div) ->
 	new Morris.Line({
 
 	element: div,
-	data: [
-		{y: '2012', a:10} ,
-		{y: '2013', a: 7,4} ,
-		{y: '2014', a:4}
-	],
-
+	data: data,
 	xkey: 'y'
-	ykeys: ['a']
+	ykeys: ['x']
 	labels: ['Series A']
 
 	})
+#Method to format an array of data to a format that function plot needs
+formatDataToPlot = (data, year)->
+	formatedData = []
+	for value in data by 1
+		formatedData.push {y: "#{year}", x: value}
+		year++
+	return formatedData
+	
