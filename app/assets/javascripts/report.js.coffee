@@ -4,23 +4,24 @@
 
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
-    $("#new-request").append "<p>Sucesso</p>"
+    $("#row").append "<div id='prova-brasil-portuguese-report'></div>"
+    plot(data, 'prova-brasil-portuguese-report')
   ).on "ajax:error", (e, xhr, status, error) ->
-    $("#new-request").append "<p>ERROR</p>"
+    $("#row").append "<p>ERROR</p>"
 
-jQuery ->
-	Morris.Line({
-	
-		element: 'year',
-		data: [
-			{y: '2012', a:100} ,
-			{y: '2013', a: 75} ,
-			{y: '2014', a:120}
 
-		],
+plot = (data,div) ->
+	new Morris.Line({
 
-		xkey: 'y'
-		ykeys: ['a']
-		labels: ['Series A']
+	element: div,
+	data: [
+		{y: '2012', a:10} ,
+		{y: '2013', a: 7,4} ,
+		{y: '2014', a:4}
+	],
 
-});
+	xkey: 'y'
+	ykeys: ['a']
+	labels: ['Series A']
+
+	})
