@@ -5,7 +5,6 @@
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
   		result = formatDataToPlot(data.prova_brasil.math_score, data.year)
-  		console.log result
     $("#row").append "<div id='prova-brasil-portuguese-report'></div>"
     plot(result, 'prova-brasil-portuguese-report')
   ).on "ajax:error", (e, xhr, status, error) ->
@@ -17,8 +16,8 @@ plot = (data,div) ->
 
 	element: div,
 	data: data,
-	xkey: 'y'
-	ykeys: ['x']
+	xkey: 'x'
+	ykeys: ['y']
 	labels: ['Series A']
 
 	})
@@ -26,7 +25,7 @@ plot = (data,div) ->
 formatDataToPlot = (data, year)->
 	formatedData = []
 	for value in data by 1
-		formatedData.push {y: "#{year}", x: value}
+		formatedData.push {x: "#{year}", y: value}
 		year++
 	return formatedData
 	
