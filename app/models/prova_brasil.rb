@@ -21,8 +21,8 @@ class ProvaBrasil < ActiveRecord::Base
 		(@year..@final_year).each do |year|
 			current_prova_brasil = request_prova_brasil(year,@id_state,@id_grade)
 
-			@math_score_result.push(current_prova_brasil.portuguese_score)
-			@portuguese_score_result.push(current_prova_brasil.math_score)
+			@math_score_result.push(current_prova_brasil.math_score)
+			@portuguese_score_result.push(current_prova_brasil.portuguese_score)
 
 			@prova_brasil_request_result.push(current_prova_brasil)
 		end
