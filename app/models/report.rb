@@ -1,5 +1,5 @@
 class Report
-
+	validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "Todos os campos devem estar preenchidos!"
 	attr_accessor :prova_brasil, :rates, :year
 
 	def initialize(year, id_grade, id_state,final_year)
