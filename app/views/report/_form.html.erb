@@ -2,19 +2,24 @@
 
   <div class="form-group">
   <%= label_tag(:year, "Ano de inicio") %>
-  <%= text_field_tag(:year,nil, class: 'form-control')%>
+  <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq, 
+  :selected => params[:year]) , class: 'form-control'  ) %>
+  <%#= text_field_tag(:year,nil, class: 'form-control')%>
   </div>
   <div class="form-group">
   <%= label_tag(:id_state, "Estado") %>
-  <%= text_field_tag(:id_state,nil, class: 'form-control') %>
+  <%= select_tag(:id_state, options_for_select( Rate.all.pluck(:id_state).uniq, 
+  :selected => params[:id_state]) , class: 'form-control'  ) %>
   </div>
   <div class="form-group">
   <%= label_tag(:id_grade, "Turma") %>
-  <%= text_field_tag(:id_grade,nil, class: 'form-control') %>
+  <%= select_tag(:id_grade, options_for_select( Rate.all.pluck(:id_grade).uniq, 
+  :selected => params[:id_grade]) , class: 'form-control'  ) %>
   </div>
   <div class="form-group">
   <%= label_tag(:final_year, "Ano final") %>
-  <%= text_field_tag(:final_year,nil, class: 'form-control') %>
+  <%= select_tag(:final_year, options_for_select( Rate.all.pluck(:year).uniq, 
+  :selected => params[:final_year]) , class: 'form-control'  ) %>
   </div>
 
   <%= submit_tag("Gerar Relatório", :class => 'btn btn-default') %>
