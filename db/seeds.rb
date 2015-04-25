@@ -22,13 +22,13 @@
 		year: 2009, id_state: 1)
 
  	ProvaBrasil.create(id_test: 6, id_grade: 1, total_students: 30, portuguese_score: 5.6, math_score: 8.7,
-		year: 20010, id_state: 1)
+		year: 2010, id_state: 1)
 
  	ProvaBrasil.create(id_test: 7, id_grade: 1, total_students: 30, portuguese_score: 6.6, math_score: 8.7,
-		year: 20011, id_state: 1)
+		year: 2011, id_state: 1)
 
  	ProvaBrasil.create(id_test: 8, id_grade: 1, total_students: 30, portuguese_score: 0, math_score: 8.7,
-		year: 20012, id_state: 1)
+		year: 2012, id_state: 1)
 
 
 
