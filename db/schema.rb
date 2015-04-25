@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422024001) do
+ActiveRecord::Schema.define(version: 20150425170840) do
 
   create_table "prova_brasils", force: true do |t|
     t.integer  "id_test"
@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(version: 20150422024001) do
     t.integer  "year"
     t.integer  "id_grade"
     t.integer  "id_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "states", force: true do |t|
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
