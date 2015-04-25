@@ -3,14 +3,12 @@ class ProvaBrasil < ActiveRecord::Base
 	attr_accessor :prova_brasil_hash, :portuguese_average_score,
 	:math_average_score
 
-
 	def initialize(year, id_grade, id_state,final_year)
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
 		@final_year = final_year
 		request_prova_brasil_report
-	
 	end
 
 	def request_prova_brasil_report
