@@ -8,7 +8,7 @@
   </div>
   <div class="form-group">
   <%= label_tag(:id_state, "Estado") %>
-  <%= select_tag(:id_state, options_for_select( Rate.all.pluck(:id_state).uniq, 
+  <%= select_tag(:id_state, options_for_select( State.all.pluck(:state).uniq, 
   :selected => params[:id_state]) , class: 'form-control'  ) %>
   </div>
   <div class="form-group">
