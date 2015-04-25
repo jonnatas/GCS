@@ -1,11 +1,11 @@
 class Report
-	validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "Todos os campos devem estar preenchidos!"
+	#validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "Todos os campos devem estar preenchidos!"
 	attr_accessor :prova_brasil, :rates, :year
 
-	def initialize(year, id_grade, id_state,final_year)
+	def initialize(year, id_grade, state,final_year)
 		@year = year
 		@id_grade = id_grade
-		@id_state = id_state
+		@id_state = State.id_by_description(state)
 		@final_year = final_year
 		request_report
 	end
