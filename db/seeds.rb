@@ -30,6 +30,12 @@
  	ProvaBrasil.create(id_test: 8, id_grade: 1, total_students: 30, portuguese_score: 0, math_score: 8.7,
 		year: 2012, id_state: 1)
 
+ 	ProvaBrasil.create(id_test: 9, id_grade: 2, total_students: 30, portuguese_score: 3.0, math_score: 3.7,
+		year: 2006, id_state: 1)
+
+ 	ProvaBrasil.create(id_test: 10, id_grade: 3, total_students: 30, portuguese_score: 4.0, math_score: 5.7,
+		year: 2007, id_state: 1)
+
 
 
 	Rate.create(evasion: 15,performance: 10, distortion: 13, year: 2005, id_grade: 1, id_state: 1)
@@ -40,6 +46,8 @@
 	Rate.create(evasion: 12,performance: 8, distortion: 13, year: 2010, id_grade: 1, id_state: 1)
 	Rate.create(evasion: 15,performance: 10, distortion: 13, year: 2011, id_grade: 1, id_state: 1)
 	Rate.create(evasion: 10,performance: 9, distortion: 13, year: 2012, id_grade: 1, id_state: 1)
+	Rate.create(evasion: 15,performance: 10, distortion: 13, year: 2007, id_grade: 2, id_state: 1)
+	Rate.create(evasion: 10,performance: 9, distortion: 13, year: 2008, id_grade: 3, id_state: 1)
 	
 
 
