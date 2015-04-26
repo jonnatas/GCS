@@ -5,8 +5,8 @@
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
   	#request plot for Prova Brasil data
-    $("#portuguese-pb").append "<div id='prova-brasil-portuguese-report'></div>"
-    plot(formatDataToPlotTwoLines(data.prova_brasil.portuguese_score,data.prova_brasil.math_score, data.year), 'prova-brasil-portuguese-report',
+    $("#pb").append "<div id='prova-brasil-report'></div>"
+    plot(formatDataToPlotTwoLines(data.prova_brasil.portuguese_score,data.prova_brasil.math_score, data.year), 'prova-brasil-report',
      ["Português","Matemática"],["#FF5600","#0A62A4"])
 
   	#request plot for Prova Brasil data
