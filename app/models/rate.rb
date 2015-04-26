@@ -15,11 +15,13 @@ class Rate < ActiveRecord::Base
 		@evasion_result = Array.new
 		@performance_result = Array.new
 		@distortion_result = Array.new
-
+		#auxiliar variable to receive the given id_grade and make casts to the value.
+		local_id_grade = @id_grade
 
 		(@year..@final_year).each do |year|
-			current_rate = request_rate(year,@id_state,@id_grade)
-
+			current_rate = request_rate(year,@id_state,local_id_grade)
+			#increments the id_grade through years.
+			local_id_grade = (local_id_grade.to_i + 1).to_s 
 			@evasion_result.push(current_rate.evasion)
 			@performance_result.push(current_rate.performance)
 			@distortion_result.push(current_rate.distortion)
