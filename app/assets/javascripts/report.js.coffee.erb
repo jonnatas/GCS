@@ -5,6 +5,8 @@
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
 
+  	$('#report-container').empty().append(reportHTML)
+
   	$("#report-result").show()
 
   	#request plot for Prova Brasil data
@@ -48,3 +50,44 @@ formatDataToPlot = (data, year)->
 		year++
 	return formatedData
 	
+reportHTML = '		<div id="report-result" style="display: none;">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4>Prova Brasil</h4></div>
+				<div class="panel-body">
+					<div class="row">
+						<div id="portuguese-pb-title" class="col-xs-6">Português</div>
+				 		<div id="math-pb-title" class="col-xs-6">Matemática</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6"><div id="portuguese-pb-graph"></div></div>
+				 		<div class="col-xs-6"><div id="math-pb-graph"></div></div>
+					</div>
+					<div class="row">
+						<div id="portuguese-pb-average" class="col-xs-6"></div>
+				 		<div id="math-pb-average" class="col-xs-6"></div>
+					</div>
+				</div>	
+			</div>
+			<br />
+			<br />
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4>Índices</h4></div>
+				<div class="panel-body">
+					<div class="row">
+						<div id="rate-evasion-title" class="col-md-4">Evasão</div>
+				 		<div id="rate-performance-title" class="col-md-4">Redimento</div>
+				 		<div id="rate-distortion-title" class="col-md-4">Distorção Turma/Idada</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"><div id="rate-evasion-graph"></div></div>
+				 		<div class="col-md-4"><div id="rate-performance-graph"></div></div>
+				 		<div class="col-md-4"><div id="rate-distortion-graph"></div></div>
+					</div>
+					<div class="row">
+						<div id="rate-evasion-average" class="col-md-4"></div>
+				 		<div id="rate-performance-average" class="col-md-4"></div>
+				 		<div id="rate-distortion-average" class="col-md-4"></div>
+					</div>
+				</div>	
+			</div>
+		</div>'
