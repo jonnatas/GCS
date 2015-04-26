@@ -4,17 +4,30 @@
 
 $(document).ready ->
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
-  	#request plot for Prova Brasil data
-    $("#portuguese-pb").append "<div id='prova-brasil-portuguese-report'></div>"
-    plot(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'prova-brasil-portuguese-report',
-     ["Português"],["#FF5600"])
+
+  	$("#report-result").show()
 
   	#request plot for Prova Brasil data
-    $("#math-pb").append "<div id='prova-brasil-math-report'></div>"
-    plot(formatDataToPlot(data.prova_brasil.math_score, data.year), 'prova-brasil-math-report',
-    ["Matemática"], ["#0A62A4"])
+  	plot(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
+  	appendAverageToDiv(data.prova_brasil.portguese_average,"#portuguese-pb-average")
+  	#request plot for Prova Brasil data
+  	plot(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
+  	appendAverageToDiv(data.prova_brasil.math_average,"#math-pb-average")
+
+  	plot(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
+  	appendAverageToDiv(data.rates.evasion_average, '#rate-evasion-average')
+
+  	plot(formatDataToPlot(data.rates.performance, data.year), 'rate-performance-graph', ["Performace"],["#0A62A4"])
+  	appendAverageToDiv(data.rates.performance_average, '#rate-performance-average')
+
+  	plot(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#0A62A4"])
+  	appendAverageToDiv(data.rates.distortion_average, '#rate-distortion-average')
+
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
+
+appendAverageToDiv = (data,div) ->
+	$(div).append "<span>Média #{data.toFixed(2)}</span>"
 
 #Generic Method to plot an array of data at specific div
 plot = (data,div,labels,colors) ->
@@ -33,6 +46,5 @@ formatDataToPlot = (data, year)->
 	for value in data by 1
 		formatedData.push {x: "#{year}", y: value}
 		year++
-	console.log formatedData
 	return formatedData
 	
