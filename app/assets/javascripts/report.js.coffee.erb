@@ -12,9 +12,11 @@ $(document).ready ->
   	#request plot for Prova Brasil data
   	plot(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
   	appendAverageToDiv(data.prova_brasil.portguese_average,"#portuguese-pb-average")
+  	appendDvToDiv(data.prova_brasil.portuguese_desvio_padrao, "#portuguese-pb-average")
   	#request plot for Prova Brasil data
   	plot(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
   	appendAverageToDiv(data.prova_brasil.math_average,"#math-pb-average")
+  	appendDvToDiv(data.prova_brasil.math_desvio_padrao, "#math-pb-average")
 
   	plot(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
   	appendAverageToDiv(data.rates.evasion_average, '#rate-evasion-average')
@@ -30,6 +32,9 @@ $(document).ready ->
 
 appendAverageToDiv = (data,div) ->
 	$(div).append "<span>Média #{data.toFixed(2)}</span>"
+
+appendDvToDiv = (data,div) ->
+	$(div).append "<span>Desvio Padrao #{data.toFixed(2)}</span>"
 
 #Generic Method to plot an array of data at specific div
 plot = (data,div,labels,colors) ->
