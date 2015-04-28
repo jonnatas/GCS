@@ -21,12 +21,13 @@ class ProvaBrasil < ActiveRecord::Base
 
 		(@year..@final_year).each do |year|
 			current_prova_brasil = request_prova_brasil(year,@id_state,local_id_grade)
-			#increments the id_grade through years.
-			local_id_grade = (local_id_grade.to_i + 1).to_s
 			@math_score_result.push(current_prova_brasil.math_score)
 			@portuguese_score_result.push(current_prova_brasil.portuguese_score)
-
 			@prova_brasil_request_result.push(current_prova_brasil)
+			
+			#increments the id_grade through years.
+			local_id_grade = (local_id_grade.to_i + 1).to_s
+
 		end
 
 		request_average_to_portuguese
