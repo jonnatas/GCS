@@ -24,7 +24,7 @@ class ProvaBrasil < ActiveRecord::Base
 			@math_score_result.push(current_prova_brasil.math_score)
 			@portuguese_score_result.push(current_prova_brasil.portuguese_score)
 			@prova_brasil_request_result.push(current_prova_brasil)
-			
+
 			#increments the id_grade through years.
 			local_id_grade = (local_id_grade.to_i + 1).to_s
 
@@ -32,8 +32,16 @@ class ProvaBrasil < ActiveRecord::Base
 
 		request_average_to_portuguese
 		request_average_to_math
-		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, :portguese_average => @portuguese_average_score,
-		 :math_score => @math_score_result, :math_average => @math_average_score}
+		request_desvio_padrao_portuguese
+		request_desvio_padrao_math
+
+		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, 
+		 :portguese_average => @portuguese_average_score,
+		 :portuguese_desvio_padrao => @desvio_padrao_pt,
+		 :math_score => @math_score_result,
+		 :math_average => @math_average_score,
+		 :math_desvio_padrao => @desvio_padrao_math
+		 }
 	end
 	private :request_prova_brasil_report
 
@@ -47,6 +55,16 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 	private :request_average_to_math
 
+	def request_desvio_padrao_portuguese
+		@desvio_padrao_pt = compute_desvio_padrao(@portuguese_score_result)
+	end
+	private :request_desvio_padrao_portuguese
+
+	def request_desvio_padrao_math
+		@desvio_padrao_math = compute_desvio_padrao(@math_score_result)
+	end
+	private :request_desvio_padrao_math
+
 	def compute_average_for(data)
 		total_score = 0.0
 		data.each do |current_data|
@@ -55,8 +73,22 @@ class ProvaBrasil < ActiveRecord::Base
 		return total_score/data.count
 	end
 
+	def compute_desvio_padrao(data)
+		average = compute_average_for(data)
+		total_variance = 0.0
+		data.each do |current_data|
+			total_variance += (current_data - average) * (current_data - average) 
+		end
+
+		total_variance = total_variance/data.count
+
+		return 5
+
+	end
+
 	def request_prova_brasil(year, id_state, id_grade)
 		return ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
 	end
 	private :request_prova_brasil_report
+
 end
