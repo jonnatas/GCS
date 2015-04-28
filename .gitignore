@@ -23,3 +23,6 @@
 
 # Ignore workspace.xml for RubyMine
 .idea/workspace.xml
+
+#Ignore DS_Store for Mac
+._.DS_Store
