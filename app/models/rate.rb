@@ -62,8 +62,8 @@ class Rate < ActiveRecord::Base
 		request_average_to_performance
 		request_average_to_distortion
 		request_standard_deviation_evasion
-		request_average_to_distortion
-		request_average_to_performance
+		request_standard_deviation_performance
+		request_standard_deviation_distortion
 
 		@rate_hash = {:evasion => @evasion_result,
 		 	:performance => @performance_result,
