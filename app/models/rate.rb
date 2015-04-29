@@ -7,7 +7,36 @@ class Rate < ActiveRecord::Base
 		@id_grade = id_grade
 		@id_state = id_state
 		@final_year = final_year
+
+		@final_year = final_year_avaiable( year, id_grade, id_state )
+
 		request_rate_report
+
+	end
+
+	def final_year_avaiable( year, id_grade, id_state )
+
+		final_year = ""
+		#to use in the loop below , increments in one each loop
+		id_grade_local = id_grade
+
+		#loop to test if the line in the table with the params year and id_grade are empty
+		(year.to_i..2012).each do |year_test|
+
+			table_line = Rate.where(:year => year_test,:id_grade => id_grade_local , :id_state => id_state)
+
+			id_grade_local = id_grade_local.to_i + 1 #increments each loop
+			
+			#if table_line is empty, means that we have a final year to use
+			if table_line.empty?
+
+				final_year = (year_test - 1).to_s				
+				break
+			end
+		end
+
+		return final_year
+
 	end
 
 	def request_rate_report
