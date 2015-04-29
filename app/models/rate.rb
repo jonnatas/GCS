@@ -64,6 +64,9 @@ class Rate < ActiveRecord::Base
 		request_standard_deviation_evasion
 		request_standard_deviation_performance
 		request_standard_deviation_distortion
+		request_variance_evasion
+		request_variance_performance
+		request_variance_distortion
 
 		@rate_hash = {:evasion => @evasion_result,
 		 	:performance => @performance_result,
@@ -73,7 +76,10 @@ class Rate < ActiveRecord::Base
 		  	:distortion_average => @distortion_average,
 		  	:evasion_standard_deviation => @standard_deviation_evasion,
 		  	:performance_standard_deviation => @standard_deviation_performance,
-		  	:distortion_standard_deviation => @standard_deviation_distortion}
+		  	:distortion_standard_deviation => @standard_deviation_distortion,
+			:evasion_variance => @variance_evasion,
+		  	:performance_variance => @variance_performance,
+		  	:distortion_variance => @variance_distortion}
 	end
 	private :request_rate_report
 
@@ -108,6 +114,21 @@ class Rate < ActiveRecord::Base
 	end
 	private :request_standard_deviation_distortion
 
+	def request_variance_evasion
+		@variance_evasion = compute_variance(@evasion_result)
+	end
+	private :request_variance_evasion
+
+	def request_variance_performance
+		@variance_performance = compute_variance(@performance_result)
+	end
+	private :request_variance_performance
+
+	def request_variance_distortion
+		@variance_distortion = compute_variance(@distortion_result)
+	end
+	private :request_variance_distortion
+
 
 	def compute_average_for(data)
 		total_score = 0.0
@@ -127,6 +148,16 @@ class Rate < ActiveRecord::Base
 		total_variance = total_variance/data.count
 		standard_deviation 	= total_variance**(0.5)
 		return standard_deviation
+	end
+
+	def compute_variance(data)
+		average = compute_average_for(data)
+		total_variance = 0.0
+		data.each do |current_data|
+			total_variance += (current_data - average)**2 
+		end
+
+		return total_variance
 	end
 
 	def request_rate(year,id_state,id_grade)
