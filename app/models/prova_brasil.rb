@@ -21,8 +21,11 @@ class ProvaBrasil < ActiveRecord::Base
 		#to use in the loop below , increments in one each loop
 		id_grade_local = id_grade
 
+		#will pick the last year avaiable and add 1
+		local_final_year = ProvaBrasil.all.pluck(:year).max.to_i + 1
+
 		#loop to test if the line in the table with the params year and id_grade are empty
-		(year.to_i..2012).each do |year_test|
+		(year.to_i..local_final_year).each do |year_test|
 
 			table_line = ProvaBrasil.where(:year => year_test,:id_grade => id_grade_local , :id_state => id_state)
 
