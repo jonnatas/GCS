@@ -1,4 +1,14 @@
 <%= form_tag("/report/request_report.json",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
+  
+  <script type="text/javascript">
+    $(function() {
+      $('a#clean_report').click(function(event){
+        $('#report-container').empty().append(reportHTML)
+        $('div#report-container').hide();
+      });
+    });
+  </script>
+
 
   <div class="form-group">
   <%= label_tag(:year, "Ano de inicio") %>
@@ -25,5 +35,9 @@
   
 
   <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
+  <a id="clean_report" class="btn btn-default">Limpar</a>
+
 <% end %>
+
+
 
