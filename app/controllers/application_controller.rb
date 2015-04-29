@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  #
+  #Overriding the local_request? method
   protected
   def local_request?
     false
@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     when ActiveRecord::RecordNotFound
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     else
+      super
   end
 
 end
