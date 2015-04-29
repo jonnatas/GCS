@@ -63,13 +63,17 @@ class ProvaBrasil < ActiveRecord::Base
 		request_average_to_math
 		request_standard_deviation_portuguese
 		request_standard_deviation_math
+		request_variance_portuguese
+		request_variance_math
 
 		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, 
 		 :portguese_average => @portuguese_average_score,
 		 :portuguese_standard_deviation => @standard_deviation_pt,
+		 :portuguese_variance => @variance_pt,
 		 :math_score => @math_score_result,
 		 :math_average => @math_average_score,
-		 :math_standard_deviation => @standard_deviation_math
+		 :math_standard_deviation => @standard_deviation_math,
+		 :math_variance => @variance_math
 		 }
 	end
 	private :request_prova_brasil_report
@@ -94,6 +98,16 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 	private :request_standard_deviation_math
 
+	def request_variance_portuguese
+		@variance_pt = compute_variance(@portuguese_score_result)
+	end
+	private :request_variance_portuguese
+
+	def request_variance_math
+		@variance_math = compute_variance(@math_score_result)
+	end
+	private :request_variance_math
+
 	def compute_average_for(data)
 		total_score = 0.0
 		data.each do |current_data|
@@ -113,6 +127,16 @@ class ProvaBrasil < ActiveRecord::Base
 		standard_deviation 	= total_variance**(0.5)
 		return standard_deviation
 
+	end
+
+	def compute_variance(data)
+		average = compute_average_for(data)
+		total_variance = 0.0
+		data.each do |current_data|
+			total_variance += (current_data - average)**2 
+		end
+
+		return total_variance
 	end
 
 	def request_prova_brasil(year, id_state, id_grade)
