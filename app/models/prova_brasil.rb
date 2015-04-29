@@ -10,7 +10,7 @@ class ProvaBrasil < ActiveRecord::Base
 		@id_state = id_state
 		@final_year = final_year
 
-		@final_year = final_year_avaiable( year, id_grade, id_state )
+		#@final_year = final_year_avaiable( year, id_grade, id_state )
 
 		request_prova_brasil_report
 	end
@@ -61,15 +61,15 @@ class ProvaBrasil < ActiveRecord::Base
 
 		request_average_to_portuguese
 		request_average_to_math
-		request_desvio_padrao_portuguese
-		request_desvio_padrao_math
+		request_standard_deviation_portuguese
+		request_standard_deviation_math
 
 		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, 
 		 :portguese_average => @portuguese_average_score,
-		 :portuguese_desvio_padrao => @desvio_padrao_pt,
+		 :portuguese_standard_deviation => @standard_deviation_pt,
 		 :math_score => @math_score_result,
 		 :math_average => @math_average_score,
-		 :math_desvio_padrao => @desvio_padrao_math
+		 :math_standard_deviation => @standard_deviation_math
 		 }
 	end
 	private :request_prova_brasil_report
@@ -84,15 +84,15 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 	private :request_average_to_math
 
-	def request_desvio_padrao_portuguese
-		@desvio_padrao_pt = compute_desvio_padrao(@portuguese_score_result)
+	def request_standard_deviation_portuguese
+		@standard_deviation_pt = compute_standard_deviation(@portuguese_score_result)
 	end
-	private :request_desvio_padrao_portuguese
+	private :request_standard_deviation_portuguese
 
-	def request_desvio_padrao_math
-		@desvio_padrao_math = compute_desvio_padrao(@math_score_result)
+	def request_standard_deviation_math
+		@standard_deviation_math = compute_standard_deviation(@math_score_result)
 	end
-	private :request_desvio_padrao_math
+	private :request_standard_deviation_math
 
 	def compute_average_for(data)
 		total_score = 0.0
@@ -102,16 +102,16 @@ class ProvaBrasil < ActiveRecord::Base
 		return total_score/data.count
 	end
 
-	def compute_desvio_padrao(data)
+	def compute_standard_deviation(data)
 		average = compute_average_for(data)
 		total_variance = 0.0
 		data.each do |current_data|
-			total_variance += (current_data - average) * (current_data - average) 
+			total_variance += (current_data - average)**2 
 		end
 
 		total_variance = total_variance/data.count
-
-		return 5
+		standard_deviation 	= total_variance**(0.5)
+		return standard_deviation
 
 	end
 
