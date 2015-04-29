@@ -11,12 +11,12 @@ $(document).ready ->
 
   	#request plot for Prova Brasil data
   	plot(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
-  	appendAverageToDiv(data.prova_brasil.portguese_average,"#portuguese-pb-average")
-  	appendDvToDiv(data.prova_brasil.portuguese_desvio_padrao, "#portuguese-pb-average")
+  	appendAverageToDiv(data.prova_brasil.portguese_average,"#average-pt")
+  	appendDvToDiv(data.prova_brasil.portuguese_standard_deviation, "#standard-deviation-pt")
   	#request plot for Prova Brasil data
   	plot(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
-  	appendAverageToDiv(data.prova_brasil.math_average,"#math-pb-average")
-  	appendDvToDiv(data.prova_brasil.math_desvio_padrao, "#math-pb-average")
+  	appendAverageToDiv(data.prova_brasil.math_average,"#average-math")
+  	appendDvToDiv(data.prova_brasil.math_standard_deviation, "#standard-deviation-math")
 
   	plot(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
   	appendAverageToDiv(data.rates.evasion_average, '#rate-evasion-average')
@@ -34,7 +34,7 @@ appendAverageToDiv = (data,div) ->
 	$(div).append "<span>Média #{data.toFixed(2)}</span>"
 
 appendDvToDiv = (data,div) ->
-	$(div).append "<span>Desvio Padrao #{data.toFixed(2)}</span>"
+	$(div).append "<span>Desvio Padrão #{data.toFixed(2)}</span>"
 
 #Generic Method to plot an array of data at specific div
 plot = (data,div,labels,colors) ->
@@ -68,8 +68,16 @@ reportHTML = '<div id="report-result" style="display: none;">
 				 		<div class="col-xs-6"><div id="math-pb-graph"></div></div>
 					</div>
 					<div class="row">
-						<div id="portuguese-pb-average" class="col-xs-6"></div>
-				 		<div id="math-pb-average" class="col-xs-6"></div>
+						<div id="portuguese-pb" class="col-xs-6">
+							<div id="average-pt" class="col-xs-4"></div>
+							<div id="standard-deviation-pt" class="col-xs-4"></div>
+							<div id="variance-pt" class="col-xs-4"></div>
+						</div>	
+				 		<div id="math-pb-average" class="col-xs-6">
+				 			<div id="average-math" class="col-xs-4"></div>
+							<div id="standard-deviation-math" class="col-xs-4"></div>
+							<div id="variance-math" class="col-xs-4"></div>
+				 		</div>
 					</div>
 				</div>	
 			</div>
