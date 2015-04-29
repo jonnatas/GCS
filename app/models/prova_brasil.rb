@@ -8,9 +8,9 @@ class ProvaBrasil < ActiveRecord::Base
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
-		@final_year = final_year
+		#@final_year = final_year
 
-		#@final_year = final_year_avaiable( year, id_grade, id_state )
+		@final_year = final_year_avaiable( year, id_grade, id_state )
 
 		request_prova_brasil_report
 	end
