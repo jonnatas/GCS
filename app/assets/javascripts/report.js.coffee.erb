@@ -40,13 +40,13 @@ $(document).ready ->
     $("#row").append "<p>ERROR</p>"
 
 appendAverageToDiv = (data,div) ->
-	$(div).append "<span>Média #{data.toFixed(2)}</span>"
+	$(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
 
 appendStandardVariationToDiv = (data,div) ->
-	$(div).append "<span>Desvio Padrão #{data.toFixed(2)}</span>"
+	$(div).append "<span><b>Desvio Padrão</b> #{data.toFixed(2)}</span>"
 
 appendVarienceToDiv = (data,div) ->
-	$(div).append "<span>Variância #{data.toFixed(2)}</span>"
+	$(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
 
 
 #Generic Method to plot an array of data at specific div
@@ -68,7 +68,9 @@ formatDataToPlot = (data, year)->
 		year++
 	return formatedData
 	
-reportHTML = '<div id="report-result" style="display: none;">
+reportHTML = '
+			<div id="report-result" style="display: none;">
+
 			<div class="panel panel-default">
 				<div class="panel-heading"><h4>Prova Brasil</h4></div>
 				<div class="panel-body">

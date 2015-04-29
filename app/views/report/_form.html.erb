@@ -28,7 +28,7 @@
   :selected => params[:id_state]) , class: 'form-control'  ) %>
   </div>
   <div class="form-group">
-  <%= label_tag(:id_grade, "Turma") %>
+  <%= label_tag(:id_grade, "Turma (Ano)") %>
   <%= select_tag(:id_grade, options_for_select( Rate.all.pluck(:id_grade).uniq, 
   :selected => params[:id_grade]) , class: 'form-control'  ) %>
   </div>
