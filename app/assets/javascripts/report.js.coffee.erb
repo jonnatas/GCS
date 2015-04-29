@@ -19,13 +19,16 @@ $(document).ready ->
   	appendDvToDiv(data.prova_brasil.math_standard_deviation, "#standard-deviation-math")
 
   	plot(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
-  	appendAverageToDiv(data.rates.evasion_average, '#rate-evasion-average')
+  	appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
+  	appendDvToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
 
   	plot(formatDataToPlot(data.rates.performance, data.year), 'rate-performance-graph', ["Performace"],["#0A62A4"])
-  	appendAverageToDiv(data.rates.performance_average, '#rate-performance-average')
+  	appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
+  	appendDvToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
 
   	plot(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#0A62A4"])
-  	appendAverageToDiv(data.rates.distortion_average, '#rate-distortion-average')
+  	appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
+  	appendDvToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
@@ -97,9 +100,21 @@ reportHTML = '<div id="report-result" style="display: none;">
 				 		<div class="col-md-4"><div id="rate-distortion-graph"></div></div>
 					</div>
 					<div class="row">
-						<div id="rate-evasion-average" class="col-md-4"></div>
-				 		<div id="rate-performance-average" class="col-md-4"></div>
-				 		<div id="rate-distortion-average" class="col-md-4"></div>
+						<div id="rate-evasion" class="col-md-4">
+							<div id="average-evasion" class="col-xs-4"></div>
+							<div id="standard-deviation-evasion" class="col-xs-4"></div>
+							<div id="variance-evasion" class="col-xs-4"></div>
+						</div>
+				 		<div id="rate-performance" class="col-md-4">
+				 			<div id="average-perfomance" class="col-xs-4"></div>
+							<div id="standard-deviation-perfomance" class="col-xs-4"></div>
+							<div id="variance-perfomance" class="col-xs-4"></div>
+				 		</div>
+				 		<div id="rate-distortion" class="col-md-4">
+				 			<div id="average-distortion" class="col-xs-4"></div>
+							<div id="standard-deviation-distortion" class="col-xs-4"></div>
+							<div id="variance-distortion" class="col-xs-4"></div>
+				 		</div>
 					</div>
 				</div>	
 			</div>
