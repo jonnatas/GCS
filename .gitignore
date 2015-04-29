@@ -22,4 +22,4 @@
 .DS_Store
 
 # Ignore workspace.xml for RubyMine
-.idea/workspace.xml
+.idea/*
