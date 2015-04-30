@@ -2,17 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
-
-clean_report = () ->
-  ('a#clean_report').click((event) ->
-    $('#report-container').empty().append(reportHTML)
-    $('div#report-container').hide()
-  )
- 
+clear = true
 
 $(document).ready ->
+  clean_report = () ->
+  	if !clear
+  		$('a#clean_report').click((event) ->
+    	 $('#report-container').empty().append(reportHTML)
+    	 $('div#report-container').hide()
+  		)
+
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+
+  	clear = false
 
   	$('#report-container').empty().append(reportHTML)
 
