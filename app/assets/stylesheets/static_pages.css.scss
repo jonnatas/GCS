@@ -3,36 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.navbar{
-  position: fixed;
-  top:0;
-  left:0;
-  background-color: white;
-  z-index: 9999;
-  width:100%;
-  border-radius:0;
-}
-
-.navbar .container{
-  position: relative;
-  margin-top:15px;
-}
-
-.navbar a{
-  color: #5a5a5a;
-  font-size: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.navbar .pull-right a {
-  padding-left:20px;
-
-}
-
-.navbar li{
-  display: inline;
-}
 
 .servicos{
   height:100%;
