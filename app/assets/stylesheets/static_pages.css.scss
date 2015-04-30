@@ -2,7 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html, body {
+  height: 100%;
 
+}
 
 .servicos{
   height:100%;
@@ -48,6 +51,7 @@
 
 
 .sobre{
+  position: relative;
   height: 100%;
   background-color:rgb(102,102,102);
 
@@ -57,11 +61,13 @@
   margin-top:110px;
   margin-bottom:70px;
   color:white;
+  text-align: center;
 }
 
 .sobre p{
   font-size: 23px;
   color:white;
+  text-align: center;
 }
 
 .fim{
