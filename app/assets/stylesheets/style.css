@@ -1,19 +1,4 @@
-html, body {
-    height: 100%;
-}
-
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -75px; /* the bottom margin is the negative value of the footer's height */
-}
-.footer, .push {
-    height: 75px; /* .push must be the same height as .footer */
-
-}
-
-/*.navbar{
+.navbar{
 position: fixed;
 top:0;
 left:0;
@@ -44,7 +29,7 @@ border-radius:0;
 
 .navbar li{
 	display: inline;
-}*/
+}
 
 .servicos{
 	height:100%;
@@ -104,10 +89,11 @@ border-radius:0;
 .sobre p{
 	font-size: 23px;
 	color:white;
+	text-align: left;
 }
 
 .footer{
-	
+	height:75px;
 	background-color:black;
 }
 
