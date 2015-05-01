@@ -61,16 +61,12 @@ class Rate < ActiveRecord::Base
 			@rate_request_result.push(current_rate)
 		end
 
-		request_average_to_evasion
-		request_average_to_performance
-		request_average_to_distortion
-		request_standard_deviation_evasion
-		request_standard_deviation_performance
-		request_standard_deviation_distortion
-		request_variance_evasion
-		request_variance_performance
-		request_variance_distortion
+		request_analise_data
+		generate_hash_result
+	end
+	private :request_rate_report
 
+	def generate_hash_result
 		@rate_hash = {:evasion => @evasion_result,
 		 	:performance => @performance_result,
 		 	:distortion => @distortion_result,
@@ -84,8 +80,18 @@ class Rate < ActiveRecord::Base
 		  	:performance_variance => @variance_performance,
 		  	:distortion_variance => @variance_distortion}
 	end
-	private :request_rate_report
 
+	def request_analise_data
+		request_average_to_evasion
+		request_average_to_performance
+		request_average_to_distortion
+		request_standard_deviation_evasion
+		request_standard_deviation_performance
+		request_standard_deviation_distortion
+		request_variance_evasion
+		request_variance_performance
+		request_variance_distortion
+	end
 
 	def request_average_to_evasion
 		@evasion_average = compute_average_for(@evasion_result)

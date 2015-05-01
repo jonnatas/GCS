@@ -59,16 +59,15 @@ class ProvaBrasil < ActiveRecord::Base
 
 			#increments the id_grade through years.
 			local_id_grade = (local_id_grade.to_i + 1).to_s
-
 		end
 
-		request_average_to_portuguese
-		request_average_to_math
-		request_standard_deviation_portuguese
-		request_standard_deviation_math
-		request_variance_portuguese
-		request_variance_math
+		request_analise_data
+		generate_hash_result
+	end
+	private :request_prova_brasil_report
 
+
+	def generate_hash_result
 		@prova_brasil_hash = {:portuguese_score => @portuguese_score_result, 
 		 :portguese_average => @portuguese_average_score,
 		 :portuguese_standard_deviation => @standard_deviation_pt,
@@ -79,7 +78,15 @@ class ProvaBrasil < ActiveRecord::Base
 		 :math_variance => @variance_math
 		 }
 	end
-	private :request_prova_brasil_report
+
+	def request_analise_data
+		request_average_to_portuguese
+		request_average_to_math
+		request_standard_deviation_portuguese
+		request_standard_deviation_math
+		request_variance_portuguese
+		request_variance_math
+	end
 
 	def request_average_to_portuguese
 		@portuguese_average_score = compute_average_for(@portuguese_score_result)
@@ -143,7 +150,7 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 
 	def request_prova_brasil(year, id_state, id_grade)
-		return ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
+		ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
 	end
 	private :request_prova_brasil_report
 
