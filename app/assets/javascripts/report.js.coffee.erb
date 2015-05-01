@@ -42,7 +42,7 @@ $(document).ready ->
   	appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
 
-  	plot(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#0A62A4"])
+  	plot(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
   	appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
@@ -71,6 +71,7 @@ plot = (data,div,labels,colors) ->
 	labels: labels
 	lineColors: colors
 	})
+
 #Method to format an array of data to a format that function plot needs
 formatDataToPlot = (data, year)->
 	formatedData = []
@@ -115,7 +116,7 @@ reportHTML = '
 					<div class="row">
 						<div id="rate-evasion-title" class="col-md-4">Evasão</div>
 				 		<div id="rate-performance-title" class="col-md-4">Redimento</div>
-				 		<div id="rate-distortion-title" class="col-md-4">Distorção Turma/Idada</div>
+				 		<div id="rate-distortion-title" class="col-md-4">Distorção Turma/Idade</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4"><div id="rate-evasion-graph"></div></div>
