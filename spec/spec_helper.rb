@@ -18,9 +18,17 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 
-require 'yaml'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
+require 'yaml'
+
+require 'simplecov'
+SimpleCov.start 'rails'
+Dir[Rails.root.join("app/models/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("app/controllers/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("app/lib/**/*.rb")].each { |f| require f }
+
+
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

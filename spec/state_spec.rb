@@ -11,4 +11,5 @@ describe State do
       expect(@state_id).to eq(1)
     end
 
+
 end
