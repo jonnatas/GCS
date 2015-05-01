@@ -4,11 +4,10 @@ class ProvaBrasil < ActiveRecord::Base
 	:math_average_score
 
 
-	def initialize(year, id_grade, id_state,final_year)
+	def initialize(year, id_grade, id_state)
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
-		#@final_year = final_year
 
 		@final_year = final_year_avaiable( year, id_grade, id_state )
 

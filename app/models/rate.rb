@@ -2,11 +2,10 @@ class Rate < ActiveRecord::Base
 
 	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
 
-	def initialize(year, id_grade, id_state,final_year)
+	def initialize(year, id_grade, id_state)
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
-		#@final_year = final_year
 
 		@final_year = final_year_avaiable( year, id_grade, id_state )
 
