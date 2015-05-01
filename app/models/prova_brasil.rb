@@ -146,7 +146,7 @@ class ProvaBrasil < ActiveRecord::Base
 			total_variance += (current_data - average)**2 
 		end
 
-		return total_variance
+		return total_variance/data.count
 	end
 
 	def request_prova_brasil(year, id_state, id_grade)
