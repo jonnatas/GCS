@@ -1,13 +1,11 @@
-<div class = "navbar">
-    <div class = "container">
-      <ul class = "pull-left">
-        <li><a href="#">EnTurma</a></li>
-      </ul>
+<header class="navbar navbar-fixed-top navbar-inverse">  <div class = "container">
+      <%= link_to "EnTurma", root_path, id: "logo" %>
 
-      <ul class="pull-right">
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#sobre" >Sobre</a></li>
-        <li><a href="#">Contato</a></li>
-      </ul>
-    </div>
+    <ul class="pull-right">
+      <%= link_to "Serviços", '/static_pages/home#servicos' %>
+      <%= link_to "Sobre", '/static_pages/home#sobre' %>
+      <%= link_to "Contato", '#' %>
+
+    </ul>
   </div>
+</header>
