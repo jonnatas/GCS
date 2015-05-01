@@ -2,21 +2,29 @@
 <html>
 	<head>
 	  <title>EnTurma</title>
-	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	        
+	  
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
-      <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css">
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
       <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
-      <%= render 'shared/navigation' %>
+      <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css">
     </head>
 	<body>
+<div class="wrapper">
+
+	<%= render 'shared/navigation' %>
 
         <br><br>
 		<%= yield %>
 
-	</body>
-    <footer>
-      <%= render 'shared/footer' %>
 
-    </footer>
+	<div class="push"></div>
+</div>
+	<div class="footer">
+	<%= render 'shared/footer' %>
+	</div>
+	</body>
+    
 </html>

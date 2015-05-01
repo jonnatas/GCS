@@ -1,4 +1,19 @@
-.navbar{
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -75px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 75px; /* .push must be the same height as .footer */
+
+}
+
+/*.navbar{
 position: fixed;
 top:0;
 left:0;
@@ -14,7 +29,7 @@ border-radius:0;
 }
 
 .navbar a{
-  color: #5a5a5a;
+  color: white;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
@@ -29,7 +44,7 @@ border-radius:0;
 
 .navbar li{
 	display: inline;
-}
+}*/
 
 .servicos{
 	height:100%;
@@ -91,12 +106,12 @@ border-radius:0;
 	color:white;
 }
 
-.fim{
-	height: 75px;
+.footer{
+	
 	background-color:black;
 }
 
-.fim h4{
+.footer h4{
 	color: white;
 	margin-top:30px;	
 }
