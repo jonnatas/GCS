@@ -14,6 +14,12 @@ describe "#initialize"
      expect(@report.instance_variable_get(:@id_state)).to eq(1)
   end
 
+describe "#request_report" 
+	it "create prova_brasil and rate object and return a hash with this objects and year" do
+		expect(:@report_result_hash).not_to eq(nil)
+	end  
+
+
 
 
 
