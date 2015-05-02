@@ -23,3 +23,5 @@
 
 # Ignore workspace.xml for RubyMine
 .idea/*
+
+/coverage

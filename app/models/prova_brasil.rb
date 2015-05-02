@@ -9,12 +9,11 @@ class ProvaBrasil < ActiveRecord::Base
 		@id_grade = id_grade
 		@id_state = id_state
 
-		@final_year = final_year_avaiable( year, id_grade, id_state )
+		@final_year = ProvaBrasil.final_year_avaiable( year, id_grade, id_state )
 
-		request_prova_brasil_report
 	end
 
-	def final_year_avaiable( year, id_grade, id_state )
+	def self.final_year_avaiable( year, id_grade, id_state )
 
 		final_year = ""
 		#to use in the loop below , increments in one each loop
@@ -33,7 +32,7 @@ class ProvaBrasil < ActiveRecord::Base
 			#if table_line is empty, means that we have a final year to use
 			if table_line.empty?
 
-				final_year = (year_test - 1).to_s				
+				final_year = (year_test - 1).to_s
 				break
 			end
 		end
@@ -63,7 +62,6 @@ class ProvaBrasil < ActiveRecord::Base
 		request_analise_data
 		generate_hash_result
 	end
-	private :request_prova_brasil_report
 
 
 	def generate_hash_result
@@ -151,6 +149,6 @@ class ProvaBrasil < ActiveRecord::Base
 	def request_prova_brasil(year, id_state, id_grade)
 		ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
 	end
-	private :request_prova_brasil_report
+	private :request_prova_brasil
 
 end

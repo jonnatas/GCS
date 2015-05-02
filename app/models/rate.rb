@@ -29,7 +29,7 @@ class Rate < ActiveRecord::Base
 			#if table_line is empty, means that we have a final year to use
 			if table_line.empty?
 
-				final_year = (year_test - 1).to_s				
+				final_year = (year_test - 1).to_s
 				break
 			end
 		end
@@ -56,6 +56,8 @@ class Rate < ActiveRecord::Base
 
 			@rate_request_result.push(current_rate)
 		end
+		request_analise_data
+		generate_hash_result
 	end
 	private :request_rate_report
 
@@ -152,7 +154,7 @@ class Rate < ActiveRecord::Base
 		return standard_deviation
 	end
 
-	def x(data)
+	def compute_variance(data)
 		average = compute_average_for(data)
 		total_variance = 0.0
 		data.each do |current_data|
