@@ -6,7 +6,6 @@ class Report
 		@year = year
 		@id_grade = id_grade
 		@id_state = State.id_by_description(state)
-		request_report
 	end
 
 	def request_report
@@ -17,6 +16,6 @@ class Report
 		 :year => @year}
 
 	end
-	private :request_report
+	public :request_report
 
 end
