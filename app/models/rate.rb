@@ -32,7 +32,7 @@ class Rate < ActiveRecord::Base
 			#if table_line is empty, means that we have a final year to use
 			if table_line.empty?
 
-				final_year = (year_test - 1).to_s				
+				final_year = (year_test - 1).to_s
 				break
 			end
 		end
