@@ -11,7 +11,6 @@ class ProvaBrasil < ActiveRecord::Base
 
 		@final_year = final_year_avaiable( year, id_grade, id_state )
 
-		request_prova_brasil_report
 	end
 
 	def final_year_avaiable( year, id_grade, id_state )
@@ -63,7 +62,6 @@ class ProvaBrasil < ActiveRecord::Base
 		request_analise_data
 		generate_hash_result
 	end
-	private :request_prova_brasil_report
 
 
 	def generate_hash_result
@@ -151,6 +149,6 @@ class ProvaBrasil < ActiveRecord::Base
 	def request_prova_brasil(year, id_state, id_grade)
 		ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
 	end
-	private :request_prova_brasil_report
+	private :request_prova_brasil
 
 end

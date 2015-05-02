@@ -26,6 +26,7 @@ require 'simplecov'
 SimpleCov.start 'rails'
 Dir[Rails.root.join("app/models/**/*.rb")].each { |f| require f }
 Dir[Rails.root.join("app/controllers/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("app/views/**/*.rb")].each { |f| require f }
 Dir[Rails.root.join("app/lib/**/*.rb")].each { |f| require f }
 
 
