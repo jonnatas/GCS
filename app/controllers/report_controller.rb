@@ -6,7 +6,7 @@ class ReportController < ApplicationController
 
 	def request_report
 		@report = Report.new(params[:year],params[:id_grade],params[:id_state])
-
+		@report.request_report
 		respond_to do |format|
 			format.json { render json: @report.report_result_hash}
 		end
