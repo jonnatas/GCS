@@ -6,11 +6,8 @@ class Rate < ActiveRecord::Base
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
-
 		@final_year = final_year_avaiable( year, id_grade, id_state )
-
 		request_rate_report
-
 	end
 
 	def final_year_avaiable( year, id_grade, id_state )
@@ -59,9 +56,6 @@ class Rate < ActiveRecord::Base
 
 			@rate_request_result.push(current_rate)
 		end
-
-		request_analise_data
-		generate_hash_result
 	end
 	private :request_rate_report
 
@@ -158,7 +152,7 @@ class Rate < ActiveRecord::Base
 		return standard_deviation
 	end
 
-	def compute_variance(data)
+	def x(data)
 		average = compute_average_for(data)
 		total_variance = 0.0
 		data.each do |current_data|
