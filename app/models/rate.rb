@@ -6,11 +6,14 @@ class Rate < ActiveRecord::Base
 		@year = year
 		@id_grade = id_grade
 		@id_state = id_state
-		@final_year = final_year_avaiable( year, id_grade, id_state )
-		request_rate_report
+		@final_year = Rate.final_year_avaiable( year, id_grade, id_state )
+
+		puts "&&&&&&&&&&&&&&&&&&&&#{@year.class}"
+		puts "&&&&&&&&&&&&&&&&&&&&#{@final_year.class}"
+		
 	end
 
-	def final_year_avaiable( year, id_grade, id_state )
+	def self.final_year_avaiable( year, id_grade, id_state )
 
 		final_year = ""
 		#to use in the loop below , increments in one each loop
@@ -59,7 +62,7 @@ class Rate < ActiveRecord::Base
 		request_analise_data
 		generate_hash_result
 	end
-	private :request_rate_report
+
 
 	def generate_hash_result
 		@rate_hash = {:evasion => @evasion_result,

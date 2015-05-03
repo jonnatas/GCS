@@ -13,6 +13,7 @@ class Report
 		prova_brasil.request_prova_brasil_report
 
 		rates = Rate.new(@year,@id_grade,@id_state)
+		rates.request_rate_report
 
 		@report_result_hash = {:prova_brasil => prova_brasil.prova_brasil_hash, :rates => rates.rate_hash,
 		 :year => @year}
