@@ -32,6 +32,10 @@ describe ProvaBrasil do
       expect(variance.round(4)).to eq(7.9175)
     end
 
-  
+  describe "#compute_standard_deviation"
+    it "Verify if the standard deviation calculation is correct" do
+      deviation = @prova_brasil.compute_standard_deviation([0.0,3.6,5.6,6.6,6.6,7.0,8.6,9.6])
+      expect(deviation).to eq(2.8138052526783013)
+    end
 
 end
