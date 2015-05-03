@@ -7,7 +7,7 @@ class Rate < ActiveRecord::Base
 		@id_grade = id_grade
 		@id_state = id_state
 		@final_year = Rate.final_year_avaiable( year, id_grade, id_state )
-		
+
 	end
 
 	def self.final_year_avaiable( year, id_grade, id_state )

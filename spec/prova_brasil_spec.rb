@@ -23,19 +23,10 @@ describe ProvaBrasil do
   describe "#final_year_avaiable"
     it "take the state, grade and year and return the final year avaiable for the current prova_brasil" do
       @final_year = ProvaBrasil.final_year_avaiable(@year,@id_grade,@id_state)
-      expect(@final_year).to eq("2011")
+      expect(@final_year).to eq("2010")
     end
 
-  describe "#compute_variance"
-    it "Verify if the variance calculus is correct" do
-      variance = @prova_brasil.compute_variance([0.0,3.6,5.6,6.6,6.6,7.0,8.6,9.6])
-      expect(variance.round(4)).to eq(7.9175)
-    end
 
-  describe "#compute_standard_deviation"
-    it "Verify if the standard deviation calculation is correct" do
-      deviation = @prova_brasil.compute_standard_deviation([0.0,3.6,5.6,6.6,6.6,7.0,8.6,9.6])
-      expect(deviation).to eq(2.8138052526783013)
-    end
+
 
 end
