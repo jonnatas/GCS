@@ -1,5 +1,5 @@
 class Rate < ActiveRecord::Base
-
+	include ReportHelper
 	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
 
 	def initialize(year, id_grade, id_state)
@@ -7,9 +7,6 @@ class Rate < ActiveRecord::Base
 		@id_grade = id_grade
 		@id_state = id_state
 		@final_year = Rate.final_year_avaiable( year, id_grade, id_state )
-
-		puts "&&&&&&&&&&&&&&&&&&&&#{@year.class}"
-		puts "&&&&&&&&&&&&&&&&&&&&#{@final_year.class}"
 		
 	end
 
@@ -92,80 +89,50 @@ class Rate < ActiveRecord::Base
 	end
 
 	def request_average_to_evasion
-		@evasion_average = compute_average_for(@evasion_result)
+		@evasion_average = ReportHelper.compute_average_for(@evasion_result)
 	end
 	private :request_average_to_evasion
 
 	def request_average_to_performance
-		@performance_average = compute_average_for(@performance_result)
+		@performance_average = ReportHelper.compute_average_for(@performance_result)
 	end
 	private :request_average_to_performance
 
 	def request_average_to_distortion
-		@distortion_average = compute_average_for(@distortion_result)
+		@distortion_average = ReportHelper.compute_average_for(@distortion_result)
 	end
 	private :request_average_to_distortion
 
 	def request_standard_deviation_evasion
-		@standard_deviation_evasion = compute_standard_deviation(@evasion_result)
+		@standard_deviation_evasion = ReportHelper.compute_standard_deviation(@evasion_result)
 	end
 	private :request_standard_deviation_evasion
 
 	def request_standard_deviation_performance
-		@standard_deviation_performance = compute_standard_deviation(@performance_result)
+		@standard_deviation_performance = ReportHelper.compute_standard_deviation(@performance_result)
 	end
 	private :request_standard_deviation_performance
 
 	def request_standard_deviation_distortion
-		@standard_deviation_distortion = compute_standard_deviation(@distortion_result)
+		@standard_deviation_distortion = ReportHelper.compute_standard_deviation(@distortion_result)
 	end
 	private :request_standard_deviation_distortion
 
 	def request_variance_evasion
-		@variance_evasion = compute_variance(@evasion_result)
+		@variance_evasion = ReportHelper.compute_variance(@evasion_result)
 	end
 	private :request_variance_evasion
 
 	def request_variance_performance
-		@variance_performance = compute_variance(@performance_result)
+		@variance_performance = ReportHelper.compute_variance(@performance_result)
 	end
 	private :request_variance_performance
 
 	def request_variance_distortion
-		@variance_distortion = compute_variance(@distortion_result)
+		@variance_distortion = ReportHelper.compute_variance(@distortion_result)
 	end
 	private :request_variance_distortion
 
-
-	def compute_average_for(data)
-		total_score = 0.0
-		data.each do |current_data|
-			total_score += current_data
-		end
-		return total_score/data.count
-	end
-
-	def compute_standard_deviation(data)
-		average = compute_average_for(data)
-		total_variance = 0.0
-		data.each do |current_data|
-			total_variance += (current_data - average)**2 
-		end
-
-		total_variance = total_variance/data.count
-		standard_deviation 	= total_variance**(0.5)
-		return standard_deviation
-	end
-
-	def compute_variance(data)
-		average = compute_average_for(data)
-		total_variance = 0.0
-		data.each do |current_data|
-			total_variance += (current_data - average)**2 
-		end
-
-		return total_variance/data.count
-	end
 
 	def request_rate(year,id_state,id_grade)
 		return Rate.where(:year => year, :id_state => id_state, :id_grade => id_grade).first
