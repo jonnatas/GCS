@@ -16,6 +16,5 @@
 //= require raphael
 //= require morris
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
-//= require_tree .
+
 
