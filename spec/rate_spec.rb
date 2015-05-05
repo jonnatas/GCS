@@ -4,6 +4,7 @@ require_relative'../app/models/rate'
 describe Report do
 	before :each do
 		@rate = Rate.new(2005,1,1)
+		@rate.request_rate_report
 	end
 
 	describe "#initialize"
@@ -30,6 +31,49 @@ describe Report do
 	      expect(new_rate.id_state).to eq(1)
 	    end
 
-	
+	describe "#request_average_to_evasion"
+		it "Take de evasion reports and compute de average" do
+			expect(@rate.instance_variable_get(:@evasion_average)).to eq(12.375)
+		end
+
+	describe "#request_average_to_performance"
+		it "Take de performance reports and compute de average" do
+			expect(@rate.instance_variable_get(:@performance_average)).to eq(9.125)
+		end
+
+	describe "#request_average_to_distortion"
+		it "Take de distortion reports and compute de average" do
+			expect(@rate.instance_variable_get(:@distortion_average)).to eq(13.0)
+		end
+
+	describe "#request_standard_deviation_evasion"
+		it "Take de evasion reports and compute de standard deviation" do
+			expect(@rate.instance_variable_get(:@standard_deviation_evasion)).to eq(2.1758618981911515)
+		end
+
+	describe "#request_standard_deviation_performance"
+		it "Take de performance reports and compute de standard deviation" do
+			expect(@rate.instance_variable_get(:@standard_deviation_performance)).to eq(0.7806247497997998)
+		end
+
+	describe "#request_standard_deviation_distortion"
+		it "Take de distortion reports and compute de standard deviation" do
+			expect(@rate.instance_variable_get(:@standard_deviation_distortion)).to eq(0.0)
+		end
+
+	describe "#request_variance_evasion"
+		it "Take de evasion reports and compute de varience" do
+			expect(@rate.instance_variable_get(:@variance_evasion)).to eq(4.734375)
+		end
+
+	describe "#request_variance_performance"
+		it "Take de performance reports and compute de varience" do
+			expect(@rate.instance_variable_get(:@variance_performance)).to eq(0.609375)
+		end
+
+	describe "#request_variance_distortion"
+		it "Take de distortion reports and compute de varience" do
+			expect(@rate.instance_variable_get(:@variance_distortion)).to eq(0.0)
+		end
   
 end
