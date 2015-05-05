@@ -10,7 +10,6 @@ class ProvaBrasil < ActiveRecord::Base
 		@id_state = id_state
 
 		@final_year = ProvaBrasil.final_year_avaiable( year, id_grade, id_state )
-
 	end
 
 	def self.final_year_avaiable( year, id_grade, id_state )
@@ -118,6 +117,5 @@ class ProvaBrasil < ActiveRecord::Base
 	def request_prova_brasil(year, id_state, id_grade)
 		ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first
 	end
-	private :request_prova_brasil
 
 end

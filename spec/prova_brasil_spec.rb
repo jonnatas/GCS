@@ -26,7 +26,16 @@ describe ProvaBrasil do
       expect(@final_year).to eq("2010")
     end
 
-
-
-
+  describe "#request_prova_brasil"
+    it "Take de state, grade and year and return a ProvaBrasil object from DB" do
+      new_prova_brasil = @prova_brasil.request_prova_brasil(2005,1,1)
+      expect(new_prova_brasil.id).to eq(1)
+      expect(new_prova_brasil.id_test).to eq(1)
+      expect(new_prova_brasil.id_grade).to eq(1)
+      expect(new_prova_brasil.total_students).to eq(30)
+      expect(new_prova_brasil.portuguese_score).to eq(6.6)
+      expect(new_prova_brasil.math_score).to eq(6.7)
+      expect(new_prova_brasil.year).to eq(2005)
+      expect(new_prova_brasil.id_state).to eq(1)
+    end
 end
