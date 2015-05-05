@@ -38,7 +38,6 @@ class Rate < ActiveRecord::Base
 	end
 
 	def request_rate_report
-		@rate_request_result = Array.new
 		@evasion_result = Array.new
 		@performance_result = Array.new
 		@distortion_result = Array.new
@@ -52,9 +51,8 @@ class Rate < ActiveRecord::Base
 			@evasion_result.push(current_rate.evasion)
 			@performance_result.push(current_rate.performance)
 			@distortion_result.push(current_rate.distortion)
-
-			@rate_request_result.push(current_rate)
 		end
+
 		request_analise_data
 		generate_hash_result
 	end
