@@ -21,28 +21,28 @@ $(document).ready ->
   	$("#report-result").show()
 
   	#request plot for Prova Brasil data
-  	plot(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
+  	plotBar(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
   	appendAverageToDiv(data.prova_brasil.portguese_average,"#average-pt")
   	appendStandardVariationToDiv(data.prova_brasil.portuguese_standard_deviation, "#standard-deviation-pt")
   	appendVarienceToDiv(data.prova_brasil.portuguese_variance, "#variance-pt")
 
   	#request plot for Prova Brasil data
-  	plot(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
+  	plotBar(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
   	appendAverageToDiv(data.prova_brasil.math_average,"#average-math")
   	appendStandardVariationToDiv(data.prova_brasil.math_standard_deviation, "#standard-deviation-math")
   	appendVarienceToDiv(data.prova_brasil.math_variance, "#variance-math")
 
-  	plot(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
+  	plotLine(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
   	appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
   	appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
   	appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
 
-  	plot(formatDataToPlot(data.rates.performance, data.year), 'rate-performance-graph', ["Performace"],["#0A62A4"])
+  	plotLine(formatDataToPlot(data.rates.performance, data.year), 'rate-performance-graph', ["Performace"],["#0A62A4"])
   	appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
   	appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
 
-  	plot(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
+  	plotLine(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
   	appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
@@ -61,16 +61,27 @@ appendVarienceToDiv = (data,div) ->
 
 
 #Generic Method to plot an array of data at specific div
-plot = (data,div,labels,colors) ->
+plotLine = (data,div,labels,colors) ->
 	new Morris.Line({
 
-	element: div,
-	data: data,
-	xkey: 'x'
-	ykeys: ['y']
-	labels: labels
-	lineColors: colors
-	})
+		element: div,
+		data: data,
+		xkey: 'x'
+		ykeys: ['y']
+		labels: labels
+		lineColors: colors
+		})
+
+plotBar = (data,div,labels,colors) ->
+	new Morris.Bar({
+
+		element: div,
+		data: data,
+		xkey: 'x'
+		ykeys: ['y']
+		labels: labels
+		lineColors: colors
+		})
 
 #Method to format an array of data to a format that function plot needs
 formatDataToPlot = (data, year)->
