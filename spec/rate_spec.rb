@@ -108,6 +108,4 @@ describe Report do
 
 			expect(@rate.instance_variable_get(:@rate_hash)).to eq(expected_hash_result)
 		end
-
-  
 end
