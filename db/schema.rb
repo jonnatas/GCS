@@ -13,28 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150425170840) do
 
-  create_table "parses", force: true do |t|
-    t.float    "ID_SAEB"
-    t.float    "ID_REGIAO"
-    t.string   "SIGLA_UF"
-    t.float    "ID_UF"
-    t.float    "ID_SERIE"
-    t.float    "ID_TIPO_REDE"
-    t.float    "ID_LOCALIZACAO"
-    t.float    "ID_CAPITAL"
-    t.float    "NU_PARTICIPANTES"
-    t.float    "MEDIA_LP"
-    t.float    "MEDIA_MT"
-    t.float    "ERRO_PADRAO_LP"
-    t.float    "ERRO_PADRAO_MT"
-    t.float    "A"
-    t.float    "B"
-    t.float    "C"
-    t.float    "D"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "prova_brasils", force: true do |t|
     t.integer  "id_test"
     t.integer  "id_grade"

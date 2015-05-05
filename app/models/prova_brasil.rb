@@ -1,5 +1,5 @@
 class ProvaBrasil < ActiveRecord::Base
-
+	include	ReportHelper
 	attr_accessor :prova_brasil_hash, :portuguese_average_score,
 	:math_average_score
 
@@ -14,7 +14,6 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 
 	def self.final_year_avaiable( year, id_grade, id_state )
-
 		final_year = ""
 		#to use in the loop below , increments in one each loop
 		id_grade_local = id_grade
@@ -86,65 +85,35 @@ class ProvaBrasil < ActiveRecord::Base
 	end
 
 	def request_average_to_portuguese
-		@portuguese_average_score = compute_average_for(@portuguese_score_result)
+		@portuguese_average_score = ReportHelper.compute_average_for(@portuguese_score_result)
 	end
 	private :request_average_to_portuguese
 
 	def request_average_to_math
-		@math_average_score = compute_average_for(@math_score_result)
+		@math_average_score = ReportHelper.compute_average_for(@math_score_result)
 	end
 	private :request_average_to_math
 
 	def request_standard_deviation_portuguese
-		@standard_deviation_pt = compute_standard_deviation(@portuguese_score_result)
+		@standard_deviation_pt = ReportHelper.compute_standard_deviation(@portuguese_score_result)
 	end
 	private :request_standard_deviation_portuguese
 
 	def request_standard_deviation_math
-		@standard_deviation_math = compute_standard_deviation(@math_score_result)
+		@standard_deviation_math = ReportHelper.compute_standard_deviation(@math_score_result)
 	end
 	private :request_standard_deviation_math
 
 	def request_variance_portuguese
-		@variance_pt = compute_variance(@portuguese_score_result)
+		@variance_pt = ReportHelper.compute_variance(@portuguese_score_result)
 	end
 	private :request_variance_portuguese
 
 	def request_variance_math
-		@variance_math = compute_variance(@math_score_result)
+		@variance_math = ReportHelper.compute_variance(@math_score_result)
 	end
 	private :request_variance_math
 
-	def compute_average_for(data)
-		total_score = 0.0
-		data.each do |current_data|
-			total_score += current_data
-		end
-		return total_score/data.count
-	end
-
-	def compute_standard_deviation(data)
-		average = compute_average_for(data)
-		total_variance = 0.0
-		data.each do |current_data|
-			total_variance += (current_data - average)**2 
-		end
-
-		total_variance = total_variance/data.count
-		standard_deviation 	= total_variance**(0.5)
-		return standard_deviation
-
-	end
-
-	def compute_variance(data)
-		average = compute_average_for(data)
-		total_variance = 0.0
-		data.each do |current_data|
-			total_variance += (current_data - average)**2 
-		end
-
-		return total_variance/data.count
-	end
 
 	def request_prova_brasil(year, id_state, id_grade)
 		ProvaBrasil.where(:year => year,:id_grade => id_grade, :id_state => id_state).first

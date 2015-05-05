@@ -1,5 +1,5 @@
 class Report
-	#validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "Can't be blank!"
+	#validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "No blank fields aloud!"
 	attr_accessor :report_result_hash
 
 	def initialize(year, id_grade, state)

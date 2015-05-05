@@ -12,6 +12,7 @@ describe ProvaBrasil do
 
   describe "#initialize"
   it "take the params and set them to the object" do
+    @final_year = ProvaBrasil.final_year_avaiable(@year,@id_grade,@id_state)
     expect(@prova_brasil).not_to eq(nil)
     expect(@prova_brasil.instance_variable_get(:@year)).to eq(@year)
     expect(@prova_brasil.instance_variable_get(:@id_grade)).to eq(@id_grade)
@@ -24,6 +25,7 @@ describe ProvaBrasil do
       @final_year = ProvaBrasil.final_year_avaiable(@year,@id_grade,@id_state)
       expect(@final_year).to eq("2010")
     end
+
 
 
 

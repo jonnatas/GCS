@@ -1,6 +1,6 @@
 class Rate < ActiveRecord::Base
 	include ReportHelper
-	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
+validates_presence_of :year	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
 
 	def initialize(year, id_grade, id_state)
 		@year = year
