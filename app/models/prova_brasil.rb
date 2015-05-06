@@ -43,7 +43,7 @@ class ProvaBrasil < ActiveRecord::Base
 	def request_prova_brasil_report
 		@math_score_result = Array.new
 		@portuguese_score_result = Array.new
-		#auxiliar variable to receive the given id_grade and make casts to the value.
+		#auxiliar variable to receive the given id_grade and make casts to the value
 		local_id_grade = @id_grade
 
 		(@year.to_i..@final_year.to_i).each do |year|
@@ -51,7 +51,7 @@ class ProvaBrasil < ActiveRecord::Base
 			@math_score_result.push(current_prova_brasil.math_score)
 			@portuguese_score_result.push(current_prova_brasil.portuguese_score)
 
-			#increments the id_grade through years.
+			#increments the id_grade through years
 			local_id_grade = (local_id_grade.to_i + 1).to_s
 		end
 
