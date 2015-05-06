@@ -16,12 +16,12 @@ class Rate < ActiveRecord::Base
 		id_grade_local = id_grade
 
 		#will pick the last year avaiable and add 1
-		local_final_year = Rate.all.pluck(:year).max.to_i + 1
+		local_final_year = Rate.all.pluck(:ano).max.to_i + 1
 
 		#loop to test if the line in the table with the params year and id_grade are empty
 		(year.to_i..local_final_year).each do |year_test|
 
-			table_line = Rate.where(:year => year_test,:id_grade => id_grade_local , :id_state => id_state)
+			table_line = Rate.where(:ano => year_test,:abrangencia => id_state)
 
 			id_grade_local = id_grade_local.to_i + 1 #increments each loop
 			
@@ -45,12 +45,15 @@ class Rate < ActiveRecord::Base
 		local_id_grade = @id_grade
 
 		(@year.to_i..@final_year.to_i).each do |year|
-			current_rate = request_rate(year,@id_state,local_id_grade)
+			current_rate = request_rate(year,@id_state,local_id_grade).attributes
+			current_distortion = request_distortion(year,@id_state,local_id_grade).attributes
 			#increments the id_grade through years.
-			local_id_grade = (local_id_grade.to_i + 1).to_s 
-			@evasion_result.push(current_rate.evasion)
-			@performance_result.push(current_rate.performance)
-			@distortion_result.push(current_rate.distortion)
+
+			@evasion_result.push(current_rate.select{|key, value| key.to_s.match(/ab_#{local_id_grade}/)}.values[0])
+			@performance_result.push(current_rate.select{|key, value| key.to_s.match(/ap_#{local_id_grade}/)}.values[0])
+			@distortion_result.push(current_distortion.select{|key, value| key.to_s.match(/di_#{local_id_grade}/)}.values[0])
+
+			local_id_grade = (local_id_grade.to_i + 1).to_s
 		end
 
 		request_analise_data
@@ -132,6 +135,10 @@ class Rate < ActiveRecord::Base
 
 
 	def request_rate(year,id_state,id_grade)
-		return Rate.where(:year => year, :id_state => id_state, :id_grade => id_grade).first
+		return Rate.where(:ano => year, :abrangencia => id_state, :local => "Total", :rede => "Total").first
+	end
+
+	def request_distortion(year,id_state,id_grade)
+		return Distortion.where(:ano => year, :uf => id_state, :local => "Total", :rede => "Total").first
 	end
 end

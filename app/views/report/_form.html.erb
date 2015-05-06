@@ -2,7 +2,7 @@
   
   <div class="form-group">
   <%= label_tag(:year, "Ano de inicio") %>
-  <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq, 
+  <%= select_tag(:year, options_for_select( Rate.all.pluck(:ano).uniq.map(&:to_i), 
   :selected => params[:year]) , class: 'form-control') %>
   <%#= text_field_tag(:year,nil, class: 'form-control')%>
   </div>
@@ -11,12 +11,12 @@
 
   <div class="form-group">
   <%= label_tag(:id_state, "Estado") %>
-  <%= select_tag(:id_state, options_for_select( State.all.pluck(:state).uniq, 
+  <%= select_tag(:id_state, options_for_select( Rate.all.pluck(:abrangencia).uniq.sort!, 
   :selected => params[:id_state]) , class: 'form-control'  ) %>
   </div>
   <div class="form-group">
   <%= label_tag(:id_grade, "Turma (Ano)") %>
-  <%= select_tag(:id_grade, options_for_select( Rate.all.pluck(:id_grade).uniq, 
+  <%= select_tag(:id_grade, options_for_select( ['1','2','3','4','5','6','7','8','9'], 
   :selected => params[:id_grade]) , class: 'form-control'  ) %>
   </div>
   
