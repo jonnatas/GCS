@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, :with => :render_error
   rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
   rescue_from ActionController::RoutingError, :with => :render_not_found
-
+  rescue_from Exception, :with => :server_error
   def index
   end
 
@@ -22,5 +22,12 @@ class ApplicationController < ActionController::Base
       f.js{ render :partial => "errors/ajax_404", :status => 404 }
     end
   end
+
+  def server_error
+    respond_to do |format|
+      format.html { render template: 'errors/internal_server_error', :status => 500 }
+      format.all  { render nothing: true, :status => 500}
+    end
+  end  
 
 end
