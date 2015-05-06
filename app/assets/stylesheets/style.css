@@ -1,3 +1,10 @@
+* {margin:0;padding:0;} 
+html, body {height: 100%;}
+
+#wrap {
+	min-height: 100%;}
+
+
 .navbar{
 position: fixed;
 top:0;
@@ -96,8 +103,12 @@ border-radius:0;
 }
 
 .footer{
+	position: relative;
 	height:75px;
 	background-color:black;
+	margin-top: -75px;
+	clear:both;
+
 }
 
 .footer h4{
@@ -106,3 +117,6 @@ border-radius:0;
 }
 
 
+#main-container{
+	padding-bottom: 75px;
+}
