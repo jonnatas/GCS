@@ -41,7 +41,7 @@ class Rate < ActiveRecord::Base
 		@evasion_result = Array.new
 		@performance_result = Array.new
 		@distortion_result = Array.new
-		#auxiliar variable to receive the given id_grade and make casts to the value.
+		#auxiliar variable to receive the given id_grade and make casts to the value
 		local_id_grade = @id_grade
 
 		(@year.to_i..@final_year.to_i).each do |year|
