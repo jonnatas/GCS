@@ -48,6 +48,12 @@ border-radius:0;
 
 .jumbotron img{
 	margin-top:45px;
+	transition:0.25s;
+}
+
+.jumbotron img:hover{
+	-webkit-transform: scale(1.2,1.2);
+    -moz-transform:scale(1.2,1.2);
 
 }
 
@@ -55,6 +61,8 @@ border-radius:0;
 	height:750px;
 	background-color: rgb(51,51,51);
 	border-bottom: solid black 1px;
+	background-image: url('url.png');
+	background-size: cover;
 }
 
 .servicos h1{
@@ -63,13 +71,15 @@ border-radius:0;
 	color: white;
 	font-family: 'Lato';
 	font-weight: bold;
+	font-size: 50px;
 }
 
 .servicos h3{
 	text-align: center;
 	color:white;
 	font-family: 'Lato';
-	font-weight: semibold;
+	font-weight: bold;
+	font-size: 25px;
 }
 
 .servicos img{
@@ -90,6 +100,8 @@ border-radius:0;
 	background-color:rgb(102,102,102);
 	position:relative;
 	border-bottom: solid black 1px;
+	background-image: url('background2.jpg');
+	background-size: cover;
 }
 
 .sobre h1{
@@ -98,6 +110,7 @@ border-radius:0;
 	color:white;
 	font-family: 'Lato';
 	font-weight: bold;
+	font-size: 50px;
 }
 
 .sobre p{
@@ -105,6 +118,8 @@ border-radius:0;
 	color:white;
 	text-align: left;
 	font-family: 'Lato';
+	font-weight: bold;
+	font-size: 25px;
 
 }
 
