@@ -1,5 +1,6 @@
 class Rate < ActiveRecord::Base
 	include ReportHelper
+	FINAL_GRADE = 9
 	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
 
 	def initialize(year, id_grade, id_state)
@@ -48,12 +49,13 @@ class Rate < ActiveRecord::Base
 			current_rate = request_rate(year,@id_state,local_id_grade).attributes
 			current_distortion = request_distortion(year,@id_state,local_id_grade).attributes
 			#increments the id_grade through years.
+			if local_id_grade.to_i <= FINAL_GRADE
+				@evasion_result.push(current_rate.select{|key, value| key.to_s.match(/ab_#{local_id_grade}/)}.values[0])
+				@performance_result.push(current_rate.select{|key, value| key.to_s.match(/ap_#{local_id_grade}/)}.values[0])
+				@distortion_result.push(current_distortion.select{|key, value| key.to_s.match(/di_#{local_id_grade}/)}.values[0])
 
-			@evasion_result.push(current_rate.select{|key, value| key.to_s.match(/ab_#{local_id_grade}/)}.values[0])
-			@performance_result.push(current_rate.select{|key, value| key.to_s.match(/ap_#{local_id_grade}/)}.values[0])
-			@distortion_result.push(current_distortion.select{|key, value| key.to_s.match(/di_#{local_id_grade}/)}.values[0])
-
-			local_id_grade = (local_id_grade.to_i + 1).to_s
+				local_id_grade = (local_id_grade.to_i + 1).to_s
+			end
 		end
 
 		request_analise_data
