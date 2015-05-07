@@ -124,15 +124,27 @@ reportHTML = '
             </div>
             <br />
             <br />            <div class="panel panel-default">
+                
                 <div class="panel-heading"><h4>Índices</h4></div>
+                <div class="evasion">
                 <div class="panel-body">
                     <div class="row">
+                  
                         <div id="rate-evasion-title" class="col-md-4"><h4>Evasão</h4></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6"><div id="rate-evasion-graph"></div></div>
+                        <div class="col-md-6">
+                          <div id="rate-evasion-graph"></div>
+                           <div class="rate-evasion">
+                        <div id="rate-evasion">
+                            <div id="average-evasion" class="col-xs-4"></div>
+                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
+                            <div id="variance-evasion" class="col-xs-4"></div>
+                        </div>
+                    </div>
+                        </div>
                         <div class="col-md-6"><div id="rate-evasion-graph-text"></div>
-                            <div style="font-family : Verdana; font-size:100% ">
+                          <div class="description-col-md-6">
                             
                               <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
                                 O Índice de Evasão retrata o percentual de alunos que deixaram  
@@ -141,8 +153,7 @@ reportHTML = '
                               <p style="text-align: justify;"><font face="cursive">  &nbsp &nbsp &nbsp &nbsp 
                                 Tal índice é obtido por meio do Censo Escolar pelo INEP e 
                                 compõe o Índice de Desenvolvimento da Educação Brasileira (Ideb).</font></p>
-                            
-                            </div>
+                          </div>  
                           </div>
                     </div>
                     <div class="row">
@@ -152,14 +163,16 @@ reportHTML = '
                             <div id="variance-evasion" class="col-xs-4"></div>
                         </div>
                     </div>
+                  </div>
                 </div>
+                <div class="rendiment">
                 <div class="panel-body">
                     <div class="row">
                         <div id="rate-performance-title" class="col-md-4"><h4>Redimento</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-performance-graph-text"></div>
-                          <div style="font-family:Verdana; font-size:100% ">
+                          <div class="description-col-md-6">
                             <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
                                 O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento 
                                 Escolar (Anresc) é uma avaliação criada pelo Ministério da Educação. Sendo 
@@ -182,6 +195,7 @@ reportHTML = '
                          </div>
                     </div>
                 </div>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div id="rate-distortion-title" class="col-md-4"><h4>Dirtorção</h4></div>
@@ -189,7 +203,7 @@ reportHTML = '
                     <div class="row">
                         <div class="col-md-6"><div id="rate-distortion-graph"></div></div>
                         <div class="col-md-6"><div id="rate-distortion-graph-text"></div>
-                          <div style="font-family:Verdana; font-size:100% ">
+                          <div class="description-col-md-6">
                             <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp
                               O Índice de Distorção representa o percentual de alunos que se encontram em 
                               condição de distorção idade-série.</font></p>
@@ -201,8 +215,8 @@ reportHTML = '
                               país. </font></p>
                             <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
                             Neste caso o aluno será contabilizado na situação de distorção idade-série.</font></p>
-                            
                           </div>
+                          
                         </div>
                     </div>
                     <div class="row">
