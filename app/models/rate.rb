@@ -8,6 +8,9 @@ class Rate < ActiveRecord::Base
 		@id_grade = id_grade
 		@id_state = id_state
 		@final_year = Rate.final_year_avaiable( year, id_grade, id_state )
+		@evasion_result = Array.new
+		@performance_result = Array.new
+		@distortion_result = Array.new
 	end
 
 	def self.final_year_avaiable( year, id_grade, id_state )
@@ -39,9 +42,6 @@ class Rate < ActiveRecord::Base
 	end
 
 	def request_rate_report
-		@evasion_result = Array.new
-		@performance_result = Array.new
-		@distortion_result = Array.new
 		#auxiliar variable to receive the given id_grade and make casts to the value
 		local_id_grade = @id_grade
 
