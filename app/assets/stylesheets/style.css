@@ -48,11 +48,15 @@ border-radius:0;
 	margin-top:110px;
 	margin-bottom:50px;
 	color: white;
+	font-family: 'Lato';
+	font-weight: bold;
 }
 
 .servicos h3{
 	text-align: center;
 	color:white;
+	font-family: 'Lato';
+	font-weight: semibold;
 }
 
 .servicos img{
@@ -86,7 +90,7 @@ border-radius:0;
 .sobre{
 	height: 750px;
 	background-color:rgb(102,102,102);
-		position:relative;
+	position:relative;
 
 }
 
@@ -94,12 +98,16 @@ border-radius:0;
 	margin-top:110px;
 	margin-bottom:70px;
 	color:white;
+	font-family: 'Lato';
+	font-weight: bold;
 }
 
 .sobre p{
 	font-size: 23px;
 	color:white;
 	text-align: left;
+	font-family: 'Lato';
+
 }
 
 .footer{
@@ -114,6 +122,8 @@ border-radius:0;
 .footer h4{
 	color: white;
 	margin-top:30px;	
+	font-family: 'Lato';
+	font-weight: semibold;
 }
 
 
