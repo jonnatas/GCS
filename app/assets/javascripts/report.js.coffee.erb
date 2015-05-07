@@ -143,7 +143,16 @@ reportHTML = '
                         </div>
                     </div>
                         </div>
-                        <div class="col-md-6"><div id="rate-evasion-graph-text"></div>
+                        <div class="col-md-6">
+                        <div id="rate-evasion-graph-text">
+                        <div class="row">
+                        <div id="rate-evasion">
+                            <div id="average-evasion" class="col-xs-4"></div>
+                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
+                            <div id="variance-evasion" class="col-xs-4"></div>
+                        </div>
+                        </div>
+                        </div>
                           <div class="description-col-md-6">
                             
                               <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
@@ -156,13 +165,6 @@ reportHTML = '
                           </div>  
                           </div>
                     </div>
-                    <div class="row">
-                        <div id="rate-evasion">
-                            <div id="average-evasion" class="col-xs-4"></div>
-                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
-                            <div id="variance-evasion" class="col-xs-4"></div>
-                        </div>
-                    </div>
                   </div>
                 </div>
                 <div class="rendiment">
@@ -171,7 +173,10 @@ reportHTML = '
                         <div id="rate-performance-title" class="col-md-4"><h4>Redimento</h4></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6"><div id="rate-performance-graph-text"></div>
+                        <div class="col-md-6">
+                        <div id="rate-performance-graph-text">
+
+                        </div>
                           <div class="description-col-md-6">
                             <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
                                 O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento 
@@ -185,23 +190,34 @@ reportHTML = '
                              A avaliação é dividida em duas provas: Língua Portuguesa e Matemática.</font></p>
                           </div>
                         </div>
-                        <div class="col-md-6"><div id="rate-performance-graph"></div></div>
-                    </div>
-                    <div class="row">
+                        <div class="col-md-6">
+                        <div id="rate-performance-graph"></div>
+                        <div class="rate-performance">
                          <div id="rate-performance">
                              <div id="average-perfomance" class="col-xs-4"></div>
                             <div id="standard-deviation-perfomance" class="col-xs-4"></div>
                             <div id="variance-perfomance" class="col-xs-4"></div>
                          </div>
+                    </div></div>
                     </div>
+                    
                 </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-distortion-title" class="col-md-4"><h4>Dirtorção</h4></div>
+                        <div id="rate-distortion-title" class="col-md-4"><h4>Distorção</h4></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6"><div id="rate-distortion-graph"></div></div>
+                        <div class="col-md-6">
+                        <div id="rate-distortion-graph"></div>
+                        <div class="rate-distortion">
+                         <div id="rate-distortion">
+                             <div id="average-distortion" class="col-xs-4"></div>
+                            <div id="standard-deviation-distortion" class="col-xs-4"></div>
+                            <div id="variance-distortion" class="col-xs-4"></div>
+                         </div>
+                        </div>
+                        </div>
                         <div class="col-md-6"><div id="rate-distortion-graph-text"></div>
                           <div class="description-col-md-6">
                             <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp
@@ -219,13 +235,7 @@ reportHTML = '
                           
                         </div>
                     </div>
-                    <div class="row">
-                         <div id="rate-distortion">
-                             <div id="average-distortion" class="col-xs-4"></div>
-                            <div id="standard-deviation-distortion" class="col-xs-4"></div>
-                            <div id="variance-distortion" class="col-xs-4"></div>
-                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>'
