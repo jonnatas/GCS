@@ -17,7 +17,8 @@ class Report
 
 		@report_result_hash = {:prova_brasil => nil,#prova_brasil.prova_brasil_hash,
 		 :rates => rates.rate_hash,
-		 :year => @year}
+		 :year => @year,
+		 :grade => @id_grade}
 
 	end
 	public :request_report
