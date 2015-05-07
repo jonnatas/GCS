@@ -3,22 +3,21 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-
 $(document).ready ->
   clean_report = () ->
-  	if !clear
-  		$('a#clean_report').click((event) ->
-    	 $('#report-container').empty().append(reportHTML)
-    	 $('div#report-container').hide()
-  		)
+		$('a#clean_report').click((event) ->
+  	 $('#report-container').empty().append(reportHTML)
+  	 $('div#report-container').hide()
+		)
 
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
 
-  	clear = false
+
 
   	$('#report-container').empty().append(reportHTML)
 
-  	$("#report-result").show()
+  	$("#report-result").show(); $("div#report-container").show()
+
 
   	# #request plot for Prova Brasil data
   	# plotBar(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
