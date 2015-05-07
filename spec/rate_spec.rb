@@ -21,14 +21,7 @@ describe Report do
 
 	describe "#request_rate"
 	    it "Take de state, grade and year and return a Rate object from DB" do
-	      new_rate = @rate.request_rate(2005,1,1)
-	      expect(new_rate.id).to eq(1)
-	      expect(new_rate.evasion).to eq(15)
-	      expect(new_rate.performance).to eq(10)
-	      expect(new_rate.distortion).to eq(13)
-	      expect(new_rate.id_grade).to eq(1)
-	      expect(new_rate.year).to eq(2005)
-	      expect(new_rate.id_state).to eq(1)
+	      expect(@rate.request_rate(2008,"AC",1)).not_to eq(nil)
 	    end
 
 	describe "#request_rate_report"
