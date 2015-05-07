@@ -92,65 +92,91 @@ formatDataToPlot = (data, year)->
 	return formatedData
 	
 reportHTML = '
-			<div id="report-result" style="display: none;">
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><h4>Prova Brasil</h4></div>
-				<div class="panel-body">
-					<div class="row">
-						<div id="portuguese-pb-title" class="col-xs-6">Português</div>
-				 		<div id="math-pb-title" class="col-xs-6">Matemática</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6"><div id="portuguese-pb-graph"></div></div>
-				 		<div class="col-xs-6"><div id="math-pb-graph"></div></div>
-					</div>
-					<div class="row">
-						<div id="portuguese-pb" class="col-xs-6">
-							<div id="average-pt" class="col-xs-4"></div>
-							<div id="standard-deviation-pt" class="col-xs-4"></div>
-							<div id="variance-pt" class="col-xs-4"></div>
-						</div>	
-				 		<div id="math-pb-average" class="col-xs-6">
-				 			<div id="average-math" class="col-xs-4"></div>
-							<div id="standard-deviation-math" class="col-xs-4"></div>
-							<div id="variance-math" class="col-xs-4"></div>
-				 		</div>
-					</div>
-				</div>	
-			</div>
-			<br />
-			<br />
-			<div class="panel panel-default">
-				<div class="panel-heading"><h4>Índices</h4></div>
-				<div class="panel-body">
-					<div class="row">
-						<div id="rate-evasion-title" class="col-md-4">Evasão</div>
-				 		<div id="rate-performance-title" class="col-md-4">Redimento</div>
-				 		<div id="rate-distortion-title" class="col-md-4">Distorção Turma/Idade</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4"><div id="rate-evasion-graph"></div></div>
-				 		<div class="col-md-4"><div id="rate-performance-graph"></div></div>
-				 		<div class="col-md-4"><div id="rate-distortion-graph"></div></div>
-					</div>
-					<div class="row">
-						<div id="rate-evasion" class="col-md-4">
-							<div id="average-evasion" class="col-xs-4"></div>
-							<div id="standard-deviation-evasion" class="col-xs-4"></div>
-							<div id="variance-evasion" class="col-xs-4"></div>
-						</div>
-				 		<div id="rate-performance" class="col-md-4">
-				 			<div id="average-perfomance" class="col-xs-4"></div>
-							<div id="standard-deviation-perfomance" class="col-xs-4"></div>
-							<div id="variance-perfomance" class="col-xs-4"></div>
-				 		</div>
-				 		<div id="rate-distortion" class="col-md-4">
-				 			<div id="average-distortion" class="col-xs-4"></div>
-							<div id="standard-deviation-distortion" class="col-xs-4"></div>
-							<div id="variance-distortion" class="col-xs-4"></div>
-				 		</div>
-					</div>
-				</div>	
-			</div>
-		</div>'
+        <div id="report-result" style="display: none;">            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Prova Brasil</h4></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="portuguese-pb-title" class="col-xs-6"><h5>Português</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6"><div id="portuguese-pb-graph"></div></div>
+                        <div class="col-xs-6"><div id="portuguese-pb-graph-text"></div></div>
+                    </div>
+                    <div class="row">
+                        <div id="portuguese-pb">
+                            <div id="average-pt" class="col-xs-4"></div>
+                            <div id="standard-deviation-pt" class="col-xs-4"></div>
+                            <div id="variance-pt" class="col-xs-4"></div>
+                        </div>    
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="math-pb-title" class="col-xs-6"><h5>Matemática</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6"><div id="math-pb-graph-text"></div></div>
+                        <div class="col-xs-6"><div id="math-pb-graph"></div></div>
+                    </div>
+                    <div class="row">
+                        <div id="math-pb">
+                            <div id="average-math" class="col-xs-4"></div>
+                            <div id="standard-deviation-math" class="col-xs-4"></div>
+                            <div id="variance-math" class="col-xs-4"></div>
+                        </div>    
+                    </div>
+                </div>        
+            </div>
+            <br />
+            <br />            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Índices</h4></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="rate-evasion-title" class="col-md-4"><h5>Evasão</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><div id="rate-evasion-graph"></div></div>
+                        <div class="col-md-6"><div id="rate-evasion-graph-text"></div></div>
+                    </div>
+                    <div class="row">
+                        <div id="rate-evasion">
+                            <div id="average-evasion" class="col-xs-4"></div>
+                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
+                            <div id="variance-evasion" class="col-xs-4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="rate-performance-title" class="col-md-4"><h5>Redimento</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><div id="rate-performance-graph-text"></div></div>
+                        <div class="col-md-6"><div id="rate-performance-graph"></div></div>
+                    </div>
+                    <div class="row">
+                         <div id="rate-performance">
+                             <div id="average-perfomance" class="col-xs-4"></div>
+                            <div id="standard-deviation-perfomance" class="col-xs-4"></div>
+                            <div id="variance-perfomance" class="col-xs-4"></div>
+                         </div>
+                    </div>
+                </div>    
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="rate-distortion-title" class="col-md-4"><h5>Dirtorção</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><div id="rate-distortion-graph"></div></div>
+                        <div class="col-md-6"><div id="rate-distortion-graph-text"></div></div>
+                    </div>
+                    <div class="row">
+                         <div id="rate-distortion">
+                             <div id="average-distortion" class="col-xs-4"></div>
+                            <div id="standard-deviation-distortion" class="col-xs-4"></div>
+                            <div id="variance-distortion" class="col-xs-4"></div>
+                         </div>
+                    </div>
+                </div>        
+            </div>
+        </div>' 
