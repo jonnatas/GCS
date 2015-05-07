@@ -7,16 +7,12 @@ $(document).ready ->
   clean_report = () ->
 		$('a#clean_report').click((event) ->
   	 $('#report-container').empty().append(reportHTML)
-  	 $('div#report-container').hide()
+  	 $('div#report-container').hide(); $('#clean_report').hide() 
 		)
 
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
-
-
-
   	$('#report-container').empty().append(reportHTML)
-
-  	$("#report-result").show(); $("div#report-container").show()
+  	$("#report-result").show(); $("div#report-container").show(); $('#clean_report').show()
 
 
   	# #request plot for Prova Brasil data
