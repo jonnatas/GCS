@@ -15,26 +15,26 @@
 	font-family: 'Lato';
 	font-style: normal;
   	font-weight: normal;
-  	src: url('Lato-Regular.ttf');
+  	src: url('fonts/Lato-Regular.ttf');
 }
 
 @font-face{
 	font-family: 'Lato';
 	font-style: normal;
   	font-weight: bold;
-  	src: url('Lato-Bold.ttf');
+  	src: url('fonts/Lato-Bold.ttf');
 }
 
 @font-face{
 	font-family: 'Lato';
 	font-style: normal;
   	font-weight: semibold;
-  	src: url('Lato-Semibold.ttf');
+  	src: url('fonts/Lato-Semibold.ttf');
 }
 
 @font-face{
 	font-family: 'Bebas Neue';
 	font-style: normal;
   	font-weight: normal;
-  	src: url('BebasNeue.otf');
+  	src: url('fonts/BebasNeue.otf');
 }
