@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506133703) do
+ActiveRecord::Schema.define(version: 20150507202428) do
 
   create_table "distortions", force: true do |t|
     t.string   "ano"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 20150506133703) do
     t.float    "di_3_m"
     t.float    "di_4_m"
     t.float    "total_med"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "idebs", force: true do |t|
+    t.float    "ideb"
+    t.string   "uf"
+    t.float    "ano"
+    t.string   "tipo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parseidebs", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

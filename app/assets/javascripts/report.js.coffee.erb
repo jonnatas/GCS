@@ -15,11 +15,11 @@ $(document).ready ->
   	$("#report-result").show(); $("div#report-container").show(); $('#clean_report').show()
 
 
-  	# #request plot for Prova Brasil data
-  	# plotBar(formatDataToPlot(data.prova_brasil.portuguese_score, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
-  	# appendAverageToDiv(data.prova_brasil.portguese_average,"#average-pt")
-  	# appendStandardVariationToDiv(data.prova_brasil.portuguese_standard_deviation, "#standard-deviation-pt")
-  	# appendVarienceToDiv(data.prova_brasil.portuguese_variance, "#variance-pt")
+  	#request plot for Prova Brasil data
+  	plotBar(formatDataToPlot(data.ideb.ideb, data.year), 'portuguese-pb-graph',["Português"],["#FF5600"])
+  	appendAverageToDiv(data.prova_brasil.portguese_average,"#average-pt")
+  	appendStandardVariationToDiv(data.prova_brasil.portuguese_standard_deviation, "#standard-deviation-pt")
+  	appendVarienceToDiv(data.prova_brasil.portuguese_variance, "#variance-pt")
 
   	# #request plot for Prova Brasil data
   	# plotBar(formatDataToPlot(data.prova_brasil.math_score, data.year), 'math-pb-graph',["Matemática"], ["#0A62A4"])
