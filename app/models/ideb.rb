@@ -7,6 +7,8 @@ class Ideb < ActiveRecord::Base
 		@uf = uf
 		@grade = grade
 		@ideb_result = Array.new
+		@years = Array.new
+		@grades = Array.new
 	end
 
 
@@ -21,6 +23,8 @@ class Ideb < ActiveRecord::Base
 			if current_year%2 != 0 && current_year != 2013
 				current_ideb = request_ideb(current_year, current_type,@uf)
 				@ideb_result.push(current_ideb.ideb)
+				@years.push(current_year.to_s)
+				@grades.push(@grade.to_s)
 			end
 			@grade = @grade.to_i + 1
 		end
@@ -37,7 +41,9 @@ class Ideb < ActiveRecord::Base
 	def generate_hash_result
 		@ideb_hash = {:ideb => @ideb_result, :ideb_average => @ideb_average,
 		 :ideb_standard_deviation => @standard_deviation_ideb,
-		 :ideb_variance => @variance_ideb} 
+		 :ideb_variance => @variance_ideb,
+		:ideb_years => @years,
+		:ideb_grades => @grades} 
 	end
 
 	def request_ideb(year,type,uf)
