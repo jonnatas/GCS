@@ -32,17 +32,17 @@ $(document).ready ->
   	# appendStandardVariationToDiv(data.prova_brasil.math_standard_deviation, "#standard-deviation-math")
   	# appendVarienceToDiv(data.prova_brasil.math_variance, "#variance-math")
 
-  	plotLine(formatDataToPlot(data.rates.evasion, data.year), 'rate-evasion-graph',["Evasão"],["#FF5600"])
+  	plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
   	appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
   	appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
   	appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
 
-  	plotLine(formatDataToPlot(data.rates.performance, data.year), 'rate-performance-graph', ["Performace"],["#0A62A4"])
+  	plotLine(formatDataToPlot(data.rates.performance, data.year,data.grade), 'rate-performance-graph', ["Performace"],["#0A62A4"])
   	appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
   	appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
 
-  	plotLine(formatDataToPlot(data.rates.distortion, data.year), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
+  	plotLine(formatDataToPlot(data.rates.distortion, data.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
   	appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
@@ -84,11 +84,11 @@ plotBar = (data,div,labels,colors) ->
 		})
 
 #Method to format an array of data to a format that function plot needs
-formatDataToPlot = (data, year)->
+formatDataToPlot = (data, year, grade)->
 	formatedData = []
 	for value in data by 1
-		formatedData.push {x: "#{year}", y: value}
-		year++
+		formatedData.push {x: "#{year} - #{grade} ano", y: value}
+		year++; grade++
 	return formatedData
 	
 reportHTML = '
