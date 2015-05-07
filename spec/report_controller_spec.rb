@@ -12,7 +12,7 @@ describe ReportController do
 
   describe "#request_report"
   it "take the params and set them to the object" do
-     expect (@report.report_result_hash).not_to eq(nil)
+     @report.report_result_hash.should be 
   end
 
 

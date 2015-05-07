@@ -9,7 +9,7 @@ describe ParsesController do
 
   describe "#index"
   it "take the params and set them to the object" do
-     expect (@parses).not_to eq(nil)
+     	@parses.should be
   end
 
 
