@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+
+
 $(document).ready ->
   clean_report = () ->
   	if !clear
@@ -94,7 +96,7 @@ reportHTML = '
                 <div class="panel-heading"><h4>Prova Brasil</h4></div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="portuguese-pb-title" class="col-xs-6"><h5>Português</h5></div>
+                        <div id="portuguese-pb-title" class="col-xs-6"><h4>Português</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6"><div id="portuguese-pb-graph"></div></div>
@@ -110,7 +112,7 @@ reportHTML = '
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="math-pb-title" class="col-xs-6"><h5>Matemática</h5></div>
+                        <div id="math-pb-title" class="col-xs-6"><h4>Matemática</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6"><div id="math-pb-graph-text"></div></div>
@@ -130,16 +132,20 @@ reportHTML = '
                 <div class="panel-heading"><h4>Índices</h4></div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-evasion-title" class="col-md-4"><h5>Evasão</h5></div>
+                        <div id="rate-evasion-title" class="col-md-4"><h4>Evasão</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-evasion-graph"></div></div>
                         <div class="col-md-6"><div id="rate-evasion-graph-text"></div>
-                            <div style="font-family:sans-serif;font-size:120% ">
-                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Evasão retrata o percentual de alunos que deixaram  
-                              de frequentar a escola, caracterizando dessa forma abandono escolar.</p>
-                            <p> &nbsp &nbsp &nbsp &nbsp Tal índice é obtido por meio do Censo Escolar pelo INEP e 
-                              compõe o Índice de Desenvolvimento da Educação Brasileira (Ideb).</p>
+                            <div style="font-family : Verdana; font-size:100% ">
+                            
+                              <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
+                                O Índice de Evasão retrata o percentual de alunos que deixaram  
+                                de frequentar a escola, caracterizando dessa forma abandono escolar.</font></p>
+
+                              <p style="text-align: justify;"><font face="cursive">  &nbsp &nbsp &nbsp &nbsp 
+                                Tal índice é obtido por meio do Censo Escolar pelo INEP e 
+                                compõe o Índice de Desenvolvimento da Educação Brasileira (Ideb).</font></p>
                             
                             </div>
                           </div>
@@ -154,18 +160,21 @@ reportHTML = '
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-performance-title" class="col-md-4"><h5>Redimento</h5></div>
+                        <div id="rate-performance-title" class="col-md-4"><h4>Redimento</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-performance-graph-text"></div>
-                          <div style="font-family:sans-serif;font-size:120% ">
-                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento 
-                                Escolar (Anresc) é uma avaliação criada pelo Ministério da Educação. Sendo complementar
-                                ao Sistema Nacional de Educação Básica e um dos componentes para o cálculo do Índice de
-                                Desenvolvimento da Educação Básica, a avaliação é realizada a cada dois anos e participam
-                                todos os estudantes de escolas públicas urbanas do 5º ao 9º ano em turmas com 20 ou mais
-                                alunos.</p>
-                            <p> &nbsp &nbsp &nbsp &nbsp A avaliação é dividida em duas provas: Língua Portuguesa e Matemática.</p>
+                          <div style="font-family:Verdana; font-size:100% ">
+                            <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
+                                O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento 
+                                Escolar (Anresc) é uma avaliação criada pelo Ministério da Educação. Sendo 
+                                complementar ao Sistema Nacional de Educação Básica e um dos componentes para
+                                o cálculo do Índice de Desenvolvimento da Educação Básica, a avaliação é realizada
+                                a cada dois anos e participam todos os estudantes de escolas públicas urbanas do 5º
+                                ao 9º ano em turmas com 20 ou mais alunos.</font></p>
+
+                            <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp
+                             A avaliação é dividida em duas provas: Língua Portuguesa e Matemática.</font></p>
                           </div>
                         </div>
                         <div class="col-md-6"><div id="rate-performance-graph"></div></div>
@@ -180,20 +189,23 @@ reportHTML = '
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-distortion-title" class="col-md-4"><h5>Dirtorção</h5></div>
+                        <div id="rate-distortion-title" class="col-md-4"><h4>Dirtorção</h4></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-distortion-graph"></div></div>
                         <div class="col-md-6"><div id="rate-distortion-graph-text"></div>
-                          <div style="font-family:sans-serif;font-size:120% ">
-                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Distorção representa o percentual de alunos que se encontram em 
-                              condição de distorção idade-série.</p>
-                            <p> &nbsp &nbsp &nbsp &nbsp O aluno que reprova ou abandona os estudos por dois anos ou mais
+                          <div style="font-family:Verdana; font-size:100% ">
+                            <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp
+                              O Índice de Distorção representa o percentual de alunos que se encontram em 
+                              condição de distorção idade-série.</font></p>
+                            <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
+                              O aluno que reprova ou abandona os estudos por dois anos ou mais
                               durante a trajetória de escolarização, repetindo por consequência uma mesma
                               série, se encontra em defasem em relação à idade considerada adequada para 
                               cada ano de estudo, de acordo com o que propõe a legislação educacional do 
-                              país. </p>
-                            <p> &nbsp &nbsp &nbsp &nbsp Neste caso o aluno será contabilizado na situação de distorção idade-série.</p>
+                              país. </font></p>
+                            <p style="text-align: justify;"><font face="cursive"> &nbsp &nbsp &nbsp &nbsp 
+                            Neste caso o aluno será contabilizado na situação de distorção idade-série.</font></p>
                             
                           </div>
                         </div>
