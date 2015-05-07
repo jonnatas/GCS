@@ -1,15 +1,18 @@
 require 'rspec'
-require_relative '../app/controllers/parses_controller'
+require_relative '../app/controllers/report_controller'
 
-describe ParsesController do
+
+
+describe ReportController do
 
   before :each do
-    @parses = Parse.all
+    @report = Report.new(2011, 1, "AC")
+    @report.request_report
   end
 
-  describe "#index"
+  describe "#request_report"
   it "take the params and set them to the object" do
-     expect (@parses).not_to eq(nil)
+     expect (@report.report_result_hash).not_to eq(nil)
   end
 
 
