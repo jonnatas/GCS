@@ -1,7 +1,7 @@
 <%= form_tag("/report/request_report.json",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
   
   <div class="form-group">
-  <%= label_tag(:year, "Ano de inicio") %>
+  <%= label_tag(:year, "Ano de início") %>
   <%= select_tag(:year, options_for_select( Rate.all.pluck(:ano).uniq.map(&:to_i), 
   :selected => params[:year]) , class: 'form-control') %>
   <%#= text_field_tag(:year,nil, class: 'form-control')%>
