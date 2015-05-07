@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-clear = true
-
 $(document).ready ->
   clean_report = () ->
   	if !clear
@@ -107,7 +105,7 @@ reportHTML = '
                             <div id="average-pt" class="col-xs-4"></div>
                             <div id="standard-deviation-pt" class="col-xs-4"></div>
                             <div id="variance-pt" class="col-xs-4"></div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -123,9 +121,9 @@ reportHTML = '
                             <div id="average-math" class="col-xs-4"></div>
                             <div id="standard-deviation-math" class="col-xs-4"></div>
                             <div id="variance-math" class="col-xs-4"></div>
-                        </div>    
+                        </div>
                     </div>
-                </div>        
+                </div>
             </div>
             <br />
             <br />            <div class="panel panel-default">
@@ -136,7 +134,15 @@ reportHTML = '
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-evasion-graph"></div></div>
-                        <div class="col-md-6"><div id="rate-evasion-graph-text"></div></div>
+                        <div class="col-md-6"><div id="rate-evasion-graph-text"></div>
+                            <div style="font-family:sans-serif;font-size:120% ">
+                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Evasão retrata o percentual de alunos que deixaram  
+                              de frequentar a escola, caracterizando dessa forma abandono escolar.</p>
+                            <p> &nbsp &nbsp &nbsp &nbsp Tal índice é obtido por meio do Censo Escolar pelo INEP e 
+                              compõe o Índice de Desenvolvimento da Educação Brasileira (Ideb).</p>
+                            
+                            </div>
+                          </div>
                     </div>
                     <div class="row">
                         <div id="rate-evasion">
@@ -151,7 +157,17 @@ reportHTML = '
                         <div id="rate-performance-title" class="col-md-4"><h5>Redimento</h5></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6"><div id="rate-performance-graph-text"></div></div>
+                        <div class="col-md-6"><div id="rate-performance-graph-text"></div>
+                          <div style="font-family:sans-serif;font-size:120% ">
+                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento 
+                                Escolar (Anresc) é uma avaliação criada pelo Ministério da Educação. Sendo complementar
+                                ao Sistema Nacional de Educação Básica e um dos componentes para o cálculo do Índice de
+                                Desenvolvimento da Educação Básica, a avaliação é realizada a cada dois anos e participam
+                                todos os estudantes de escolas públicas urbanas do 5º ao 9º ano em turmas com 20 ou mais
+                                alunos.</p>
+                            <p> &nbsp &nbsp &nbsp &nbsp A avaliação é dividida em duas provas: Língua Portuguesa e Matemática.</p>
+                          </div>
+                        </div>
                         <div class="col-md-6"><div id="rate-performance-graph"></div></div>
                     </div>
                     <div class="row">
@@ -161,14 +177,26 @@ reportHTML = '
                             <div id="variance-perfomance" class="col-xs-4"></div>
                          </div>
                     </div>
-                </div>    
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div id="rate-distortion-title" class="col-md-4"><h5>Dirtorção</h5></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><div id="rate-distortion-graph"></div></div>
-                        <div class="col-md-6"><div id="rate-distortion-graph-text"></div></div>
+                        <div class="col-md-6"><div id="rate-distortion-graph-text"></div>
+                          <div style="font-family:sans-serif;font-size:120% ">
+                            <p> &nbsp &nbsp &nbsp &nbsp O Índice de Distorção representa o percentual de alunos que se encontram em 
+                              condição de distorção idade-série.</p>
+                            <p> &nbsp &nbsp &nbsp &nbsp O aluno que reprova ou abandona os estudos por dois anos ou mais
+                              durante a trajetória de escolarização, repetindo por consequência uma mesma
+                              série, se encontra em defasem em relação à idade considerada adequada para 
+                              cada ano de estudo, de acordo com o que propõe a legislação educacional do 
+                              país. </p>
+                            <p> &nbsp &nbsp &nbsp &nbsp Neste caso o aluno será contabilizado na situação de distorção idade-série.</p>
+                            
+                          </div>
+                        </div>
                     </div>
                     <div class="row">
                          <div id="rate-distortion">
@@ -177,6 +205,6 @@ reportHTML = '
                             <div id="variance-distortion" class="col-xs-4"></div>
                          </div>
                     </div>
-                </div>        
+                </div>
             </div>
-        </div>' 
+        </div>'
