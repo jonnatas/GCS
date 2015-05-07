@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, :with => :render_error
   rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
   rescue_from ActionController::RoutingError, :with => :render_not_found
-  rescue_from Exception, :with => :server_error
+  # rescue_from ActionController::InternalServerError, :with => :server_error
+
   def index
   end
 
@@ -28,6 +29,6 @@ class ApplicationController < ActionController::Base
       format.html { render template: 'errors/500', :status => 500 }
       format.all  { render nothing: true, :status => 500}
     end
-  end  
+  end
 
 end
