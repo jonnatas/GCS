@@ -93,20 +93,22 @@ formatIDEBDataToPlot = (data, years, grades)->
 reportHTML = '
         <div id="report-result" style="display: none;">            <div class="panel panel-default">
                 <div class="panel-heading"><h4>IDEB</h4></div>
-                <div class="panel-body">
+                <div class="panel-body-ideb">
                     <div class="row">
                     </div>
                     <div class="row">
-                        <div class="col-xs-6"><div id="portuguese-pb-graph"></div></div>
+                        <div class="col-xs-6"><div id="portuguese-pb-graph"></div>
+                            <div class="row">
+                                <div id="portuguese-pb">
+                                    <div id="average-pt" class="col-xs-4"></div>
+                                    <div id="standard-deviation-pt" class="col-xs-4"></div>
+                                    <div id="variance-pt" class="col-xs-4"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xs-6"><div id="portuguese-pb-graph-text"></div></div>
                     </div>
-                    <div class="row">
-                        <div id="portuguese-pb">
-                            <div id="average-pt" class="col-xs-4"></div>
-                            <div id="standard-deviation-pt" class="col-xs-4"></div>
-                            <div id="variance-pt" class="col-xs-4"></div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <br />
@@ -117,7 +119,7 @@ reportHTML = '
                 <div class="panel-body">
                     <div class="row">
                   
-                        <div id="rate-evasion-title" class="col-md-4"><h4>Evasão</h4></div>
+                        <h4>Evasão</h4>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -159,7 +161,7 @@ reportHTML = '
                 <div class="rendiment">
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-performance-title" class="col-md-4"><h4>Redimento</h4></div>
+                        <h4>Redimento</h4>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -196,7 +198,7 @@ reportHTML = '
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="rate-distortion-title" class="col-md-4"><h4>Distorção</h4></div>
+                        <h4>Distorção</h4>
                     </div>
                     <div class="row">
                         <div class="col-md-6">

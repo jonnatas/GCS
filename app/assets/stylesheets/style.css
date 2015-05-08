@@ -155,21 +155,29 @@ border-radius:0;
 }
 
 .evasion{
-	border-color: #CCC !important; 
-	border-bottom: solid;
+	
+	border-bottom: solid 1px #DDD;
 }
 
 .rendiment{
-	border-color: #CCC !important; 
-	border-bottom: solid;
+	 
+	border-bottom: solid 1px #DDD;
 }
 
 .panel-heading{
-	text-align: center;
+	text-align: left;
 }
 
+.panel-heading h4{
+	font-family: 'Lato';
+	font-weight: 'bold';
+	font-size: 30px;
+}
+
+
+
 .title-relatory{
-	margin-left: 8px !important; 
+	margin-left: 8px; 
 }
 
 .rate-evasion{
@@ -183,3 +191,40 @@ border-radius:0;
 .rate-performance{
 	width: 120%;
 }
+
+.panel-body-ideb{
+	height: 500px;
+}
+
+
+.panel-body {
+	height: 600px;
+}
+
+.panel-body h4{
+	text-align: center;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	font-family: 'Lato';
+	font-weight: 'bold';
+	font-size: 30px;
+
+}
+
+
+
+.panel-body p{
+	text-align: left;
+	
+	
+	/*font-family: 'Lato';
+	font-weight: 'bold';*/
+	font-size: 18px;
+
+}
+
+#portuguese-pb{
+
+	padding-left: 20px;
+}
+
