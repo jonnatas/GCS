@@ -2,10 +2,10 @@ class CreateIdebs < ActiveRecord::Migration
   def change
     create_table :idebs do |t|
 
-    	t.float :ideb
-    	t.string :uf
-    	t.float :ano
-    	t.string :tipo
+    	t.float :score
+    	t.integer :state_id
+    	t.integer :year
+    	t.string :test_type
     	
       t.timestamps
     end

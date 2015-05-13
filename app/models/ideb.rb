@@ -2,34 +2,38 @@ class Ideb < ActiveRecord::Base
 
 	attr_accessor :ideb_hash
 
-	def initialize(year,uf,grade)
+	def initialize(year,state_id,grade_id)
 		@year = year
-		@uf = uf
-		@grade = grade
+		@state_id = state_id
+		@grade_id = grade_id
 		@ideb_result = Array.new
 		@years = Array.new
-		@grades = Array.new
+		@grade_ids = Array.new
 	end
 
 
 	def request_ideb_report
-		(@year.to_i..2011).each do |current_year|
-			current_type = ""
-			if @grade.to_i <= 5
-				current_type = "inicial"
-			else
-				current_type = "final"
+		if @year.to_i <= 2011
+			(@year.to_i..2011).each do |current_year|
+				current_type = ""
+				if @grade_id.to_i <= 5
+					current_type = "early"
+				else
+					current_type = "final"
+				end
+				if current_year%2 != 0 && current_year != 2013
+					current_ideb = request_ideb(current_year,@state_id,current_type)
+					@ideb_result.push(current_ideb.score)
+					@years.push(current_year.to_s)
+					@grade_ids.push(@grade_id.to_s)
+				end
+				@grade_id = @grade_id.to_i + 1
 			end
-			if current_year%2 != 0 && current_year != 2013
-				current_ideb = request_ideb(current_year, current_type,@uf)
-				@ideb_result.push(current_ideb.ideb)
-				@years.push(current_year.to_s)
-				@grades.push(@grade.to_s)
-			end
-			@grade = @grade.to_i + 1
+			request_analise_data
+			generate_hash_result
+		else
+			@ideb_hash = {:status => "unavailable"}
 		end
-		request_analise_data
-		generate_hash_result
 	end
 
 	def request_analise_data
@@ -39,15 +43,11 @@ class Ideb < ActiveRecord::Base
 	end
 
 	def generate_hash_result
-		@ideb_hash = {:ideb => @ideb_result, :ideb_average => @ideb_average,
+		@ideb_hash = {:status => "available" ,:ideb => @ideb_result, :ideb_average => @ideb_average,
 		 :ideb_standard_deviation => @standard_deviation_ideb,
 		 :ideb_variance => @variance_ideb,
 		:ideb_years => @years,
-		:ideb_grades => @grades} 
-	end
-
-	def request_ideb(year,type,uf)
-		return Ideb.where(:ano => year, :uf => uf, :tipo => type).first
+		:ideb_grade_ids => @grade_ids} 
 	end
 
 	def request_average_to_ideb
@@ -65,6 +65,8 @@ class Ideb < ActiveRecord::Base
 	end
 	private :request_variance_to_ideb
 
-
+	def request_ideb(year,state_id,type)
+		return Ideb.where(:year => year, :state_id => state_id, :test_type => type).first
+	end
 	
 end

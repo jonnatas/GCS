@@ -1,33 +1,33 @@
 class Rate < ActiveRecord::Base
 	include ReportHelper
 	FINAL_GRADE = 9
-	attr_accessor :rate_hash, :evasion_average, :performance_average, :distortion_average
+	attr_accessor :rate_hash
 
-	def initialize(year, id_grade, id_state)
+	def initialize(year, grade_id, state_id)
 		@year = year
-		@id_grade = id_grade
-		@id_state = id_state
-		@final_year = Rate.final_year_avaiable( year, id_grade, id_state )
+		@grade_id = grade_id
+		@state_id = state_id
+		@final_year = Rate.final_year_avaiable( year, grade_id, state_id )
 		@evasion_result = Array.new
 		@performance_result = Array.new
 		@distortion_result = Array.new
 	end
 
-	def self.final_year_avaiable( year, id_grade, id_state )
+	def self.final_year_avaiable( year, grade_id, state_id )
 
 		final_year = ""
 		#to use in the loop below , increments in one each loop
-		id_grade_local = id_grade
+		grade_id_local = grade_id
 
 		#will pick the last year avaiable and add 1
-		local_final_year = Rate.all.pluck(:ano).max.to_i + 1
+		local_final_year = Rate.all.pluck(:year).max.to_i + 1
 
-		#loop to test if the line in the table with the params year and id_grade are empty
+		#loop to test if the line in the table with the params year and grade_id are empty
 		(year.to_i..local_final_year).each do |year_test|
 
-			table_line = Rate.where(:ano => year_test,:abrangencia => id_state)
+			table_line = Rate.where(:year => year_test,:state_id => state_id)
 
-			id_grade_local = id_grade_local.to_i + 1 #increments each loop
+			grade_id_local = grade_id_local.to_i + 1 #increments each loop
 			
 			#if table_line is empty, means that we have a final year to use
 			if table_line.empty?
@@ -42,19 +42,19 @@ class Rate < ActiveRecord::Base
 	end
 
 	def request_rate_report
-		#auxiliar variable to receive the given id_grade and make casts to the value
-		local_id_grade = @id_grade
+		#auxiliar variable to receive the given grade_id and make casts to the value
+		local_grade_id = @grade_id
 
 		(@year.to_i..@final_year.to_i).each do |year|
-			current_rate = request_rate(year,@id_state,local_id_grade).attributes
-			current_distortion = request_distortion(year,@id_state,local_id_grade).attributes
-			#increments the id_grade through years.
-			if local_id_grade.to_i <= FINAL_GRADE
-				@evasion_result.push(current_rate.select{|key, value| key.to_s.match(/ab_#{local_id_grade}/)}.values[0])
-				@performance_result.push(current_rate.select{|key, value| key.to_s.match(/ap_#{local_id_grade}/)}.values[0])
-				@distortion_result.push(current_distortion.select{|key, value| key.to_s.match(/di_#{local_id_grade}/)}.values[0])
+			current_rate = request_rate(year,@state_id,local_grade_id)
+			current_distortion = request_distortion(year,@state_id,local_grade_id)
+			#increments the grade_id through years.
+			if local_grade_id.to_i <= FINAL_GRADE
+				@evasion_result.push(current_rate.evasion)
+				@performance_result.push(current_rate.peformance)
+				@distortion_result.push(current_distortion.distortion)
 
-				local_id_grade = (local_id_grade.to_i + 1).to_s
+				local_grade_id = (local_grade_id.to_i + 1).to_s
 			end
 		end
 
@@ -136,11 +136,13 @@ class Rate < ActiveRecord::Base
 	private :request_variance_distortion
 
 
-	def request_rate(year,id_state,id_grade)
-		return Rate.where(:ano => year, :abrangencia => id_state, :local => "Total", :rede => "Total").first
+	def request_rate(year,state_id,grade_id)
+		return Rate.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+		 :grade_id => grade_id).first
 	end
 
-	def request_distortion(year,id_state,id_grade)
-		return Distortion.where(:ano => year, :uf => id_state, :local => "Total", :rede => "Total").first
+	def request_distortion(year,state_id,grade_id)
+		return Distortion.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			:grade_id => grade_id).first
 	end
 end
