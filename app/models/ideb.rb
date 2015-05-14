@@ -2,7 +2,7 @@ class Ideb < ActiveRecord::Base
 
 	attr_accessor :ideb_hash
 
-	def initialize(year,state_id,grade_id)
+	def initialize(year,grade_id,state_id)
 		@year = year
 		@state_id = state_id
 		@grade_id = grade_id

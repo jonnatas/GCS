@@ -3,13 +3,16 @@ class Report
 	attr_accessor :report_result_hash
 
 	module Error
+
 		class Standard < StandardError
 		end
+
 		class NoDataToSelectedYear < Standard
 			def message
 				"Sorry, but there is no record on DB for this year."
 			end
 		end
+		
 	end
 
 	def initialize(year, grade, state)

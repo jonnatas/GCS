@@ -3,6 +3,21 @@ class Rate < ActiveRecord::Base
 	FINAL_GRADE = 9
 	attr_accessor :rate_hash
 
+	module Error
+
+		class Standard < StandardError
+		end
+
+		class FinalYearException < Standard
+
+			def message
+				"Final year reached"
+			end
+
+		end
+
+	end
+
 	def initialize(year, grade_id, state_id)
 		@year = year
 		@grade_id = grade_id
@@ -48,14 +63,17 @@ class Rate < ActiveRecord::Base
 		(@year.to_i..@final_year.to_i).each do |year|
 			current_rate = request_rate(year,@state_id,local_grade_id)
 			current_distortion = request_distortion(year,@state_id,local_grade_id)
-			#increments the grade_id through years.
-			if local_grade_id.to_i <= FINAL_GRADE
-				@evasion_result.push(current_rate.evasion)
-				@performance_result.push(current_rate.peformance)
-				@distortion_result.push(current_distortion.distortion)
 
-				local_grade_id = (local_grade_id.to_i + 1).to_s
+			begin
+				raise Error::FinalYearException if local_grade_id.to_i > FINAL_GRADE
+					@evasion_result.push(current_rate.evasion)
+					@performance_result.push(current_rate.peformance)
+					@distortion_result.push(current_distortion.distortion)
+					local_grade_id = (local_grade_id.to_i + 1).to_s
+			rescue
+				puts "#{local_grade_id}"
 			end
+
 		end
 
 		request_analise_data
