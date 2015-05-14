@@ -2,28 +2,23 @@
   
   <div class="form-group">
   <%= label_tag(:year, "Ano de início") %>
-  <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq.sort!, 
-  :selected => params[:year]) , class: 'form-control') %>
-  <%#= text_field_tag(:year,nil, class: 'form-control')%>
+  <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
   </div>
   <div class="form-group">
   </div>
 
   <div class="form-group">
   <%= label_tag(:state, "Estado") %>
-  <%= select_tag(:state, options_for_select( State.all.pluck(:state).uniq.sort!, 
-  :selected => params[:state]) , class: 'form-control'  ) %>
+  <%= select_tag(:state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
   </div>
   <div class="form-group">
   <%= label_tag(:grade, "Turma (Ano)") %>
-  <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!, 
-  :selected => params[:grade]) , class: 'form-control'  ) %>
+  <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
   </div>
   
   <div class="form-group">
   <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
   <a id="clean_report" class="btn btn-default"  style="display: none;">Limpar</a>
-  </div>
 <% end %>
 
 

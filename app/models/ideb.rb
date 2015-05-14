@@ -13,27 +13,23 @@ class Ideb < ActiveRecord::Base
 
 
 	def request_ideb_report
-		if @year.to_i <= 2011
-			(@year.to_i..2011).each do |current_year|
-				current_type = ""
-				if @grade_id.to_i <= 5
-					current_type = "early"
-				else
-					current_type = "final"
-				end
-				if current_year%2 != 0 && current_year != 2013
-					current_ideb = request_ideb(current_year,@state_id,current_type)
-					@ideb_result.push(current_ideb.score)
-					@years.push(current_year.to_s)
-					@grade_ids.push(@grade_id.to_s)
-				end
-				@grade_id = @grade_id.to_i + 1
+		(@year.to_i..2011).each do |current_year|
+			current_type = ""
+			if @grade_id.to_i <= 5
+				current_type = "early"
+			else
+				current_type = "final"
 			end
-			request_analise_data
-			generate_hash_result
-		else
-			@ideb_hash = {:status => "unavailable"}
+			if current_year%2 != 0 && current_year != 2013
+				current_ideb = request_ideb(current_year,@state_id,current_type)
+				@ideb_result.push(current_ideb.score)
+				@years.push(current_year.to_s)
+				@grade_ids.push(@grade_id.to_s)
+			end
+			@grade_id = @grade_id.to_i + 1
 		end
+		request_analise_data
+		generate_hash_result
 	end
 
 	def request_analise_data

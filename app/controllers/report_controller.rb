@@ -13,6 +13,4 @@ class ReportController < ApplicationController
 		end
 		puts @report.report_result_hash
 	end
-
-
 end

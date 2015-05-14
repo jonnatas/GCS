@@ -15,12 +15,19 @@ $(document).ready ->
   	$("#report-result").show()
   	$("div#report-container").show(); $('#clean_report').show()
 
-  	if data.ideb.status == "available"
-        #request plot for Prova Brasil data
-    	plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
-    	appendAverageToDiv(data.ideb.ideb_average,"#average-ideb")
-    	appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
-    	appendVarienceToDiv(data.ideb.ideb_variance, "#variance-ideb")
+  	if data.ideb.status == "available"      
+      plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
+      appendAverageToDiv(data.ideb.ideb_average,"#average-ideb")
+      appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
+      appendVarienceToDiv(data.ideb.ideb_variance, "#variance-ideb")
+    else
+      $("#ideb-report").empty() 
+      $("#ideb-report").removeClass('panel')
+      $("#ideb-report").removeClass('panel-default')
+      $("#ideb-report").addClass('alert alert-danger')
+      $("#ideb-report").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
+      
+
     
   	plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
   	appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
@@ -93,9 +100,10 @@ formatIDEBDataToPlot = (data, years, grades)->
 
 	
 reportHTML = '
-        <div id="report-result" style="display: none;">            <div class="panel panel-default">
+        <div id="report-result" style="display: none;">           
+         <div id="ideb-report" class="panel panel-default">
                 <div class="panel-heading"><h4>Ideb</h4></div>
-                <div class="panel-body-ideb">
+                <div id="panel-body-ideb" class="panel-body-ideb">
                     <div class="row">
                     </div>
                     <div class="row">
