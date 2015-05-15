@@ -43,7 +43,7 @@ class Ideb < ActiveRecord::Base
 		 :ideb_standard_deviation => @standard_deviation_ideb,
 		 :ideb_variance => @variance_ideb,
 		:ideb_years => @years,
-		:ideb_grade_ids => @grade_ids} 
+		:ideb_grade_ids => @grade_ids}
 	end
 
 	def request_average_to_ideb
@@ -64,5 +64,5 @@ class Ideb < ActiveRecord::Base
 	def request_ideb(year,state_id,type)
 		return Ideb.where(:year => year, :state_id => state_id, :test_type => type).first
 	end
-	
+
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '*unmatched_route', :to => 'application#raise_not_found!'
 
-  resources :parses do 
+  resources :parses do
   collection {post :import}
   end
 

@@ -42,11 +42,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def server_error(exception)
-    respond_to do |format|
-      format.html { render template: 'errors/500', :status => 500 }
-      format.all  { render nothing: true, :status => 500}
-    end
-  end
-
 end
