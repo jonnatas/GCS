@@ -71,7 +71,7 @@ class Rate < ActiveRecord::Base
 					@distortion_result.push(current_distortion.distortion)
 					local_grade_id = (local_grade_id.to_i + 1).to_s
 			rescue
-				puts "#{local_grade_id}"
+				
 			end
 
 		end

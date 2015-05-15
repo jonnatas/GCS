@@ -7,6 +7,16 @@ describe Report do
  	@report = Report.new(2011,1,"AC")
  end 
 
+ describe Report::Error::NoDataToSelectedYear do
+		before :each do
+			@error = Report::Error::NoDataToSelectedYear.new
+		end
+		describe "#message"
+			  	it "Show the message" do 
+			  		expect(@error.message).to eq("Sorry, but there is no record on DB for this year.")
+			  		end
+	end
+
 describe "#initialize"
   it "take the params and set them to the object" do
      expect(@report.instance_variable_get(:@year)).to eq(2011)
