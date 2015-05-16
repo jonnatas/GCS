@@ -66,9 +66,9 @@ class Rate < ActiveRecord::Base
 
 			begin
 				raise Error::FinalYearException if local_grade_id.to_i > FINAL_GRADE
-					@evasion_result.push(current_rate.evasion)
-					@performance_result.push(current_rate.peformance)
-					@distortion_result.push(current_distortion.distortion)
+					set_data_to_evasion_array(current_rate.evasion)
+					set_data_to_performance_array(current_rate.peformance)
+					set_data_to_distortion_array(current_distortion.distortion)
 					local_grade_id = (local_grade_id.to_i + 1).to_s
 			rescue
 				
@@ -78,6 +78,18 @@ class Rate < ActiveRecord::Base
 
 		request_analise_data
 		generate_hash_result
+	end
+
+	def set_data_to_evasion_array(evasion)
+		@evasion_result.push(evasion)
+	end
+
+	def set_data_to_performance_array(performance)
+		@performance_result.push(performance)
+	end
+
+	def set_data_to_distortion_array(distortion)
+		@distortion_result.push(distortion)
 	end
 
 
