@@ -22,14 +22,26 @@ class Ideb < ActiveRecord::Base
 			end
 			if current_year%2 != 0 && current_year != 2013
 				current_ideb = request_ideb(current_year,@state_id,current_type)
-				@ideb_result.push(current_ideb.score)
-				@years.push(current_year.to_s)
-				@grade_ids.push(@grade_id.to_s)
+				set_data_to_ideb_result_array(current_ideb.score)
+				set_data_to_years_array(current_year.to_s)
+				set_data_to_grade_ids_array(@grade_id.to_s)
 			end
 			@grade_id = @grade_id.to_i + 1
 		end
 		request_analise_data
 		generate_hash_result
+	end
+
+	def set_data_to_ideb_result_array(ideb)
+		@ideb_result.push(ideb)
+	end
+
+	def set_data_to_years_array(current_year)
+		@years.push(current_year)
+	end
+
+	def set_data_to_grade_ids_array(grade)
+		@grade_ids.push(grade)
 	end
 
 	def request_analise_data
