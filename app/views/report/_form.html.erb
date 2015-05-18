@@ -1,5 +1,5 @@
 <%= form_tag("/report/request_report.json",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
-  
+
   <div class="form-group">
   <%= label_tag(:year, "Ano de início") %>
   <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
@@ -15,7 +15,7 @@
   <%= label_tag(:grade, "Turma (Ano)") %>
   <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
   </div>
-  
+
   <div class="form-group">
   <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
   <a id="clean_report" class="btn btn-default"  style="display: none;">Limpar</a>
