@@ -12,6 +12,7 @@ notifications:
     recipients:
       - johnnys.ribeiro@gmail.com
       - icyrvnd@gmail.com
+      - simiaosimis@gmail.com
 branches:
   only:
 
