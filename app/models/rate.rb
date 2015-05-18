@@ -95,17 +95,17 @@ class Rate < ActiveRecord::Base
 
 	def generate_hash_result
 		@rate_hash = {:evasion => @evasion_result,
-		 	:performance => @performance_result,
-		 	:distortion => @distortion_result,
+			:performance => @performance_result,
+			:distortion => @distortion_result,
 			:evasion_average => @evasion_average,
 			:performance_average => @performance_average,
-		  	:distortion_average => @distortion_average,
-		  	:evasion_standard_deviation => @standard_deviation_evasion,
-		  	:performance_standard_deviation => @standard_deviation_performance,
-		  	:distortion_standard_deviation => @standard_deviation_distortion,
+			:distortion_average => @distortion_average,
+			:evasion_standard_deviation => @standard_deviation_evasion,
+			:performance_standard_deviation => @standard_deviation_performance,
+			:distortion_standard_deviation => @standard_deviation_distortion,
 			:evasion_variance => @variance_evasion,
-		  	:performance_variance => @variance_performance,
-		  	:distortion_variance => @variance_distortion}
+			:performance_variance => @variance_performance,
+			:distortion_variance => @variance_distortion}
 	end
 
 	def request_analise_data
