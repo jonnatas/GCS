@@ -1,14 +1,9 @@
 language: ruby
 
-<<<<<<< HEAD
 before_script: gem install rspec rspec-rails
 
 script: rspec spec
 
-=======
-script:
-- bundle exec rspec spec  
->>>>>>> Update .travis.yml
 rvm:
   - 2.2.0 
 notifications:
@@ -22,4 +17,3 @@ branches:
   only:
 
   - TravisIntegration
-
