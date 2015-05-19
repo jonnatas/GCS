@@ -1,9 +1,15 @@
 language: ruby
 
+<<<<<<< HEAD
 before_script: gem install rspec rspec-rails
 
 script: rspec spec
+=======
+script:
+>>>>>>> Update .travis.yml
 
+  - rspec spec 
+  
 rvm:
   - 2.2.0 
 notifications:
