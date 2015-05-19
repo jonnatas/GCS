@@ -7,16 +7,6 @@ describe Report do
 		@rate.request_rate_report
 	end
 
-	describe Rate::Error::FinalYearException do
-		before :each do
-			@error = Rate::Error::FinalYearException.new
-		end
-		describe "#message"
-			  	it "Show the message" do 
-			  		expect(@error.message).to eq("Final year reached")
-			  		end
-	end
-
 	describe "#initialize"
 		it "Take the arguments and set to the instace variables" do
 		 expect(@rate.instance_variable_get(:@year)).to eq(2008)

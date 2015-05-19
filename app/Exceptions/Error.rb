@@ -22,9 +22,7 @@ module Error
 
 	class NullElementAtDB < Standard
 		def message
-			"Sorry, but there's no record on DB for this paramers. Returning an object with 0 in all 
-			attributs.
-			"
+			"Sorry, but there's no record on DB for this paramers. Returning an object with 0 in all attributs."
 		end
 	end
 end

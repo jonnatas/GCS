@@ -6,7 +6,7 @@ require_relative '../app/controllers/report_controller'
 describe ReportController do
 
   before :each do
-    @report = Report.new(2011, 1, "AC")
+    @report = Report.new(2011, "1° ano", "AC")
     @report.request_report
   end
 
