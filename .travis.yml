@@ -1,15 +1,9 @@
 language: ruby
 
-<<<<<<< HEAD
-before_script: gem install rspec rspec-rails
+before_script: gem install rspec rspec-rails simplecov
 
-script: rspec spec
-=======
-script:
->>>>>>> Update .travis.yml
+script: bundle exec rspec spec
 
-  - rspec spec 
-  
 rvm:
   - 2.2.0 
 notifications:
