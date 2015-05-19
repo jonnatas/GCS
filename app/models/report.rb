@@ -1,26 +1,38 @@
 class Report
-	#validates_presence_of :year, :id_grade, :id_state, :final_year, :message => "Can't be blank!"
+	
 	attr_accessor :report_result_hash
+	include Error
 
-	def initialize(year, id_grade, state)
+	def initialize(year, grade, state)
 		@year = year
-		@id_grade = id_grade
-		@id_state = state
+		@grade_id = Grade.grade_id_by_description(grade)
+		@state_id = State.state_id_by_description(state)
 	end
 
 	def request_report
-		ideb = Ideb.new(@year,@id_state,@id_grade)
-		ideb.request_ideb_report
+		ideb = request_ideb
+		rates = request_rate
 
-		rates = Rate.new(@year,@id_grade,@id_state)
-		rates.request_rate_report
-
-		@report_result_hash = {:ideb => ideb.ideb_hash,
-		 :rates => rates.rate_hash,
+		@report_result_hash = {:ideb => ideb,
+		 :rates => rates,
 		 :year => @year,
-		 :grade => @id_grade}
-
+		 :grade => @grade_id}
 	end
-	public :request_report
+
+	private
+	def request_ideb
+		begin
+			raise Error::NoDataToSelectedYear if @year.to_i > Ideb.maximum(:year)
+			raise Error::NoDataForSelectedGrade if @year.to_i%2 == 0 && @grade_id == 9
+			@ideb = Ideb.new(@year,@grade_id,@state_id)
+			@ideb.request_ideb_report
+		rescue
+			ideb = {:status => "unavailable"}
+		end
+	end
+	def request_rate
+		@rates = Rate.new(@year,@grade_id,@state_id)
+		@rates.request_rate_report
+	end
 
 end

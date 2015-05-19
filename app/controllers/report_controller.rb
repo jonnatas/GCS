@@ -5,7 +5,7 @@ class ReportController < ApplicationController
 	end
 
 	def request_report
-		@report = Report.new(params[:year],params[:id_grade],params[:id_state])
+		@report = Report.new(params[:year],params[:grade],params[:state])
 		@report.request_report
 
 		respond_to do |format|
@@ -13,6 +13,4 @@ class ReportController < ApplicationController
 		end
 		puts @report.report_result_hash
 	end
-
-
 end

@@ -3,15 +3,15 @@ require_relative'../app/models/rate'
 
 describe Report do
 	before :each do
-		@rate = Rate.new(2008,1,"AC")
+		@rate = Rate.new(2008, 1, 1)
 		@rate.request_rate_report
 	end
 
 	describe "#initialize"
 		it "Take the arguments and set to the instace variables" do
 		 expect(@rate.instance_variable_get(:@year)).to eq(2008)
-	     expect(@rate.instance_variable_get(:@id_grade)).to eq(1)
-	     expect(@rate.instance_variable_get(:@id_state)).to eq("AC")
+	     expect(@rate.instance_variable_get(:@grade_id)).to eq(1)
+	     expect(@rate.instance_variable_get(:@state_id)).to eq(1)
 		end
 
 	describe "#final_year_avaiable"
@@ -21,7 +21,10 @@ describe Report do
 
 	describe "#request_rate"
 	    it "Take de state, grade and year and return a Rate object from DB" do
-	      expect(@rate.request_rate(2008,"AC",1)).not_to eq(nil)
+	    	local_rate = @rate.request_rate(2008,1,1)
+	      	expect(local_rate.year).to eq(2008)
+	      	expect(local_rate.grade_id).to eq(1)
+	      	expect(local_rate.state_id).to eq(1)
 	    end
 
 	describe "#request_rate_report"
@@ -107,3 +110,5 @@ describe Report do
 			expect(@rate.instance_variable_get(:@rate_hash)).to eq(expected_hash_result)
 		end
 end
+
+

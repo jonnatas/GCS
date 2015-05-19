@@ -40,7 +40,7 @@ border-radius:0;
 }
 
 .jumbotron{
-	background-image: url('fundooo.jpg');
+	background-image: asset-url("fundooo.jpg", image);
 	background-size: cover;
 	height:750px;
 	border-bottom: solid black 1px;

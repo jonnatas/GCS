@@ -63,8 +63,7 @@ border-radius:0;
 
 
 .jumbotron{
-	background-image: url("EnTurma/public/images/fundooo.jpg");
-	background-size: cover;
+	/*background-size: cover;*/
 	height:100%;
 	background-color:black;"
 }
