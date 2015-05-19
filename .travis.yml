@@ -1,9 +1,7 @@
 language: ruby
 
 script:
-
-  - rspec spec 
-  
+- bundle exec rspec spec  
 rvm:
   - 2.2.0 
 notifications:
