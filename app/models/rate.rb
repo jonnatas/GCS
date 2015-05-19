@@ -1,7 +1,9 @@
 class Rate < ActiveRecord::Base
-	include ReportHelper, Error
+	include ReportHelper
+	include Error
 	FINAL_GRADE = 9
 	attr_accessor :rate_hash
+
 
 	def initialize(year, grade_id, state_id)
 		@year = year
