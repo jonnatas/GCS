@@ -1,7 +1,7 @@
 class Report
 	
 	attr_accessor :report_result_hash
-	include Error
+	require 'Error'
 
 	def initialize(year, grade, state)
 		@year = year

@@ -1,6 +1,6 @@
 class Rate < ActiveRecord::Base
 	include ReportHelper
-	include Error
+	require 'Error'
 	FINAL_GRADE = 9
 	attr_accessor :rate_hash
 
