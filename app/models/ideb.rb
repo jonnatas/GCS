@@ -20,7 +20,7 @@ class Ideb < ActiveRecord::Base
 			else
 				current_type = "final"
 			end
-			if current_year%2 != 0 && current_year != 2013
+			if current_year%2 != 0 && @grade_id <= 9
 				current_ideb = request_ideb(current_year,@state_id,current_type)
 				set_data_to_ideb_result_array(current_ideb.score)
 				set_data_to_years_array(current_year.to_s)

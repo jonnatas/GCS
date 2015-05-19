@@ -1,22 +1,7 @@
 class Rate < ActiveRecord::Base
-	include ReportHelper
+	include ReportHelper, Error
 	FINAL_GRADE = 9
 	attr_accessor :rate_hash
-
-	module Error
-
-		class Standard < StandardError
-		end
-
-		class FinalYearException < Standard
-
-			def message
-				"Final year reached"
-			end
-
-		end
-
-	end
 
 	def initialize(year, grade_id, state_id)
 		@year = year
@@ -61,15 +46,14 @@ class Rate < ActiveRecord::Base
 		local_grade_id = @grade_id
 
 		(@year.to_i..@final_year.to_i).each do |year|
-			current_rate = request_rate(year,@state_id,local_grade_id)
-			current_distortion = request_distortion(year,@state_id,local_grade_id)
-
 			begin
 				raise Error::FinalYearException if local_grade_id.to_i > FINAL_GRADE
-					set_data_to_evasion_array(current_rate.evasion)
-					set_data_to_performance_array(current_rate.peformance)
-					set_data_to_distortion_array(current_distortion.distortion)
-					local_grade_id = (local_grade_id.to_i + 1).to_s
+				current_rate = request_rate(year,@state_id,local_grade_id)
+				current_distortion = request_distortion(year,@state_id,local_grade_id)
+				set_data_to_evasion_array(current_rate.evasion)
+				set_data_to_performance_array(current_rate.peformance)
+				set_data_to_distortion_array(current_distortion.distortion)
+				local_grade_id = (local_grade_id.to_i + 1).to_s
 			rescue
 				
 			end
@@ -167,12 +151,27 @@ class Rate < ActiveRecord::Base
 
 
 	def request_rate(year,state_id,grade_id)
-		return Rate.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+		begin
+			raise Error::NullElementAtDB if !Rate.exists?(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+		 :grade_id => grade_id)
+			Rate.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
 		 :grade_id => grade_id).first
+		rescue
+			Rate.new(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+		 :grade_id => grade_id, :performance => 0.0, :disapproval => 0.0, :evasion => 0.0)
+		end
+		
 	end
 
 	def request_distortion(year,state_id,grade_id)
-		return Distortion.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+		begin
+			raise Error::NullElementAtDB if !Distortion.exists?(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			:grade_id => grade_id)
+			Distortion.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
 			:grade_id => grade_id).first
+		rescue
+			Distortion.new(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			:grade_id => grade_id, :distortion => 0.0)
+		end
 	end
 end

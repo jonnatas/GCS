@@ -1,19 +1,7 @@
 class Report
 	
 	attr_accessor :report_result_hash
-
-	module Error
-
-		class Standard < StandardError
-		end
-
-		class NoDataToSelectedYear < Standard
-			def message
-				"Sorry, but there is no record on DB for this year."
-			end
-		end
-		
-	end
+	include Error
 
 	def initialize(year, grade, state)
 		@year = year
@@ -34,7 +22,8 @@ class Report
 	private
 	def request_ideb
 		begin
-			raise Error::NoDataToSelectedYear if @year.to_i > Ideb.maximum("year")
+			raise Error::NoDataToSelectedYear if @year.to_i > Ideb.maximum(:year)
+			raise Error::NoDataForSelectedGrade if @year.to_i%2 == 0 && @grade_id == 9
 			@ideb = Ideb.new(@year,@grade_id,@state_id)
 			@ideb.request_ideb_report
 		rescue
