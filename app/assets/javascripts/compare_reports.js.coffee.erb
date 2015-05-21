@@ -10,7 +10,7 @@ $(document).ready ->
      $('div#compare_reports-container').hide(); $('#clean_compare_reports').hide()
     )
 
-  $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+  $("#new-compare_reports-request").on("ajax:success", (e, data, status, xhr) ->
   	$('#compare_reports-container').empty().append(compare_reportsHTML)
   	$("#compare_reports-result").show()
   	$("div#compare_reports-container").show(); $('#clean_compare_reports').show()
@@ -39,7 +39,7 @@ $(document).ready ->
   	appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
-  	plotLine(formatDataToPlot(data.first_report.rates.distortion, data.first_report.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
+  	plotLine(formatDataToPlot(data.first_report.rates.distortion, data.first_report.year,data.first_report.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
   	appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
@@ -67,6 +67,7 @@ plotLine = (data,div,labels,colors) ->
 		ykeys: ['y']
 		labels: labels
 		lineColors: colors
+
 		})
 
 plotBar = (data,div,labels,colors) ->
@@ -97,6 +98,7 @@ formatIDEBDataToPlot = (data, years, grades)->
     formatedData.push {x: "#{years[i]} - #{grades[i]}° ano", y: value}
     i++
   return formatedData
+
 
 
 compare_reportsHTML = '

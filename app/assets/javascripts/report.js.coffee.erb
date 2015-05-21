@@ -10,7 +10,7 @@ $(document).ready ->
   	 $('div#report-container').hide(); $('#clean_report').hide()
 		)
 
-  $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+  $("#new-report-request").on("ajax:success", (e, data, status, xhr) ->
   	$('#report-container').empty().append(reportHTML)
   	$("#report-result").show()
   	$("div#report-container").show(); $('#clean_report').show()
@@ -97,6 +97,7 @@ formatIDEBDataToPlot = (data, years, grades)->
     formatedData.push {x: "#{years[i]} - #{grades[i]}° ano", y: value}
     i++
   return formatedData
+
 
 
 reportHTML = '
