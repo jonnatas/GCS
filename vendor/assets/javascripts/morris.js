@@ -846,6 +846,7 @@ Licensed under the BSD-2-Clause License.
       shown: true,
       xLabels: 'auto',
       xLabelFormat: null,
+      parseTime: false,
       xLabelMargin: 24,
       hideHover: false,
       trendLine: false,
@@ -1233,7 +1234,14 @@ Licensed under the BSD-2-Clause License.
     };
 
     Line.prototype.drawXAxisLabel = function(xPos, yPos, text) {
-      return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
+
+      subText = text.substring(1,6);
+      if(subText == "° ano")
+        subText = text.substring(0,6);
+      else
+        subText = text.substring(0,4);
+
+      return this.raphael.text(xPos, yPos, subText).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
 
     Line.prototype.drawLinePath = function(path, lineColor, lineIndex) {

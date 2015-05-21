@@ -85,7 +85,7 @@ plotBar = (data,div,labels,colors) ->
 formatDataToPlot = (data, year, grade)->
 	formatedData = []
 	for value in data by 1
-		formatedData.push {x: "#{year} - #{grade}° ano", y: value}
+		formatedData.push {x: "#{grade}° ano - #{year} ", y: value}
 		year++
 		grade++
 	return formatedData
