@@ -840,18 +840,20 @@ Licensed under the BSD-2-Clause License.
       pointSize: 4,
       lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
       pointStrokeWidths: [1],
-      pointStrokeColors: ['#ffffff'],
       pointFillColors: [],
       smooth: true,
       shown: true,
       xLabels: 'auto',
+      postUnits: '%',
       xLabelFormat: null,
       parseTime: false,
       xLabelMargin: 24,
       hideHover: false,
       trendLine: false,
       trendLineWidth: 2,
-      trendLineColors: ['#689bc3', '#a2b3bf', '#64b764']
+      trendLineColors: ['blue','red'],
+      pointStrokeColors: ['black']
+
     };
 
     Line.prototype.calc = function() {

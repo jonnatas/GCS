@@ -5,10 +5,10 @@ class CompareReportsController < ApplicationController
 	end
 
 	def request_comparation
-		@first_report = Report.new(params[:first_year],params[:first_grade],params[:first_state])
+		@first_report = Report.new(params[:first_year],params[:grade],params[:first_state])
 		@first_report.request_report
 
-		@second_report = Report.new(params[:second_year],params[:second_grade],params[:second_state])
+		@second_report = Report.new(params[:second_year],params[:grade],params[:second_state])
 		@second_report.request_report
 
 		@comparation_hash = {:first_report => @first_report.report_result_hash,
