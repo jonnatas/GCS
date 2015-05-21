@@ -15,7 +15,6 @@ $(document).ready ->
        $("#public_type").show()
      else
        $("#public_type").hide()
-     
     )
 
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
@@ -36,21 +35,27 @@ $(document).ready ->
       $("#ideb-report").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
 
 
-
-    plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
-    appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
-    appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
-    appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
-
-    plotLine(formatDataToPlot(data.rates.performance, data.year,data.grade), 'rate-performance-graph', ["Performace"],["#0A62A4"])
-    appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
-    appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
-    appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
-
-    plotLine(formatDataToPlot(data.rates.distortion, data.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
-    appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
-    appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
-    appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
+    if data.rates.status == "available"
+      plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
+      appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
+      appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
+      appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
+      
+      plotLine(formatDataToPlot(data.rates.performance, data.year,data.grade), 'rate-performance-graph', ["Performace"],["#0A62A4"])
+      appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
+      appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
+      appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
+      
+      plotLine(formatDataToPlot(data.rates.distortion, data.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
+      appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
+      appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
+      appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
+    else
+      $("#rates").empty()
+      $("#rates").removeClass('panel')
+      $("#rates").removeClass('panel-default')
+      $("#rates").addClass('alert alert-danger')
+      $("#rates").append("<strong>Desculpe!</strong> Mais não temos disponível dados.")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
@@ -150,7 +155,7 @@ reportHTML = '
                 </div>
             </div>
             <br />
-            <br />            <div class="panel panel-default">
+            <br />            <div id="rates" class="panel panel-default">
 
                 <div class="panel-heading"><h4>Índices</h4></div>
                 <div class="evasion">

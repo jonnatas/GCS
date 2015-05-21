@@ -32,9 +32,16 @@ class Report
 			ideb = {:status => "unavailable"}
 		end
 	end
+	
 	def request_rate
-		@rates = Rate.new(@year,@grade_id,@state_id,@test_type,@local)
-		@rates.request_rate_report
+		begin
+			raise Error::NoDataToSelectedYear unless Rate.exists?(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
+			 :grade_id => grade_id)
+			@rates = Rate.new(@year,@grade_id,@state_id,@test_type,@local)
+			@rates.request_rate_report
+		rescue
+			rates = {:status => "unavailable"}
+		end
 	end
 
 end
