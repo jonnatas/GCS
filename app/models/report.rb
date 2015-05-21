@@ -3,11 +3,12 @@ class Report
 	attr_accessor :report_result_hash
 	require 'Error'
 
-	def initialize(year, grade, state, test_type)
+	def initialize(year, grade, state, test_type, local)
 		@year = year
 		@grade_id = Grade.grade_id_by_description(grade)
 		@state_id = State.state_id_by_description(state)
 		@test_type = test_type
+		@local = local
 	end
 
 	def request_report
@@ -32,7 +33,7 @@ class Report
 		end
 	end
 	def request_rate
-		@rates = Rate.new(@year,@grade_id,@state_id,@test_type)
+		@rates = Rate.new(@year,@grade_id,@state_id,@test_type,@local)
 		@rates.request_rate_report
 	end
 

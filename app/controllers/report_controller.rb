@@ -7,12 +7,12 @@ class ReportController < ApplicationController
 	def request_report
 		if params[:test_type] == "Publica"
 			if params[:public_type] == "Total"
-				@report = Report.new(params[:year],params[:grade],params[:state],"Publico") 
+				@report = Report.new(params[:year],params[:grade],params[:state],"Publico",params[:local]) 
 			else
-				@report = Report.new(params[:year],params[:grade],params[:state],params[:public_type]) 
+				@report = Report.new(params[:year],params[:grade],params[:state],params[:public_type],params[:local]) 
 			end
 		else
-			@report = Report.new(params[:year],params[:grade],params[:state],params[:test_type])
+			@report = Report.new(params[:year],params[:grade],params[:state],params[:test_type],params[:local])
 		end
 		@report.request_report
 
