@@ -1,44 +1,53 @@
 <%= form_tag("/compare_reports/request_comparation.json",id: "new-compare_reports-request", method: "get", remote: true, :class =>'form-inline') do %>
 
+    <div class="form-control-static">
+      <div class="form-group">
+        <h4 id="request-title">Primeira Turma</h3>
+          <div class="form-group">
+            <%= label_tag(:first_year, "Ano de início") %>
+            <%= select_tag(:first_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
+          </div>
 
-<div class="form-group">
-  <h4 id="request-title">Primeira Turma</h3>
-  <div class="form-group">
-  <%= label_tag(:first_year, "Ano de início") %>
-  <%= select_tag(:first_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
-  </div>
+          <div class="form-group">
+            <%= label_tag(:first_state, "Estado") %>
+            <%= select_tag(:first_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
+          </div>
 
-  <div class="form-group">
-  <%= label_tag(:first_state, "Estado") %>
-  <%= select_tag(:first_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
-  </div>
+          <br>
+          <br>
+          <br>
 
-</div>
-    
-<div class="form-group">
-  <h4 id="request-title">Segunda Turma</h3>
-  <div class="form-group">
-  <%= label_tag(:second_year, "Ano de início") %>
-  <%= select_tag(:second_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
-  </div>
+          <h4 id="request-title">Segunda Turma</h3>
+            <div class="form-group">
+              <%= label_tag(:second_year, "Ano de início") %>
+              <%= select_tag(:second_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
+            </div>
 
 
-  <div class="form-group">
-  <%= label_tag(:second_state, "Estado") %>
-  <%= select_tag(:second_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
-  </div>
+            <div class="form-group">
+              <%= label_tag(:second_state, "Estado") %>
+              <%= select_tag(:second_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
+            </div>
 
-</div>
-
-    <div class="form-group">
-      <%= label_tag(:grade, "Turma") %>
-      <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
-    </div>
-  <div class="form-group">
-  <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
-  <a id="clean_compare_reports" class="btn btn-default"  style="display: none;">Limpar</a>
       </div>
+
+      <div class="form-group">
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-group">
+          <%= label_tag(:grade, "Turma") %>
+          <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
+        </div>
+
+        <div class="form-group">
+          <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
+          <a id="clean_compare_reports" class="btn btn-default"  style="display: none;">Limpar</a>
+        </div>
+      </div>
+
+    </div>
 <% end %>
-
-
-

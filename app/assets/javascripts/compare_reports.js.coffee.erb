@@ -29,17 +29,17 @@ $(document).ready ->
 
 
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade), 'rate-evasion-graph',["Evasão "+data.first_report.year,"Evasão "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão "+data.first_report.year,"Evasão "+data.second_report.year],["#FF5600","#0080FF"])
   	appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
   	appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
   	appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade), 'rate-performance-graph', ["Rendimento "+data.first_report.year,"Rendimento "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento "+data.first_report.year,"Rendimento "+data.second_report.year],["#FF5600","#0080FF"])
   	appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
   	appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade), 'rate-distortion-graph', ["Distorção "+data.first_report.year,"Distorção "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção "+data.first_report.year,"Distorção "+data.second_report.year],["#FF5600","#0080FF"])
   	appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
@@ -59,13 +59,13 @@ appendVarienceToDiv = (data,div) ->
 
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
-	new Morris.Area({
+	new Morris.Line({
 
 		element: div,
 		data: data,
 		xkey: 'x'
 		ykeys: ['y1','y2']
-		labels: labels
+		labels: ['y2']
 		lineColors: colors
 		})
 
@@ -99,12 +99,32 @@ formatIDEBDataToPlot = (data, years, grades)->
   return formatedData
 
 #Method to format an array of data to a format that function plot needs
-formatDataToPlotTwoLines = (firstData, secondData, grade)->
+formatDataToPlotTwoLines = (firstData, secondData, grade, firstYear, secondYear)->
     formatedData = []
 
+    diffBetweenYear = firstYear - secondYear
+
+
+    minorData =  secondData.slice()
+    majorData = firstData.slice()
+
+    if(diffBetweenYear < 0)
+        minorData =  firstData.slice()
+        majorData =  secondData.slice()
+        diffBetweenYear = -diffBetweenYear
+
     i = 0
-    for value in firstData by 1
-        formatedData.push {x: "#{grade}° ano", y1: value, y2:secondData[i]}
+    j = -1
+
+    for value in minorData by 1
+
+        if(diffBetweenYear <= i)
+            j++
+            data = majorData[j]
+        else
+            data = null
+
+        formatedData.push {x: "#{grade}° ano", y1: value, y2:data}
         grade++;
         i++;
     return formatedData
