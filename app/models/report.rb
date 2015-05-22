@@ -35,8 +35,8 @@ class Report
 	
 	def request_rate
 		begin
-			raise Error::NoDataToSelectedYear unless Rate.exists?(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
-			 :grade_id => grade_id)
+			raise Error::NoDataToSelectedYear unless Rate.exists?(:year => @year, :state_id => @state_id, :local => @local, :test_type => @test_type,
+			 :grade_id => @grade_id)
 			@rates = Rate.new(@year,@grade_id,@state_id,@test_type,@local)
 			@rates.request_rate_report
 		rescue
