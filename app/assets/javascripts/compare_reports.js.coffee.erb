@@ -5,18 +5,18 @@
 
 $(document).ready ->
   clean_compare_reports = () ->
-		$('a#clean_compare_reports').click((event) ->
+    $('a#clean_compare_reports').click((event) ->
      $('#compare_reports-container').empty().append(reportHTML)
      $('div#compare_reports-container').hide(); $('#clean_compare_reports').hide()
     )
 
   $("#new-compare_reports-request").on("ajax:success", (e, data, status, xhr) ->
-  	$('#compare_reports-container').empty().append(compare_reportsHTML)
-  	$("#compare_reports-result").show()
-  	$("div#compare_reports-container").show(); $('#clean_compare_reports').show()
+    $('#compare_reports-container').empty().append(compare_reportsHTML)
+    $("#compare_reports-result").show()
+    $("div#compare_reports-container").show(); $('#clean_compare_reports').show()
 
-  	if data.first_report.ideb.status == "available"
-      plotBar(formatIDEBDataToPlot(data.first_report.ideb.ideb, data.first_report.ideb.ideb_years,data.first_report.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
+    if data.first_report.ideb.status == "available"
+      plotBar(formatDataToPlotTwoBars(data.first_report.ideb.ideb,data.second_report.ideb.ideb,data.first_report.ideb.ideb_grade_ids, data.first_report.ideb.ideb_years[0], data.second_report.ideb.ideb_years[0]), 'ideb-graph',["IDEB 1° Turma","IDEB 2° Turma"],['blue','red'])
       appendAverageToDiv(data.first_report.ideb.ideb_average,"#average-ideb")
       appendStandardVariationToDiv(data.first_report.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
       appendVarienceToDiv(data.first_report.ideb.ideb_variance, "#variance-ideb")
@@ -29,65 +29,65 @@ $(document).ready ->
 
 
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão ","Evasão "],['blue','red'])
-  	appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
-  	appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
-  	appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
+    plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão 1° Turma","Evasão 2° Turma"],['blue','red'])
+    appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
+    appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
+    appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento ","Rendimento "],['blue','red'])
-  	appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
-  	appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
-  	appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
+    plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento 1° Turma","Rendimento 2° Turma"],['blue','red'])
+    appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
+    appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
+    appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção ","Distorção "],['blue','red'])
-  	appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
-  	appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
-  	appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
+    plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção 1° Turma","Distorção 2° Turma"],['blue','red'])
+    appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
+    appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
+    appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
 
 appendAverageToDiv = (data,div) ->
-	$(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
 
 appendStandardVariationToDiv = (data,div) ->
-	$(div).append "<span><b>Desvio Padrão</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Desvio Padrão</b> #{data.toFixed(2)}</span>"
 
 appendVarienceToDiv = (data,div) ->
-	$(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
 
 
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
-	new Morris.Area({
+  new Morris.Area({
 
-		element: div,
-		data: data,
-		xkey: 'x'
-		ykeys: ['y1','y2']
-		labels: labels
-		lineColors: colors
-		})
+    element: div,
+    data: data,
+    xkey: 'x'
+    ykeys: ['y1','y2']
+    labels: labels
+    lineColors: colors
+    })
 
 plotBar = (data,div,labels,colors) ->
-	new Morris.Bar({
+  new Morris.Bar({
 
-		element: div,
-		data: data,
-		xkey: 'x'
-		ykeys: ['y']
-		labels: labels
-		lineColors: colors
-		})
+    element: div,
+    data: data,
+    xkey: 'x'
+    ykeys: ['y2','y1']
+    labels: labels
+    lineColors: colors
+    })
 
 #Method to format an array of data to a format that function plot needs
 formatDataToPlot = (data, year, grade)->
-	formatedData = []
-	for value in data by 1
-		formatedData.push {x: "#{grade}° ano - #{year} ", y: value}
-		year++
-		grade++
-	return formatedData
+  formatedData = []
+  for value in data by 1
+    formatedData.push {x: "#{grade}° ano - #{year} ", y: value}
+    year++
+    grade++
+  return formatedData
 
 #Method to format an array of data to a format that function plot needs
 formatIDEBDataToPlot = (data, years, grades)->
@@ -129,6 +129,36 @@ formatDataToPlotTwoLines = (firstData, secondData, grade, firstYear, secondYear)
 
 
         grade++;
+        i++;
+    return formatedData
+
+formatDataToPlotTwoBars = (firstData, secondData, grade, firstYear, secondYear)->
+    formatedData = []
+
+    diffBetweenYear = (firstYear - secondYear)/2
+
+    minorData =  secondData.slice()
+    majorData = firstData.slice()
+
+    if(diffBetweenYear < 0)
+        minorData =  firstData.slice()
+        majorData =  secondData.slice()
+        diffBetweenYear = -diffBetweenYear
+
+    i = 0
+    j = 0
+
+    for value in minorData by 1
+
+        if((Object.keys(minorData).length - diffBetweenYear) > i)
+            data = majorData[j]
+            j++
+        else
+            data = 0
+
+        formatedData.push {x: "#{grade[i]}° ano",  y1: value, y2: data}
+
+
         i++;
     return formatedData
 

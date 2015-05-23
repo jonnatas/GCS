@@ -1569,8 +1569,8 @@ Licensed under the BSD-2-Clause License.
     Bar.prototype.defaults = {
       barSizeRatio: 0.75,
       barGap: 3,
-      barColors: ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
-      barOpacity: 1.0,
+      barColors: ['blue','red'],
+      barOpacity: 0.6,
       barRadius: [0, 0, 0, 0],
       xLabelMargin: 50,
       horizontal: false,
@@ -1834,7 +1834,13 @@ Licensed under the BSD-2-Clause License.
 
     Bar.prototype.drawXAxisLabel = function(xPos, yPos, text) {
       var label;
-      return label = this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
+      subText = text.substring(1,6);
+      if(subText == "° ano")
+        subText = text.substring(0,6);
+      else
+        subText = text.substring(0,4);
+
+      return label = this.raphael.text(xPos, yPos, subText).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
 
     Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor, opacity, radiusArray) {
