@@ -2,7 +2,7 @@
 
     <div class="form-control-static">
       <div class="form-group">
-        <h4 id="request-title">Primeira Turma</h3>
+        <h4 id="request-title"><font color="blue">Primeira Turma</font></h3>
           <div class="form-group">
             <%= label_tag(:first_year, "Ano de início") %>
             <%= select_tag(:first_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
@@ -17,7 +17,7 @@
           <br>
           <br>
 
-          <h4 id="request-title">Segunda Turma</h3>
+          <h4 id="request-title"><font color="red">Segunda Turma</font></h3>
             <div class="form-group">
               <%= label_tag(:second_year, "Ano de início") %>
               <%= select_tag(:second_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>

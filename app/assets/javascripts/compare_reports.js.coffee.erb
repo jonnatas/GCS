@@ -15,11 +15,15 @@ $(document).ready ->
     $("#compare_reports-result").show()
     $("div#compare_reports-container").show(); $('#clean_compare_reports').show()
 
-    if data.first_report.ideb.status == "available"
-      plotBar(formatDataToPlotTwoBars(data.first_report.ideb.ideb,data.second_report.ideb.ideb,data.first_report.ideb.ideb_grade_ids, data.first_report.ideb.ideb_years[0], data.second_report.ideb.ideb_years[0]), 'ideb-graph',["IDEB 1° Turma","IDEB 2° Turma"],['blue','red'])
+    if((data.first_report.ideb.status == "available") && (data.second_report.ideb.status == "available"))
+      plotBar(formatDataToPlotTwoBars(data.first_report.ideb.ideb,data.second_report.ideb.ideb,data.first_report.ideb.ideb_grade_ids, data.second_report.ideb.ideb_grade_ids, data.first_report.ideb.ideb_years[0], data.second_report.ideb.ideb_years[0]), 'ideb-graph',["IDEB 1° Turma","IDEB 2° Turma"],['blue','red'])
       appendAverageToDiv(data.first_report.ideb.ideb_average,"#average-ideb")
       appendStandardVariationToDiv(data.first_report.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
       appendVarienceToDiv(data.first_report.ideb.ideb_variance, "#variance-ideb")
+
+      appendAverageToDiv(data.second_report.ideb.ideb_average,"#average-ideb2")
+      appendStandardVariationToDiv(data.second_report.ideb.ideb_standard_deviation, "#standard-deviation-ideb2")
+      appendVarienceToDiv(data.second_report.ideb.ideb_variance, "#variance-ideb2")
     else
       $("#ideb-compare_reports").empty()
       $("#ideb-compare_reports").removeClass('panel')
@@ -34,15 +38,27 @@ $(document).ready ->
     appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
     appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
+    appendAverageToDiv(data.second_report.rates.evasion_average, '#average-evasion2')
+    appendStandardVariationToDiv(data.second_report.rates.evasion_standard_deviation, '#standard-deviation-evasion2')
+    appendVarienceToDiv(data.second_report.rates.evasion_variance, "#variance-evasion2")
+
     plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento 1° Turma","Rendimento 2° Turma"],['blue','red'])
     appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
     appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
     appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
+    appendAverageToDiv(data.second_report.rates.performance_average, '#average-perfomance2')
+    appendStandardVariationToDiv(data.second_report.rates.performance_standard_deviation, '#standard-deviation-perfomance2')
+    appendVarienceToDiv(data.second_report.rates.performance_variance, "#variance-perfomance2")
+
     plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção 1° Turma","Distorção 2° Turma"],['blue','red'])
     appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
     appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
     appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
+
+    appendAverageToDiv(data.second_report.rates.distortion_average, '#average-distortion2')
+    appendStandardVariationToDiv(data.second_report.rates.distortion_standard_deviation, '#standard-deviation-distortion2')
+    appendVarienceToDiv(data.second_report.rates.distortion_variance, "#variance-distortion2")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
@@ -103,7 +119,7 @@ formatDataToPlotTwoLines = (firstData, secondData, grade, firstYear, secondYear)
     formatedData = []
 
     diffBetweenYear = firstYear - secondYear
-
+    diffBetweenYearModule = diffBetweenYear
 
     minorData =  secondData.slice()
     majorData = firstData.slice()
@@ -111,55 +127,66 @@ formatDataToPlotTwoLines = (firstData, secondData, grade, firstYear, secondYear)
     if(diffBetweenYear < 0)
         minorData =  firstData.slice()
         majorData =  secondData.slice()
-        diffBetweenYear = -diffBetweenYear
+        diffBetweenYearModule = -diffBetweenYear
 
     i = 0
     j = 0
 
     for value in minorData by 1
 
-        if((Object.keys(minorData).length - diffBetweenYear) > i)
+        if((Object.keys(minorData).length - diffBetweenYearModule) > i)
             data = majorData[j]
             j++
         else
             data = 0
 
-        formatedData.push {x: "#{grade}° ano", y1: data, y2:value}
-
+        if(diffBetweenYear<0)
+          formatedData.push {x: "#{grade}° ano", y1: value, y2:data}
+        else
+          formatedData.push {x: "#{grade}° ano",  y1: data, y2: value}
 
 
         grade++;
         i++;
     return formatedData
 
-formatDataToPlotTwoBars = (firstData, secondData, grade, firstYear, secondYear)->
+formatDataToPlotTwoBars = (firstData, secondData, firstGrade, secondGrade, firstYear, secondYear)->
     formatedData = []
 
     diffBetweenYear = (firstYear - secondYear)/2
+    diffBetweenYearModule = diffBetweenYear
 
     minorData =  secondData.slice()
     majorData = firstData.slice()
 
+    grade = secondGrade.slice()
+
     if(diffBetweenYear < 0)
+        grade = firstGrade.slice()
         minorData =  firstData.slice()
         majorData =  secondData.slice()
-        diffBetweenYear = -diffBetweenYear
+        diffBetweenYearModule = -diffBetweenYear
 
     i = 0
     j = 0
 
     for value in minorData by 1
 
-        if((Object.keys(minorData).length - diffBetweenYear) > i)
+        if((Object.keys(minorData).length - diffBetweenYearModule) > i)
             data = majorData[j]
             j++
         else
             data = 0
 
-        formatedData.push {x: "#{grade[i]}° ano",  y1: value, y2: data}
+        labelX = "#{grade[i]}° ano"
+
+        if(diffBetweenYear<0)
+          formatedData.push {x: labelX,  y1: data, y2: value}
+        else
+          formatedData.push {x: labelX,  y1: value, y2: data}
 
 
-        i++;
+        i++
     return formatedData
 
 
@@ -177,9 +204,18 @@ compare_reportsHTML = '
                         <div class="col-xs-6"><div id="ideb-graph"></div>
                             <div class="row">
                                 <div id="ideb">
-                                    <div id="average-ideb" class="col-xs-4"></div>
-                                    <div id="standard-deviation-ideb" class="col-xs-4"></div>
-                                    <div id="variance-ideb" class="col-xs-4"></div>
+                                  <div id="inner">
+                                      <h5> <font color="blue">1ª Turma</font> </h5>
+                                        <div id="average-ideb" class="col-xs-4"></div>
+                                        <div id="standard-deviation-ideb" class="col-xs-4"></div>
+                                        <div id="variance-ideb" class="col-xs-4"></div>
+                                      <br>
+                                      
+                                      <h5><font color="red">2ª Turma</font></h5>
+                                        <div id="average-ideb2" class="col-xs-4"></div>
+                                        <div id="standard-deviation-ideb2" class="col-xs-4"></div>
+                                        <div id="variance-ideb2" class="col-xs-4"></div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -223,9 +259,17 @@ compare_reportsHTML = '
                           <div id="rate-evasion-graph"></div>
                            <div class="rate-evasion">
                         <div id="rate-evasion">
-                            <div id="average-evasion" class="col-xs-4"></div>
-                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
-                            <div id="variance-evasion" class="col-xs-4"></div>
+                            <h5> <font color="blue">1ª Turma </font></h5>
+                              <div id="average-evasion" class="col-xs-4"></div>
+                              <div id="standard-deviation-evasion" class="col-xs-4"></div>
+                              <div id="variance-evasion" class="col-xs-4"></div>
+                            <br>
+                            
+                            <h5> <font color="red">2ª Turma </font> </h5>
+                              <div id="average-evasion2" class="col-xs-4"></div>
+                              <div id="standard-deviation-evasion2" class="col-xs-4"></div>
+                              <div id="variance-evasion2" class="col-xs-4"></div>
+                            
                         </div>
                     </div>
                         </div>
@@ -233,9 +277,7 @@ compare_reportsHTML = '
                         <div id="rate-evasion-graph-text">
                         <div class="row">
                         <div id="rate-evasion">
-                            <div id="average-evasion" class="col-xs-4"></div>
-                            <div id="standard-deviation-evasion" class="col-xs-4"></div>
-                            <div id="variance-evasion" class="col-xs-4"></div>
+                            
                         </div>
                         </div>
                         </div>
@@ -282,9 +324,16 @@ compare_reportsHTML = '
                         <div id="rate-performance-graph"></div>
                         <div class="rate-performance">
                          <div id="rate-performance">
-                             <div id="average-perfomance" class="col-xs-4"></div>
+                            <h5><font color="blue"> 1ª Turma </font></h5>
+                            <div id="average-perfomance" class="col-xs-4"></div>
                             <div id="standard-deviation-perfomance" class="col-xs-4"></div>
                             <div id="variance-perfomance" class="col-xs-4"></div>
+                            <br>
+                           
+                            <h5> <font color="red">2ª Turma </font></h5>    
+                            <div id="average-perfomance2" class="col-xs-4"></div>
+                            <div id="standard-deviation-perfomance2" class="col-xs-4"></div>
+                            <div id="variance-perfomance2" class="col-xs-4"></div>
                          </div>
                     </div></div>
                     </div>
@@ -300,9 +349,16 @@ compare_reportsHTML = '
                         <div id="rate-distortion-graph"></div>
                         <div class="rate-distortion">
                          <div id="rate-distortion">
-                             <div id="average-distortion" class="col-xs-4"></div>
+                            <h5> <font color="blue">1ª Turma </font></h5>
+                            <div id="average-distortion" class="col-xs-4"></div>
                             <div id="standard-deviation-distortion" class="col-xs-4"></div>
                             <div id="variance-distortion" class="col-xs-4"></div>
+                            <br>
+                            
+                            <h5> <font color="red">2ª Turma</font>   </h5>
+                            <div id="average-distortion2" class="col-xs-4"></div>
+                            <div id="standard-deviation-distortion2" class="col-xs-4"></div>
+                            <div id="variance-distortion2" class="col-xs-4"></div>
                          </div>
                         </div>
                         </div>
