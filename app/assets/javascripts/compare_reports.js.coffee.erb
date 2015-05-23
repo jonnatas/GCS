@@ -29,17 +29,17 @@ $(document).ready ->
 
 
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão "+data.first_report.year,"Evasão "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão ","Evasão "],['blue','red'])
   	appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
   	appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
   	appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento "+data.first_report.year,"Rendimento "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento ","Rendimento "],['blue','red'])
   	appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
   	appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
   	appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
-  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção "+data.first_report.year,"Distorção "+data.second_report.year],["#FF5600","#0080FF"])
+  	plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção ","Distorção "],['blue','red'])
   	appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
   	appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
   	appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
@@ -59,13 +59,13 @@ appendVarienceToDiv = (data,div) ->
 
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
-	new Morris.Line({
+	new Morris.Area({
 
 		element: div,
 		data: data,
 		xkey: 'x'
 		ykeys: ['y1','y2']
-		labels: ['y2']
+		labels: labels
 		lineColors: colors
 		})
 
@@ -114,20 +114,27 @@ formatDataToPlotTwoLines = (firstData, secondData, grade, firstYear, secondYear)
         diffBetweenYear = -diffBetweenYear
 
     i = 0
-    j = -1
+    j = 0
 
     for value in minorData by 1
 
-        if(diffBetweenYear <= i)
-            j++
+        if((Object.keys(minorData).length - diffBetweenYear) > i)
             data = majorData[j]
+            j++
         else
-            data = null
+            data = 0
 
-        formatedData.push {x: "#{grade}° ano", y1: value, y2:data}
+        formatedData.push {x: "#{grade}° ano", y1: data, y2:value}
+
+
+
         grade++;
         i++;
     return formatedData
+
+
+
+
 
 compare_reportsHTML = '
         <div id="compare_reports-result" style="display: none;">

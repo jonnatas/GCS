@@ -838,9 +838,9 @@ Licensed under the BSD-2-Clause License.
     Line.prototype.defaults = {
       lineWidth: 3,
       pointSize: 4,
-      lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      lineColors: ['blue','red'],
       pointStrokeWidths: [1],
-      pointFillColors: [],
+      pointFillColors: ['blue','red'],
       smooth: true,
       shown: true,
       xLabels: 'auto',
@@ -852,7 +852,8 @@ Licensed under the BSD-2-Clause License.
       trendLine: false,
       trendLineWidth: 2,
       trendLineColors: ['blue','red'],
-      pointStrokeColors: ['black']
+      pointStrokeColors: ['white'],
+      hideHover: 'auto'
 
     };
 
@@ -953,7 +954,7 @@ Licensed under the BSD-2-Clause License.
         if (this.options.labels[j] === false) {
           continue;
         }
-        content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j] + ":\n  " + (this.yLabelFormat(y, j)) + "\n</div>";
+        content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j]  + ":\n  " + (this.yLabelFormat(y, j)) + "\n</div>";
       }
       if (typeof this.options.hoverCallback === 'function') {
         content = this.options.hoverCallback(index, this.options, content, row.src);
@@ -1444,8 +1445,8 @@ Licensed under the BSD-2-Clause License.
     __extends(Area, _super);
 
     areaDefaults = {
-      fillOpacity: 'auto',
-      behaveLikeLine: false
+      fillOpacity: 0.2,
+      behaveLikeLine: true,
     };
 
     function Area(options) {
