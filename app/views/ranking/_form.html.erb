@@ -1,0 +1,41 @@
+<%= form_tag("/report/request_report.json",id: "new-request", method: "get", remote: true, :class =>'form-inline') do %>
+
+  <div class="form-group">
+  <%= label_tag(:year, "Ano") %>
+  <%= select_tag(:year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
+  </div>
+  <div class="form-group">
+  </div>
+
+  <div class="form-group">
+  <%= label_tag(:grade, "Turma") %>
+  <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
+  </div>
+
+  <div class="form-group">
+  <%= label_tag(:test_type, "Rede") %>
+  <%= select_tag(:test_type, options_for_select(['Total', 'Privada', 'Publica']), class: 'form-control'  ) %>
+  </div>
+
+  <div id="public_type" name="public_type" class="form-group" style="display: none;">
+  <%= label_tag(:public_type, "Fonte") %>
+  <%= select_tag(:public_type, options_for_select(['Total','Municipal', 'Estadual', 'Federal']), class: 'form-control'  ) %>
+  </div>
+
+  <div class="form-group">
+  <%= label_tag(:local, "Localidade") %>
+  <%= select_tag(:local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
+  </div>
+
+  <div class="form-group">
+  <%= label_tag(:state, "Índice comparativo") %>
+  <%= select_tag(:state, options_for_select(['IDEB', 'Evasão', 'Rendimento', 'Distorção de Idade']), class: 'form-control'  ) %>
+  </div>
+
+  <div class="form-group">
+  <%= submit_tag("Mostrar Ranking", :class => 'btn btn-primary') %>
+  <a id="clean_report" class="btn btn-default"  style="display: none;">Limpar</a>
+<% end %>
+
+
+
