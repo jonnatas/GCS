@@ -5,10 +5,12 @@ class Rate < ActiveRecord::Base
 	attr_accessor :rate_hash
 
 
-	def initialize(year, grade_id, state_id)
+	def initialize(year, grade_id, state_id, test_type, local)
 		@year = year
 		@grade_id = grade_id
 		@state_id = state_id
+		@test_type = test_type
+		@local = local
 		@final_year = Rate.final_year_avaiable( year, grade_id, state_id )
 		@evasion_result = Array.new
 		@performance_result = Array.new
@@ -50,11 +52,11 @@ class Rate < ActiveRecord::Base
 		(@year.to_i..@final_year.to_i).each do |year|
 			begin
 				raise Error::FinalYearException if local_grade_id.to_i > FINAL_GRADE
-				current_rate = request_rate(year,@state_id,local_grade_id)
-				current_distortion = request_distortion(year,@state_id,local_grade_id)
-				set_data_to_evasion_array(current_rate.evasion)
-				set_data_to_performance_array(current_rate.peformance)
-				set_data_to_distortion_array(current_distortion.distortion)
+				current_rate = request_rate(year,@state_id,local_grade_id, @test_type, @local)
+				current_distortion = request_distortion(year,@state_id,local_grade_id, @test_type, @local)
+				@evasion_result.push(current_rate.evasion)
+				@performance_result.push(current_rate.peformance)
+				@distortion_result.push(current_distortion.distortion)
 				local_grade_id = (local_grade_id.to_i + 1).to_s
 			rescue
 				
@@ -66,21 +68,10 @@ class Rate < ActiveRecord::Base
 		generate_hash_result
 	end
 
-	def set_data_to_evasion_array(evasion)
-		@evasion_result.push(evasion)
-	end
-
-	def set_data_to_performance_array(performance)
-		@performance_result.push(performance)
-	end
-
-	def set_data_to_distortion_array(distortion)
-		@distortion_result.push(distortion)
-	end
-
 
 	def generate_hash_result
-		@rate_hash = {:evasion => @evasion_result,
+		@rate_hash = {:status => "available",
+			:evasion => @evasion_result,
 			:performance => @performance_result,
 			:distortion => @distortion_result,
 			:evasion_average => @evasion_average,
@@ -152,27 +143,24 @@ class Rate < ActiveRecord::Base
 	private :request_variance_distortion
 
 
-	def request_rate(year,state_id,grade_id)
+	def request_rate(year,state_id,grade_id,test_type,local)
 		begin
-			raise Error::NullElementAtDB if !Rate.exists?(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			raise Error::NullElementAtDB unless Rate.exists?(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
 		 :grade_id => grade_id)
-			Rate.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			return Rate.where(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
 		 :grade_id => grade_id).first
-		rescue
-			Rate.new(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
-		 :grade_id => grade_id, :performance => 0.0, :disapproval => 0.0, :evasion => 0.0)
 		end
 		
 	end
 
-	def request_distortion(year,state_id,grade_id)
+	def request_distortion(year,state_id,grade_id,test_type,local)
 		begin
-			raise Error::NullElementAtDB if !Distortion.exists?(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			raise Error::NullElementAtDB unless Distortion.exists?(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
 			:grade_id => grade_id)
-			Distortion.where(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			Distortion.where(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
 			:grade_id => grade_id).first
 		rescue
-			Distortion.new(:year => year, :state_id => state_id, :local => "Total", :test_type => "Total",
+			return Distortion.new(:year => year, :state_id => state_id, :local => local, :test_type => test_type,
 			:grade_id => grade_id, :distortion => 0.0)
 		end
 	end

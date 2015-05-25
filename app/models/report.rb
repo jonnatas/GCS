@@ -3,10 +3,12 @@ class Report
 	attr_accessor :report_result_hash
 	require 'Error'
 
-	def initialize(year, grade, state)
+	def initialize(year, grade, state, test_type, local)
 		@year = year
 		@grade_id = Grade.grade_id_by_description(grade)
 		@state_id = State.state_id_by_description(state)
+		@test_type = test_type
+		@local = local
 	end
 
 	def request_report
@@ -30,9 +32,16 @@ class Report
 			ideb = {:status => "unavailable"}
 		end
 	end
+	
 	def request_rate
-		@rates = Rate.new(@year,@grade_id,@state_id)
-		@rates.request_rate_report
+		begin
+			raise Error::NoDataToSelectedYear unless Rate.exists?(:year => @year, :state_id => @state_id, :local => @local, :test_type => @test_type,
+			 :grade_id => @grade_id)
+			@rates = Rate.new(@year,@grade_id,@state_id,@test_type,@local)
+			@rates.request_rate_report
+		rescue
+			rates = {:status => "unavailable"}
+		end
 	end
 
 end

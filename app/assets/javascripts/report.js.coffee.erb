@@ -5,17 +5,24 @@
 
 $(document).ready ->
   clean_report = () ->
-		$('a#clean_report').click((event) ->
-  	 $('#report-container').empty().append(reportHTML)
-  	 $('div#report-container').hide(); $('#clean_report').hide()
-		)
+    $('a#clean_report').click((event) ->
+     $('#report-container').empty().append(reportHTML)
+     $('div#report-container').hide(); $('#clean_report').hide()
+    )
+  $("#test_type").on("change", ()->
+     selectedValue = $("#test_type").val()
+     if selectedValue == 'Publica'
+       $("#public_type").show()
+     else
+       $("#public_type").hide()
+    )
 
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
-  	$('#report-container').empty().append(reportHTML)
-  	$("#report-result").show()
-  	$("div#report-container").show(); $('#clean_report').show()
+    $('#report-container').empty().append(reportHTML)
+    $("#report-result").show()
+    $("div#report-container").show(); $('#clean_report').show()
 
-  	if data.ideb.status == "available"
+    if data.ideb.status == "available"
       plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
       appendAverageToDiv(data.ideb.ideb_average,"#average-ideb")
       appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
@@ -28,66 +35,72 @@ $(document).ready ->
       $("#ideb-report").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
 
 
-
-  	plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
-  	appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
-  	appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
-  	appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
-
-  	plotLine(formatDataToPlot(data.rates.performance, data.year,data.grade), 'rate-performance-graph', ["Performace"],["#0A62A4"])
-  	appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
-  	appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
-  	appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
-
-  	plotLine(formatDataToPlot(data.rates.distortion, data.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
-  	appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
-  	appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
-  	appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
+    if data.rates.status == "available"
+      plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
+      appendAverageToDiv(data.rates.evasion_average, '#average-evasion')
+      appendStandardVariationToDiv(data.rates.evasion_standard_deviation, '#standard-deviation-evasion')
+      appendVarienceToDiv(data.rates.evasion_variance, "#variance-evasion")
+      
+      plotLine(formatDataToPlot(data.rates.performance, data.year,data.grade), 'rate-performance-graph', ["Performace"],["#0A62A4"])
+      appendAverageToDiv(data.rates.performance_average, '#average-perfomance')
+      appendStandardVariationToDiv(data.rates.performance_standard_deviation, '#standard-deviation-perfomance')
+      appendVarienceToDiv(data.rates.performance_variance, "#variance-perfomance")
+      
+      plotLine(formatDataToPlot(data.rates.distortion, data.year,data.grade), 'rate-distortion-graph', ["Distorção"],["#FF5600"])
+      appendAverageToDiv(data.rates.distortion_average, '#average-distortion')
+      appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
+      appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
+    else
+      $("#rates").empty()
+      $("#rates").removeClass('panel')
+      $("#rates").removeClass('panel-default')
+      $("#rates").addClass('alert alert-danger')
+      $("#rates").append("<strong>Desculpe!</strong> Mais não temos disponível dados.")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
 
 appendAverageToDiv = (data,div) ->
-	$(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
 
 appendStandardVariationToDiv = (data,div) ->
-	$(div).append "<span><b>Desvio Padrão</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Desvio Padrão</b> #{data.toFixed(2)}</span>"
 
 appendVarienceToDiv = (data,div) ->
-	$(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
+  $(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
 
 
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
-	new Morris.Line({
+  new Morris.Line({
 
-		element: div,
-		data: data,
-		xkey: 'x'
-		ykeys: ['y']
-		labels: labels
-		lineColors: colors
-		})
+    element: div,
+    data: data,
+    xkey: 'x'
+    ykeys: ['y']
+    labels: labels
+    lineColors: colors
+    })
 
 plotBar = (data,div,labels,colors) ->
-	new Morris.Bar({
+  new Morris.Bar({
 
-		element: div,
-		data: data,
-		xkey: 'x'
-		ykeys: ['y']
-		labels: labels
-		lineColors: colors
-		})
+    element: div,
+    data: data,
+    xkey: 'x'
+    ykeys: ['y']
+    labels: labels
+    lineColors: colors
+    })
 
 #Method to format an array of data to a format that function plot needs
 formatDataToPlot = (data, year, grade)->
-	formatedData = []
-	for value in data by 1
-		formatedData.push {x: "#{year} - #{grade}° ano", y: value}
-		year++
-		grade++
-	return formatedData
+  formatedData = []
+  for value in data by 1
+    formatedData.push {x: "#{year} - #{grade}° ano", y: value}
+    year++
+    grade++
+  return formatedData
 
 #Method to format an array of data to a format that function plot needs
 formatIDEBDataToPlot = (data, years, grades)->
@@ -142,7 +155,7 @@ reportHTML = '
                 </div>
             </div>
             <br />
-            <br />            <div class="panel panel-default">
+            <br />            <div id="rates" class="panel panel-default">
 
                 <div class="panel-heading"><h4>Índices</h4></div>
                 <div class="evasion">
