@@ -18,10 +18,17 @@ $(document).ready ->
        $("#public_type").hide()
     )
 
+  $("#new-request").submit(() ->
+    $("#report-container").empty()
+    target = document.getElementById('loading');
+    new Spinner({color:'#000', lines: 12}).spin(target);
+    )
+
   $("#new-request").on("ajax:success", (e, data, status, xhr) ->
     $('#report-container').empty().append(reportHTML)
     $("#report-result").show()
     $("div#report-container").show(); $('#clean_report').show()
+    $("#loading").empty()
 
     if data.ideb.status == "available"
       plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
@@ -68,7 +75,6 @@ noResultDiv = (div,info) ->
   $(div).addClass('alert alert-danger')
   $(div).append(info)
 
-
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
   new Morris.Line({
@@ -109,7 +115,7 @@ formatIDEBDataToPlot = (data, years, grades)->
     formatedData.push {x: "#{years[i]} - #{grades[i]}° ano", y: value}
     i++
   return formatedData
-
+  
 
 reportHTML = '
         <div id="report-result" style="display: none;">
