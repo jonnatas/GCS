@@ -24,11 +24,12 @@ $(document).ready ->
     new Spinner({color:'#000', lines: 12}).spin(target);
     )
 
-  $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+  $("#new-report-request").on("ajax:success", (e, data, status, xhr) ->
     $('#report-container').empty().append(reportHTML)
     $("#report-result").show()
     $("div#report-container").show(); $('#clean_report').show()
     $("#loading").empty()
+
 
     if data.ideb.status == "available"
       plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
@@ -116,6 +117,7 @@ formatIDEBDataToPlot = (data, years, grades)->
     i++
   return formatedData
   
+
 
 reportHTML = '
         <div id="report-result" style="display: none;">
