@@ -9,6 +9,7 @@ $(document).ready ->
      $('#report-container').empty().append(reportHTML)
      $('div#report-container').hide(); $('#clean_report').hide()
     )
+
   $("#test_type").on("change", ()->
      selectedValue = $("#test_type").val()
      if selectedValue == 'Publica'
@@ -28,12 +29,7 @@ $(document).ready ->
       appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
       appendVarienceToDiv(data.ideb.ideb_variance, "#variance-ideb")
     else
-      $("#ideb-report").empty()
-      $("#ideb-report").removeClass('panel')
-      $("#ideb-report").removeClass('panel-default')
-      $("#ideb-report").addClass('alert alert-danger')
-      $("#ideb-report").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
-
+      noResultDiv("#ideb-report","<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
 
     if data.rates.status == "available"
       plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
@@ -51,14 +47,10 @@ $(document).ready ->
       appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
       appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
     else
-      $("#rates").empty()
-      $("#rates").removeClass('panel')
-      $("#rates").removeClass('panel-default')
-      $("#rates").addClass('alert alert-danger')
-      $("#rates").append("<strong>Desculpe!</strong> Mais não temos disponível dados.")
+      noResultDiv("#rates","<strong>Desculpe!</strong> Mais não temos dados disponível.")
 
   ).on "ajax:error", (e, xhr, status, error) ->
-    $("#row").append "<p>ERROR</p>"
+    $("#row").append "<p>ERROR, tente novamente.</p>"
 
 appendAverageToDiv = (data,div) ->
   $(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
@@ -68,6 +60,13 @@ appendStandardVariationToDiv = (data,div) ->
 
 appendVarienceToDiv = (data,div) ->
   $(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
+
+noResultDiv = (div,info) ->
+  $(div).empty()
+  $(div).removeClass('panel')
+  $(div).removeClass('panel-default')
+  $(div).addClass('alert alert-danger')
+  $(div).append(info)
 
 
 #Generic Method to plot an array of data at specific div
