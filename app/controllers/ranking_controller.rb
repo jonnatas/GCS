@@ -3,6 +3,12 @@ class RankingController < ApplicationController
   end
 
   def request_ranking
-  	@ranking = Ranking.new(params[:year],params[:grade],params[:test_type],params[:local],params[:rate])
+  	puts " Hello world"
+
+  	@ranking = Ranking.new(params[:year],params[:grade])
+  	@ranking.insert_it
+
+  	# puts @ranking
+
   end
 end
