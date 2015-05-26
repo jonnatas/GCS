@@ -12,20 +12,27 @@
             <%= label_tag(:first_state, "Estado") %>
             <%= select_tag(:first_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
           </div>
-          <div>
+          
+          <div class="form-group">
+            <%= label_tag(:first_local, "Localidade") %>
+            <%= select_tag(:first_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
+          </div>
+
+          <br/>
+          <br/>
+
+          <div class="form-group">
             <%= label_tag(:first_test_type, "Rede") %>
             <%= select_tag(:first_test_type, options_for_select(['Total', 'Privada', 'Publica']), class: 'form-control'  ) %>
           </div>
+
 
           <div id="first_public_type" name="first_public_type" class="form-group" style="display: none;">
             <%= label_tag(:first_public_type, "Fonte") %>
             <%= select_tag(:first_public_type, options_for_select(['Total','Municipal', 'Estadual', 'Federal']), class: 'form-control'  ) %>
           </div>
 
-          <div class="form-group">
-            <%= label_tag(:first_local, "Localidade") %>
-            <%= select_tag(:first_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
-          </div>
+          
 
           <br>
           <br>
@@ -43,20 +50,26 @@
               <%= select_tag(:second_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
             </div>
 
-            <div>
+            <div class="form-group">
+              <%= label_tag(:second_local, "Localidade") %>
+              <%= select_tag(:second_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="form-group">
               <%= label_tag(:second_test_type, "Rede") %>
               <%= select_tag(:second_test_type, options_for_select(['Total', 'Privada', 'Publica']), class: 'form-control'  ) %>
             </div>
+
 
             <div id="second_public_type" name="second_public_type" class="form-group" style="display: none;">
               <%= label_tag(:second_public_type, "Fonte") %>
               <%= select_tag(:second_public_type, options_for_select(['Total','Municipal', 'Estadual', 'Federal']), class: 'form-control'  ) %>
             </div>
 
-            <div class="form-group">
-              <%= label_tag(:second_local, "Localidade") %>
-              <%= select_tag(:second_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
-            </div>
+            
 
 
       </div>

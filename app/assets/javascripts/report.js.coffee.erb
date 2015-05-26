@@ -37,7 +37,7 @@ $(document).ready ->
       appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
       appendVarienceToDiv(data.ideb.ideb_variance, "#variance-ideb")
     else
-      noResultDiv("#ideb-report","<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
+      noResultDiv("#ideb-report","<strong>Não existem dados disponíveis  do IDEB para essa turma. </strong>")
 
     if data.rates.status == "available"
       plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
@@ -55,7 +55,7 @@ $(document).ready ->
       appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
       appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
     else
-      noResultDiv("#rates","<strong>Desculpe!</strong> Mais não temos dados disponível.")
+      noResultDiv("#rates","<strong>Não existem dados disponíveis dessa turma.</strong>")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR, tente novamente.</p>"

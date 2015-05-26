@@ -33,43 +33,50 @@ $(document).ready ->
       appendStandardVariationToDiv(data.second_report.ideb.ideb_standard_deviation, "#standard-deviation-ideb2")
       appendVarienceToDiv(data.second_report.ideb.ideb_variance, "#variance-ideb2")
     else
-      $("#ideb-compare_reports").empty()
-      $("#ideb-compare_reports").removeClass('panel')
-      $("#ideb-compare_reports").removeClass('panel-default')
-      $("#ideb-compare_reports").addClass('alert alert-danger')
-      $("#ideb-compare_reports").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
+      noResultDiv("#ideb-compare_reports","<strong>Não existem dados disponíveis do IDEB para essa turma.</strong>")
 
 
 
-    plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão 1° Turma","Evasão 2° Turma"],['blue','red'])
-    appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
-    appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
-    appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
-    appendAverageToDiv(data.second_report.rates.evasion_average, '#average-evasion2')
-    appendStandardVariationToDiv(data.second_report.rates.evasion_standard_deviation, '#standard-deviation-evasion2')
-    appendVarienceToDiv(data.second_report.rates.evasion_variance, "#variance-evasion2")
+    if ((data.first_report.rates.status == "available") && (data.second_report.rates.status == "available")) 
+      plotLine(formatDataToPlotTwoLines(data.first_report.rates.evasion, data.second_report.rates.evasion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-evasion-graph',["Evasão 1° Turma","Evasão 2° Turma"],['blue','red'])
+      appendAverageToDiv(data.first_report.rates.evasion_average, '#average-evasion')
+      appendStandardVariationToDiv(data.first_report.rates.evasion_standard_deviation, '#standard-deviation-evasion')
+      appendVarienceToDiv(data.first_report.rates.evasion_variance, "#variance-evasion")
 
-    plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento 1° Turma","Rendimento 2° Turma"],['blue','red'])
-    appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
-    appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
-    appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
+      appendAverageToDiv(data.second_report.rates.evasion_average, '#average-evasion2')
+      appendStandardVariationToDiv(data.second_report.rates.evasion_standard_deviation, '#standard-deviation-evasion2')
+      appendVarienceToDiv(data.second_report.rates.evasion_variance, "#variance-evasion2")
 
-    appendAverageToDiv(data.second_report.rates.performance_average, '#average-perfomance2')
-    appendStandardVariationToDiv(data.second_report.rates.performance_standard_deviation, '#standard-deviation-perfomance2')
-    appendVarienceToDiv(data.second_report.rates.performance_variance, "#variance-perfomance2")
+      plotLine(formatDataToPlotTwoLines(data.first_report.rates.performance, data.second_report.rates.performance,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-performance-graph', ["Rendimento 1° Turma","Rendimento 2° Turma"],['blue','red'])
+      appendAverageToDiv(data.first_report.rates.performance_average, '#average-perfomance')
+      appendStandardVariationToDiv(data.first_report.rates.performance_standard_deviation, '#standard-deviation-perfomance')
+      appendVarienceToDiv(data.first_report.rates.performance_variance, "#variance-perfomance")
 
-    plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção 1° Turma","Distorção 2° Turma"],['blue','red'])
-    appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
-    appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
-    appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
+      appendAverageToDiv(data.second_report.rates.performance_average, '#average-perfomance2')
+      appendStandardVariationToDiv(data.second_report.rates.performance_standard_deviation, '#standard-deviation-perfomance2')
+      appendVarienceToDiv(data.second_report.rates.performance_variance, "#variance-perfomance2")
 
-    appendAverageToDiv(data.second_report.rates.distortion_average, '#average-distortion2')
-    appendStandardVariationToDiv(data.second_report.rates.distortion_standard_deviation, '#standard-deviation-distortion2')
-    appendVarienceToDiv(data.second_report.rates.distortion_variance, "#variance-distortion2")
+      plotLine(formatDataToPlotTwoLines(data.first_report.rates.distortion, data.second_report.rates.distortion,data.first_report.grade,data.first_report.year,data.second_report.year), 'rate-distortion-graph', ["Distorção 1° Turma","Distorção 2° Turma"],['blue','red'])
+      appendAverageToDiv(data.first_report.rates.distortion_average, '#average-distortion')
+      appendStandardVariationToDiv(data.first_report.rates.distortion_standard_deviation, '#standard-deviation-distortion')
+      appendVarienceToDiv(data.first_report.rates.distortion_variance, "#variance-distortion")
+
+      appendAverageToDiv(data.second_report.rates.distortion_average, '#average-distortion2')
+      appendStandardVariationToDiv(data.second_report.rates.distortion_standard_deviation, '#standard-deviation-distortion2')
+      appendVarienceToDiv(data.second_report.rates.distortion_variance, "#variance-distortion2")
+    else
+      noResultDiv("#rates","<strong>Não existem dados disponíveis para essa turma.</strong>")
 
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#row").append "<p>ERROR</p>"
+
+noResultDiv = (div,info) ->
+  $(div).empty()
+  $(div).removeClass('panel')
+  $(div).removeClass('panel-default')
+  $(div).addClass('alert alert-danger')
+  $(div).append(info)
 
 appendAverageToDiv = (data,div) ->
   $(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
@@ -260,8 +267,9 @@ compare_reportsHTML = '
                 </div>
             </div>
             <br />
-            <br />            <div class="panel panel-default">
+            <br />            
 
+                <div id = "rates" class="panel panel-default">
                 <div class="panel-heading"><h4>Índices</h4></div>
                 <div class="evasion">
                 <div class="panel-body">
