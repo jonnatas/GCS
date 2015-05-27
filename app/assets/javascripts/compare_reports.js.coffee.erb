@@ -18,10 +18,18 @@ $(document).ready ->
     showPublicType("#second_test_type","#second_public_type")
   )
 
+  $("#new-compare_reports-request").submit(() ->
+    $("#compare_reports-container").empty()
+    target = document.getElementById('loading');
+    new Spinner({color:'#000', lines: 12}).spin(target);
+    )
+
   $("#new-compare_reports-request").on("ajax:success", (e, data, status, xhr) ->
     $('#compare_reports-container').empty().append(compare_reportsHTML)
     $("#compare_reports-result").show()
     $("div#compare_reports-container").show(); $('#clean_compare_reports').show()
+    $("#loading").empty()
+
 
     if((data.first_report.ideb.status == "available") && (data.second_report.ideb.status == "available"))
       plotBar(formatDataToPlotTwoBars(data.first_report.ideb.ideb,data.second_report.ideb.ideb,data.first_report.ideb.ideb_grade_ids, data.second_report.ideb.ideb_grade_ids, data.first_report.ideb.ideb_years[0], data.second_report.ideb.ideb_years[0]), 'ideb-graph',["IDEB 1° Turma","IDEB 2° Turma"],['blue','red'])
