@@ -4,11 +4,12 @@
 
 
 $(document).ready ->
-  clean_compare_reports = () ->
-    $('a#clean_compare_reports').click((event) ->
-     $('#compare_reports-container').empty().append(reportHTML)
-     $('div#compare_reports-container').hide(); $('#clean_compare_reports').hide()
-    )
+
+  $('#clean_compare_reports').click ->
+    console.log ("opa")
+    $('#compare_reports-container').empty().append(compare_reportsHTML)
+    $('div#compare_reports-container').hide(); $('#clean_compare_reports').hide()
+  
 
   $("#first_test_type").on("change", ()->
     showPublicType("#first_test_type","#first_public_type")

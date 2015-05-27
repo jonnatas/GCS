@@ -4,11 +4,11 @@
 
 
 $(document).ready ->
-  clean_report = () ->
-    $('a#clean_report').click((event) ->
-     $('#report-container').empty().append(reportHTML)
-     $('div#report-container').hide(); $('#clean_report').hide()
-    )
+  
+  $('a#clean_report').click((event) ->
+    $('#report-container').empty().append(reportHTML)
+    $('div#report-container').hide(); $('#clean_report').hide()
+  )
 
   $("#test_type").on("change", ()->
      selectedValue = $("#test_type").val()
