@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require raphael
 //= require morris
+//= require spin
+//= require spin.min
 //= require bootstrap-sprockets
 //= require_tree .
 

@@ -4,7 +4,7 @@ require_relative'../app/models/report'
 describe Report do
 
  before :each do
- 	@report = Report.new(2011,"1° ano","AC")
+ 	@report = Report.new(2011,"1° ano", "AC", "Total", "Total")
  end 
 
 describe "#initialize"
