@@ -9,9 +9,11 @@ describe Report do
 
 	describe "#initialize"
 		it "Take the arguments and set to the instace variables" do
-		 expect(@rate.instance_variable_get(:@year)).to eq(2008)
-	     expect(@rate.instance_variable_get(:@grade_id)).to eq(1)
-	     expect(@rate.instance_variable_get(:@state_id)).to eq(1)
+		expect(@rate.instance_variable_get(:@year)).to eq(2008)
+		expect(@rate.instance_variable_get(:@grade_id)).to eq(1)
+		expect(@rate.instance_variable_get(:@state_id)).to eq(1)
+		expect(@rate.instance_variable_get(:@test_type)).to eq("Total")
+		expect(@rate.instance_variable_get(:@local)).to eq("Total")
 		end
 
 	describe "#final_year_avaiable"
@@ -20,13 +22,13 @@ describe Report do
 		end
 
 	describe "#request_rate"
-	    it "Take de state, grade and year and return a Rate object from DB" do
-	    	local_rate = @rate.request_rate(2008,1,1, "Total", "Total")
-	      	expect(local_rate.year).to eq(2008)
-	      	expect(local_rate.grade_id).to eq(1)
-	      	expect(local_rate.state_id).to eq(1)
-	      	expect(local_rate.test_type).to eq("Total")
-	      	expect(local_rate.local).to eq("Total")
+		it "Take de state, grade and year and return a Rate object from DB" do
+			local_rate = @rate.request_rate(2008,1,1, "Total", "Total")
+			expect(local_rate.year).to eq(2008)
+			expect(local_rate.grade_id).to eq(1)
+			expect(local_rate.state_id).to eq(1)
+			expect(local_rate.test_type).to eq("Total")
+			expect(local_rate.local).to eq("Total")
 	    end
 
 	describe "#request_rate_report"
