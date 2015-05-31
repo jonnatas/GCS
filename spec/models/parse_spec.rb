@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative'../app/models/parse'
+require 'rails_helper'
 
 describe Parse do
 

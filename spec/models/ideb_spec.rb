@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative'../app/models/ideb'
+require 'rails_helper'
 
 describe Ideb do
 

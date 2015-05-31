@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative'../app/models/rate'
+require 'rails_helper'
 
 describe Report do
 	before :each do

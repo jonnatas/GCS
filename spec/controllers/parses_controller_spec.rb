@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../app/controllers/parses_controller'
+require 'rails_helper'
 
 describe ParsesController do
 
