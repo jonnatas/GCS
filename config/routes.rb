@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   root 'static_pages#home'
   get ':controller(/:action(.:format)(/:id))'
 
