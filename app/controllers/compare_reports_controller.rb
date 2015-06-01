@@ -20,7 +20,7 @@ class CompareReportsController < ApplicationController
 		respond_to do |format|
 			format.json { render json: @comparation_hash}
 		end
-		puts @comparation_hash
+
 	end
 
 end
