@@ -5,6 +5,9 @@ describe Report do
 	before :each do
 		@rate = Rate.new(2008, 1, 1, "Total", "Total")
 		@rate.request_rate_report
+		@rate.request_analise_data
+		@rate.generate_hash_result
+
 	end
 
 	describe "#initialize"
@@ -18,7 +21,8 @@ describe Report do
 
 	describe "#final_year_avaiable"
 		it "Find the last year available" do
-			expect(@rate.instance_variable_get(:@final_year)).to eq("2013")
+			expect(@rate.instance_variable_get(:@final_year)).to eq(Rate.final_year_avaiable(2008,1,1))
+
 		end
 
 	describe "#request_rate"
