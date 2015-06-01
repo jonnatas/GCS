@@ -11,7 +11,6 @@ require 'rspec'
 
     describe "GET #request_comparation"
     it "request index and return success" do
-      # get :request_comparation , :params => { :first_year => "2008", :first_state => "AC", :first_local => "Total", :first_test_type => "Total", :first_public_type => "Total", :second_year => "2008", :second_state => "AC", :second_local => "Total", :second_test_type =>"Total", :second_public_type => "Total", :grade => "1° ano"}
       get "/compare_reports/request_comparation.json?utf8=%E2%9C%93&first_year=2008&first_state=AC&first_local=Total&first_test_type=Total&first_public_type=Total&second_year=2008&second_state=AC&second_local=Total&second_test_type=Total&second_public_type=Total&grade=1%C2%B0+ano&commit=Gerar+Relat%C3%B3rio"
 
       expected_json = {:first_report=>{
@@ -69,4 +68,33 @@ require 'rspec'
 
     end
 
+   	it "request index and return the exception expected" do
+   		get "/compare_reports/request_comparation.json?utf8=%E2%9C%93&first_year=2008&first_state=DF&first_local=Rural&first_test_type=Publica&first_public_type=Municipal&second_year=2008&second_state=DF&second_local=Rural&second_test_type=Publica&second_public_type=Municipal&grade=1%C2%B0+ano&commit=Gerar+Relat%C3%B3rio"
+   		
+   		expected_json = {:first_report=>{:ideb=>{
+   			:status=>"available", 
+   			:ideb=>[5.6, 5.7], 
+   			:ideb_average=>5.65, 
+   			:ideb_standard_deviation=>0.050000000000000266, 
+   			:ideb_variance=>0.0025000000000000265, 
+   			:ideb_years=>["2009", "2011"], 
+   			:ideb_grade_ids=>["2", "4"]}, 
+   			:rates=>{:status=>"unavailable"}, 
+   			:year=>"2008", 
+   			:grade=>1}, 
+   			:second_report=>{
+   				:ideb=>{:status=>"available", 
+   				:ideb=>[5.6, 5.7], 
+   				:ideb_average=>5.65, 
+   				:ideb_standard_deviation=>0.050000000000000266, 
+   				:ideb_variance=>0.0025000000000000265, 
+   				:ideb_years=>["2009", "2011"], 
+   				:ideb_grade_ids=>["2", "4"]}, 
+   				:rates=>{:status=>"unavailable"}, 
+   				:year=>"2008", 
+   				:grade=>1}
+   				}.to_json
+
+   		expect(response.body).to eq(expected_json)
+   	end
   end
