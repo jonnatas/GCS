@@ -18,7 +18,7 @@ describe Report do
 
 	describe "#final_year_avaiable"
 		it "Find the last year available" do
-			expect(@rate.instance_variable_get(:@final_year)).to eq("")
+			expect(@rate.instance_variable_get(:@final_year)).to eq("2013")
 		end
 
 	describe "#request_rate"
