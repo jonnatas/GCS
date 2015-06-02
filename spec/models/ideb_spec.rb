@@ -5,6 +5,7 @@ describe Ideb do
 
  before :each do
  	@ideb = Ideb.new(2011,1,1)
+
  end 
 
 describe "#initialize"
@@ -27,5 +28,15 @@ describe "#generate_hash_result"
   	expect(@ideb.instance_variable_get(:@ideb_hash)).to eq(expected_hash)
   	
   	#by testing this method, we make sure that the requested methods are also working
+  end
+
+describe "#request_analise_data"
+  it "get statistics about ideb data" do
+    @ideb.request_ideb_report
+    @ideb.request_analise_data
+    expect(@ideb.instance_variable_get(:@ideb_average)).to eq(4.6)
+    expect(@ideb.instance_variable_get(:@standard_deviation_ideb)).to eq(0)
+    expect(@ideb.instance_variable_get(:@variance_ideb)).to eq(0)
+
   end
 end
