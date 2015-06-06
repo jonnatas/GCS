@@ -1,7 +1,7 @@
 class Report
-	
+
 	attr_accessor :report_result_hash
-	require 'Error'
+	require 'error'
 
 	def initialize(year, grade, state, test_type, local)
 		@year = year
@@ -32,7 +32,7 @@ class Report
 			ideb = {:status => "unavailable"}
 		end
 	end
-	
+
 	def request_rate
 		begin
 			raise Error::NoDataToSelectedYear unless Rate.exists?(:year => @year, :state_id => @state_id, :local => @local, :test_type => @test_type,

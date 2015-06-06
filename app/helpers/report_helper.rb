@@ -31,4 +31,19 @@ module ReportHelper
 		return total_variance/data.count
 	end
 
+	def self.verify_params_of_test_type(year,grade,state,test_type,public_type,local)
+
+		if test_type == "Publica"
+			if public_type == "Total"
+				@report = Report.new(year,grade,state,"Publico",local) 
+			else
+				@report = Report.new(year,grade,state,public_type,local) 
+			end
+		else
+			@report = Report.new(year,grade,state,test_type,local)
+		end
+
+		return @report
+	end
+
 end

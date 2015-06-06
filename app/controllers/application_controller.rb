@@ -33,13 +33,4 @@ class ApplicationController < ActionController::Base
 			f.js{ render :partial => "errors/ajax_404", :status => 404 }
 		end
 	end
-
-	#render action not found error
-	def render_not_found(e)
-		respond_to do |f|
-			f.html{ render :template => "errors/action_not_found", :status => 404 }
-			f.js{ render :partial => "errors/ajax_404", :status => 404 }
-		end
-	end
-
 end
