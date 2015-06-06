@@ -1,5 +1,7 @@
 language: ruby
 
+before_script: rails g rspec:install
+
 script: bundle exec rspec spec
 
 rvm:
