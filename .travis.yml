@@ -15,5 +15,5 @@ notifications:
       - tmb0710@gmail.com
 branches:
   only:
-  
-  - dev
+
+  - TravisIntegration
