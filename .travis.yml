@@ -1,6 +1,8 @@
 language: ruby
 
-before_script: rails g rspec:install
+before_script: gem install rspec
+ gem install rspec-rails
+
 
 script: bundle exec rspec spec
 
