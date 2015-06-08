@@ -1,6 +1,6 @@
 language: ruby
 
-before_script: gem installr rspec rspec-rails
+before_script: gem install rspec rspec-rails
 
 script: rspec spec
 
