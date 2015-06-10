@@ -4,11 +4,12 @@
 
 
 $(document).ready ->
-  clean_report = () ->
-    $('a#clean_report').click((event) ->
-     $('#report-container').empty().append(reportHTML)
-     $('div#report-container').hide(); $('#clean_report').hide()
-    )
+  
+  $('a#clean_report').click((event) ->
+    $('#report-container').empty().append(reportHTML)
+    $('div#report-container').hide(); $('#clean_report').hide()
+  )
+
   $("#test_type").on("change", ()->
      selectedValue = $("#test_type").val()
      if selectedValue == 'Publica'
@@ -17,10 +18,18 @@ $(document).ready ->
        $("#public_type").hide()
     )
 
-  $("#new-request").on("ajax:success", (e, data, status, xhr) ->
+  $("#new-report-request").submit(() ->
+    $("#report-container").empty()
+    target = document.getElementById('loading');
+    new Spinner({color:'#000', lines: 12}).spin(target);
+    )
+
+  $("#new-report-request").on("ajax:success", (e, data, status, xhr) ->
     $('#report-container').empty().append(reportHTML)
     $("#report-result").show()
     $("div#report-container").show(); $('#clean_report').show()
+    $("#loading").empty()
+
 
     if data.ideb.status == "available"
       plotBar(formatIDEBDataToPlot(data.ideb.ideb, data.ideb.ideb_years,data.ideb.ideb_grade_ids), 'ideb-graph',["IDEB"],["#F4D03F"])
@@ -28,12 +37,7 @@ $(document).ready ->
       appendStandardVariationToDiv(data.ideb.ideb_standard_deviation, "#standard-deviation-ideb")
       appendVarienceToDiv(data.ideb.ideb_variance, "#variance-ideb")
     else
-      $("#ideb-report").empty()
-      $("#ideb-report").removeClass('panel')
-      $("#ideb-report").removeClass('panel-default')
-      $("#ideb-report").addClass('alert alert-danger')
-      $("#ideb-report").append("<strong>Desculpe!</strong> Mais não temos disponível dados do IDEB para essa turma.")
-
+      noResultDiv("#ideb-report","<strong>Não existem dados disponíveis  do IDEB para essa turma. </strong>")
 
     if data.rates.status == "available"
       plotLine(formatDataToPlot(data.rates.evasion, data.year,data.grade), 'rate-evasion-graph',["Evasão"],["#FF5600"])
@@ -51,14 +55,10 @@ $(document).ready ->
       appendStandardVariationToDiv(data.rates.distortion_standard_deviation, '#standard-deviation-distortion')
       appendVarienceToDiv(data.rates.distortion_variance, "#variance-distortion")
     else
-      $("#rates").empty()
-      $("#rates").removeClass('panel')
-      $("#rates").removeClass('panel-default')
-      $("#rates").addClass('alert alert-danger')
-      $("#rates").append("<strong>Desculpe!</strong> Mais não temos disponível dados.")
+      noResultDiv("#rates","<strong>Não existem dados disponíveis dessa turma.</strong>")
 
   ).on "ajax:error", (e, xhr, status, error) ->
-    $("#row").append "<p>ERROR</p>"
+    $("#row").append "<p>ERROR, tente novamente.</p>"
 
 appendAverageToDiv = (data,div) ->
   $(div).append "<span><b>Média</b> #{data.toFixed(2)}</span>"
@@ -69,6 +69,12 @@ appendStandardVariationToDiv = (data,div) ->
 appendVarienceToDiv = (data,div) ->
   $(div).append "<span><b>Variância</b> #{data.toFixed(2)}</span>"
 
+noResultDiv = (div,info) ->
+  $(div).empty()
+  $(div).removeClass('panel')
+  $(div).removeClass('panel-default')
+  $(div).addClass('alert alert-danger')
+  $(div).append(info)
 
 #Generic Method to plot an array of data at specific div
 plotLine = (data,div,labels,colors) ->
@@ -110,6 +116,7 @@ formatIDEBDataToPlot = (data, years, grades)->
     formatedData.push {x: "#{years[i]} - #{grades[i]}° ano", y: value}
     i++
   return formatedData
+  
 
 
 reportHTML = '

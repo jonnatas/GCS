@@ -838,19 +838,23 @@ Licensed under the BSD-2-Clause License.
     Line.prototype.defaults = {
       lineWidth: 3,
       pointSize: 4,
-      lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      lineColors: ['blue','red'],
       pointStrokeWidths: [1],
-      pointStrokeColors: ['#ffffff'],
-      pointFillColors: [],
+      pointFillColors: ['blue','red'],
       smooth: true,
       shown: true,
       xLabels: 'auto',
+      postUnits: '%',
       xLabelFormat: null,
+      parseTime: false,
       xLabelMargin: 24,
       hideHover: false,
       trendLine: false,
       trendLineWidth: 2,
-      trendLineColors: ['#689bc3', '#a2b3bf', '#64b764']
+      trendLineColors: ['blue','red'],
+      pointStrokeColors: ['white'],
+      hideHover: 'auto'
+
     };
 
     Line.prototype.calc = function() {
@@ -950,7 +954,7 @@ Licensed under the BSD-2-Clause License.
         if (this.options.labels[j] === false) {
           continue;
         }
-        content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j] + ":\n  " + (this.yLabelFormat(y, j)) + "\n</div>";
+        content += "<div class='morris-hover-point' style='color: " + (this.colorFor(row, j, 'label')) + "'>\n  " + this.options.labels[j]  + ":\n  " + (this.yLabelFormat(y, j)) + "\n</div>";
       }
       if (typeof this.options.hoverCallback === 'function') {
         content = this.options.hoverCallback(index, this.options, content, row.src);
@@ -1233,7 +1237,14 @@ Licensed under the BSD-2-Clause License.
     };
 
     Line.prototype.drawXAxisLabel = function(xPos, yPos, text) {
-      return this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
+
+      subText = text.substring(1,6);
+      if(subText == "° ano")
+        subText = text.substring(0,6);
+      else
+        subText = text.substring(0,4);
+
+      return this.raphael.text(xPos, yPos, subText).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
 
     Line.prototype.drawLinePath = function(path, lineColor, lineIndex) {
@@ -1434,8 +1445,8 @@ Licensed under the BSD-2-Clause License.
     __extends(Area, _super);
 
     areaDefaults = {
-      fillOpacity: 'auto',
-      behaveLikeLine: false
+      fillOpacity: 0.2,
+      behaveLikeLine: true,
     };
 
     function Area(options) {
@@ -1558,8 +1569,8 @@ Licensed under the BSD-2-Clause License.
     Bar.prototype.defaults = {
       barSizeRatio: 0.75,
       barGap: 3,
-      barColors: ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
-      barOpacity: 1.0,
+      barColors: ['blue','red'],
+      barOpacity: 0.6,
       barRadius: [0, 0, 0, 0],
       xLabelMargin: 50,
       horizontal: false,
@@ -1823,7 +1834,13 @@ Licensed under the BSD-2-Clause License.
 
     Bar.prototype.drawXAxisLabel = function(xPos, yPos, text) {
       var label;
-      return label = this.raphael.text(xPos, yPos, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
+      subText = text.substring(1,6);
+      if(subText == "° ano")
+        subText = text.substring(0,6);
+      else
+        subText = text.substring(0,4);
+
+      return label = this.raphael.text(xPos, yPos, subText).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).attr('fill', this.options.gridTextColor);
     };
 
     Bar.prototype.drawBar = function(xPos, yPos, width, height, barColor, opacity, radiusArray) {

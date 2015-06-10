@@ -1,0 +1,88 @@
+<%= form_tag("/compare_reports/request_comparation.json",id: "new-compare_reports-request", method: "get", remote: true, :class =>'form-inline') do %>
+
+    <div class="form-control-static">
+      <div class="form-group-horizontal">
+        <h4 id="request-title"><font color="blue">Primeira Turma</font></h4>
+          
+          <div class="form-group">
+            <%= label_tag(:first_year, "Ano de início") %>
+            <%= select_tag(:first_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag(:first_state, "Estado") %>
+            <%= select_tag(:first_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
+          </div>
+          
+          <div class="form-group">
+            <%= label_tag(:first_local, "Localidade") %>
+            <%= select_tag(:first_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
+          </div>
+
+
+          <div class="form-group">
+            <%= label_tag(:first_test_type, "Rede") %>
+            <%= select_tag(:first_test_type, options_for_select(['Total', 'Privada', 'Publica']), class: 'form-control'  ) %>
+          </div>
+
+
+          <div id="first_public_type" name="first_public_type" class="form-group" style="display: none;">
+            <%= label_tag(:first_public_type, "Fonte") %>
+            <%= select_tag(:first_public_type, options_for_select(['Total','Municipal', 'Estadual', 'Federal']), class: 'form-control'  ) %>
+          </div>
+        
+      </div>
+      
+      <br/>
+      <br/>
+      <div><hr size=50 align="center"></div>
+      
+      <div class="form-group-horizontal">  
+
+          <h4 id="request-title"><font color="red">Segunda Turma</font></h3>
+            <div class="form-group">
+              <%= label_tag(:second_year, "Ano de início") %>
+              <%= select_tag(:second_year, options_for_select( Rate.all.pluck(:year).uniq.sort!), class: 'form-control') %>
+            </div>
+
+
+            <div class="form-group">
+              <%= label_tag(:second_state, "Estado") %>
+              <%= select_tag(:second_state, options_for_select(State.all.pluck(:state).uniq.sort!), class: 'form-control'  ) %>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag(:second_local, "Localidade") %>
+              <%= select_tag(:second_local, options_for_select(['Total', 'Urbana', 'Rural']), class: 'form-control'  ) %>
+            </div>
+
+
+            <div class="form-group">
+              <%= label_tag(:second_test_type, "Rede") %>
+              <%= select_tag(:second_test_type, options_for_select(['Total', 'Privada', 'Publica']), class: 'form-control'  ) %>
+            </div>
+
+
+            <div id="second_public_type" name="second_public_type" class="form-group" style="display: none;">
+              <%= label_tag(:second_public_type, "Fonte") %>
+              <%= select_tag(:second_public_type, options_for_select(['Total','Municipal', 'Estadual', 'Federal']), class: 'form-control'  ) %>
+            </div> 
+
+      </div>
+
+      <div class="form-group">
+
+        <hr>
+
+        <div class="form-group">
+          <%= label_tag(:grade, "Turma") %>
+          <%= select_tag(:grade, options_for_select(Grade.all.pluck(:grade).uniq.sort!), class: 'form-control'  ) %>
+        </div>
+
+        <div class="form-group">
+          <%= submit_tag("Gerar Relatório", :class => 'btn btn-primary') %>
+          <div id="clean_compare_reports" class="btn btn-default" style="display: none">Limpar</div>
+        </div>
+      </div>
+    </div>
+<% end %>

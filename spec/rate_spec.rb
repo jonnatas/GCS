@@ -3,7 +3,7 @@ require_relative'../app/models/rate'
 
 describe Report do
 	before :each do
-		@rate = Rate.new(2008, 1, 1)
+		@rate = Rate.new(2008, 1, 1, "Total", "Total")
 		@rate.request_rate_report
 	end
 
@@ -21,10 +21,12 @@ describe Report do
 
 	describe "#request_rate"
 	    it "Take de state, grade and year and return a Rate object from DB" do
-	    	local_rate = @rate.request_rate(2008,1,1)
+	    	local_rate = @rate.request_rate(2008,1,1, "Total", "Total")
 	      	expect(local_rate.year).to eq(2008)
 	      	expect(local_rate.grade_id).to eq(1)
 	      	expect(local_rate.state_id).to eq(1)
+	      	expect(local_rate.test_type).to eq("Total")
+	      	expect(local_rate.local).to eq("Total")
 	    end
 
 	describe "#request_rate_report"
@@ -94,7 +96,8 @@ describe Report do
 
 	describe "#generate_hash_result"
 		it "Take the data result analise and create a hash for response result" do
-			expected_hash_result = {:evasion=>[3.9, 3.5, 5.7, 2.4, 2.5, 3.5], 
+			expected_hash_result = {:status=>"available",
+				:evasion=>[3.9, 3.5, 5.7, 2.4, 2.5, 3.5], 
 				:performance=>[87.4, 91.6, 86.5, 89.3, 91.8, 88.9], 
 				:distortion=>[9.8, 29.7, 33.8, 14.2, 27.5, 31.5], 
 				:evasion_average=>3.5833333333333335, 
