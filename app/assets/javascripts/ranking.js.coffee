@@ -8,15 +8,15 @@ $(document).ready ->
     console.log data
     $("#ranking-container").empty().append(rankingHTML)
     $("#ranking-container").show()
-    listAverageRanking(data, '#ranking-container')
+    listDistortionRanking(data, '#distortion')
   )
 
-listAverageRanking = (data, div) ->
+listDistortionRanking = (data, div) ->
 	states = getNameList(data.distortion_list)
 	str = ""
 	i=0
 	for object in data.distortion_list by 1
-		str = str + "</br>" + (i+1) + "° " + states[i] + "</br>"
+		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + "</br>"
 		i++
 	console.log str 
 	$(div).append "#{str}"
@@ -70,4 +70,65 @@ rankingHTML = '
 
 					</div>
 					
-				</div>'
+				</div>
+
+				<div class="TabControl"> 
+					<div id="header"> 
+						<ul class="abas"> 
+							<li> 
+								<div class="aba"> 
+										<span>IDEB</span> 
+								</div> 
+							</li> 
+							<li> 
+								<div class="aba"> 
+										<span>Tab 2</span> 
+								</div> 
+							</li>
+							<li> 
+								<div class="aba"> 
+									<span>Distorção</span> 
+								</div> 
+							</li> 
+							<li> 
+								<div class="aba"> 
+									<span>Tab 4</span> 
+								</div> 
+							</li> 
+
+						</ul> 
+
+				</div> 
+					
+				<div id="content"> 
+					<div class="conteudo"></div> 
+					<div class="conteudo"> Conteúdo da aba 2 </div> 
+					<div id ="distortion" class="conteudo"></div> 
+					<div class="conteudo"> Conteúdo da aba 4 </div> 
+				</div> 
+			</div>
+
+				
+			<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+
+				<script type="text/javascript">
+				 $(document).ready(function(){ 
+						 $("#content div:nth-child(1)").show(); 
+						 $(".abas li:first div").addClass("selected");
+						 $(".aba").click(function(){ 
+						 		$(".aba").removeClass("selected"); 
+						 		$(this).addClass("selected");
+						 		var indice = $(this).parent().index();
+						 		indice++;
+						 		$("#content div").hide();
+						 		$("#content div:nth-child("+indice+")").show();
+						 });
+							$(".aba").hover( 
+								function(){$(this).addClass("ativa")},
+								function(){$(this).removeClass("ativa")}
+							);	
+					}); 
+				</script>
+				'
+
