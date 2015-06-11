@@ -12,6 +12,7 @@ class Ranking
 		@listaDis = Array.new
 		@listaRat = Array.new
 		@listaIdeb = Array.new
+
 	end 
 
 	def insert_it
