@@ -9,6 +9,7 @@ $(document).ready ->
     $("#ranking-container").empty().append(rankingHTML)
     $("#ranking-container").show()
     listDistortionRanking(data, '#distortion')
+
   )
 
 listDistortionRanking = (data, div) ->
@@ -16,7 +17,7 @@ listDistortionRanking = (data, div) ->
 	str = ""
 	i=0
 	for object in data.distortion_list by 1
-		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + "</br>"
+		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.distortion + "</br>"
 		i++
 	console.log str 
 	$(div).append "#{str}"
