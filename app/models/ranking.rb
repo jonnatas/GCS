@@ -24,14 +24,20 @@ class Ranking
 			
 			currentDistortion = request_distortion(@year,currentState, @grade_id,@test_type,@local)
 			currentRates = request_rates(@year,currentState, @grade_id,@test_type,@local)
-			currentIdeb = request_ideb(@year,currentState, @current_type)
-	
+
+			if(@year%2 != 0)
+				print @year
+			  currentIdeb = request_ideb(@year,currentState, @current_type)
+			  @listaIdeb.push(currentIdeb)
+			end
+
 			@listaDis.push(currentDistortion)
 			@listaRat.push(currentRates)
-			@listaIdeb.push(currentIdeb)
 		end
 
-		@listaIdeb.sort_by!{|ideb| ideb.score}
+		if(@listaIdeb.empty?)
+			@listaIdeb.sort_by!{|ideb| ideb.score}
+		end
 		@listaPeformance = @listaRat.sort_by!{|rates| rates.peformance}
 		@listaEvasion = @listaRat.sort_by!{|rates| rates.evasion}
 		@listaDistortion = @listaDis.sort_by!{|distortion| distortion.distortion}
