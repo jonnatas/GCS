@@ -9,8 +9,26 @@ $(document).ready ->
     $("#ranking-container").empty().append(rankingHTML)
     $("#ranking-container").show()
     listDistortionRanking(data, '#distortion')
+    listEvasionRanking(data, '#evasion')
+    listPeformanceRanking(data, '#peformance')
+    listIDEBRanking(data, '#ideb')
 
   )
+
+listIDEBRanking = (data, div) ->
+	console.log data
+	if data.ideb_list.status == "avaliable" 
+		console.log "OLAAAAAAAAAAAAAAAAAAAAA"
+		states = getNameList(data.ideb_list.ideb)
+		str = ""
+		i=0
+		for object in data.ideb_list.ideb by 1
+			str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.score + "</br>"
+			i++
+		console.log str
+		$(div).append "#{str}"
+	else 
+		$(div).append "Dado indisponível"
 
 listDistortionRanking = (data, div) ->
 	states = getNameList(data.distortion_list)
@@ -18,8 +36,25 @@ listDistortionRanking = (data, div) ->
 	i=0
 	for object in data.distortion_list by 1
 		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.distortion + "</br>"
-		i++
-	console.log str 
+		i++ 
+	$(div).append "#{str}"
+
+listEvasionRanking = (data, div) ->
+	states = getNameList(data.evasion_list)
+	str = ""
+	i=0
+	for object in data.evasion_list by 1
+		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.evasion + "</br>"
+		i++ 
+	$(div).append "#{str}"
+
+listPeformanceRanking = (data, div) ->
+	states = getNameList(data.peformance_list)
+	str = ""
+	i=0
+	for object in data.peformance_list by 1
+		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.peformance + "</br>"
+		i++ 
 	$(div).append "#{str}"
 
 getNameList = (data) ->
@@ -78,22 +113,22 @@ rankingHTML = '
 						<ul class="abas"> 
 							<li> 
 								<div class="aba"> 
-										<span>IDEB</span> 
+										<span>IDEB </span> 
 								</div> 
 							</li> 
 							<li> 
 								<div class="aba"> 
-										<span>Tab 2</span> 
+										<span>Evasão </span> 
 								</div> 
 							</li>
 							<li> 
 								<div class="aba"> 
-									<span>Distorção</span> 
+									<span>Rendimento </span> 
 								</div> 
 							</li> 
 							<li> 
 								<div class="aba"> 
-									<span>Tab 4</span> 
+									<span>Distorção	</span> 
 								</div> 
 							</li> 
 
@@ -102,10 +137,10 @@ rankingHTML = '
 				</div> 
 					
 				<div id="content"> 
-					<div class="conteudo"></div> 
-					<div class="conteudo"> Conteúdo da aba 2 </div> 
-					<div id ="distortion" class="conteudo"></div> 
-					<div class="conteudo"> Conteúdo da aba 4 </div> 
+					<div id="ideb" class="conteudo"></div> 
+					<div id ="evasion" class="conteudo"></div>
+					<div id = "peformance" class="conteudo"></div> 
+					<div id ="distortion"class="conteudo"></div> 
 				</div> 
 			</div>
 

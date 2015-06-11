@@ -10,7 +10,8 @@ class Ranking
 		# @rate = rate
 
 		@listaDis = Array.new
-		@listaRat = Array.new
+		@listaEvasion = Array.new
+		@listaPeformance = Array.new
 		@listaIdeb = Array.new
 
 	end 
@@ -26,25 +27,25 @@ class Ranking
 			currentDistortion = request_distortion(@year,currentState, @grade_id,@test_type,@local)
 			currentRates = request_rates(@year,currentState, @grade_id,@test_type,@local)
 
-			if(@year%2 != 0)
-				print @year
-			  currentIdeb = request_ideb(@year,currentState, @current_type)
-			  @listaIdeb.push(currentIdeb)
-			end
+			currentIdeb = request_ideb(@year,currentState, @current_type)
+			@listaIdeb.push(currentIdeb)
 
 			@listaDis.push(currentDistortion)
-			@listaRat.push(currentRates)
+			@listaEvasion.push(currentRates)
+			@listaPeformance.push(currentRates)
 		end
 
-		if(@listaIdeb.empty?)
+		if @ideb_status == "avaliable"
 			@listaIdeb.sort_by!{|ideb| ideb.score}
 		end
-		@listaPeformance = @listaRat.sort_by!{|rates| rates.peformance}
-		@listaEvasion = @listaRat.sort_by!{|rates| rates.evasion}
+
+
+		@listaEvasion = @listaEvasion.sort_by!{|rates| rates.evasion}
+		@listaPeformance = @listaPeformance.sort_by!{|rates| rates.peformance}
 		@listaDistortion = @listaDis.sort_by!{|distortion| distortion.distortion}
 
 		@ranking_result_hash = {
-			:ideb_list => @listaIdeb,
+			:ideb_list => {:status => @ideb_status ,:ideb => @listaIdeb},
 			:peformance_list => @listaPeformance,
 			:evasion_list => @listaEvasion,
 			:distortion_list => @listaDistortion
@@ -62,7 +63,15 @@ class Ranking
 	end
 
 	def request_ideb(year,state_id,type)
-		Ideb.where(:year => year, :state_id => state_id, :test_type => type).first
+		begin
+			raise Error::NoDataToSelectedYear if year.to_i > Ideb.maximum(:year)
+			raise Error::NoDataForSelectedGrade if year.to_i%2 == 0
+			@ideb_status = "avaliable"
+			return Ideb.where(:year => year, :state_id => state_id, :test_type => type).first
+		rescue
+			@ideb_status = "unavaliable"
+		end
+
 	end
 
 end
