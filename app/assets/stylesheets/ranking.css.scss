@@ -2,14 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.center-div{
+	margin-left: auto;
+    margin-right: auto;
+}
 
 body{
 	font-family:Calibri, Tahoma, Arial
 	} 
 .TabControl{ 
-	width:45%; 
+	width:60%; 
 	overflow:hidden; 
 	height:60%;
+	margin-left: auto;
+    margin-right: auto;
 	} 
 .TabControl #header{ 
 	width:100%;  
@@ -19,7 +25,7 @@ body{
 
 .TabControl #content{ 
 	width:100%; 
-	border: solid 1px;
+	border: solid 1px #ccc;
 	overflow:hidden; 
 	height:100%; 
 	}
@@ -33,9 +39,9 @@ body{
 	}
 
 .aba{
-	width:100px; 
+	width:167px; 
 	height:30px; 
-	border:solid 1px; 
+	border:solid 1px #ccc; 
 	border-radius:5px 5px 0 0; 
 	text-align:center; 
 	padding-top:5px; 
@@ -43,38 +49,48 @@ body{
 	} 
 
 .ativa{
-	width:100px; 
+	width:167px; 
 	height:30px; 
 	border:solid 1 px; 
-	border-radius:5px 5px 0 0; 
-	text-align:center; 
+	text-align:center;
 	padding-top:5px; 
-	background:#27408B;
+	background:#DCDCDC;
 	} 
 
 .ativa span, .selected span{
-	color:#fff
+	color:white;
 	} 
 
 .TabControl #content{
-	background:#27408B
+	background:green;
 	}
 
 .TabControl .conteudo{
 	width:100%; 
 	background:white;
 	padding-left:20px; 
+	padding-right:20px;
+	padding-bottom:20px;
+	text-align:center; 
 	display:none; 
 	height:100%;
-	color:black
+	border: #ccc;
+	color:black;
 	}
 
 .selected{
-	width:100px; 
+	width:183px; 
 	height:30px; 
 	border:solid 1 px; 
 	border-radius:5px 5px 0 0; 
 	text-align:center; 
-	padding-top:5px; 
-	background:#27408B
+	padding-top:5px;
+	padding-back:5px; 
+	background:#337ab7;
+	color: #fff;
+	border-color: #2e6da4;
 	} 
+
+.green_div{
+	text-color:green;
+}

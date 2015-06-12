@@ -27,7 +27,7 @@ border-radius:0;
   color: white;
   font-size: 15px;
   font-weight: bold;
-  text-transform: uppercase;
+  
 }
 
 .navbar .pull-right a {
@@ -149,6 +149,11 @@ border-radius:0;
 	float: left;
 }
 
+.form-group-ranking{
+	padding: 0px 50px 0px 0px;
+	float: left;
+}
+
 .description-col-md-6{
 
 	padding-top: 80px;
@@ -234,3 +239,6 @@ border-radius:0;
     margin: 4%;
 }
 
+.center-div {
+	margin-left: 25%;
+}

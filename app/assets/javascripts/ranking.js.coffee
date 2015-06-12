@@ -4,9 +4,18 @@
 
 $(document).ready ->
   console.log ("opa")
+
+  $("#new-ranking-request").submit(() ->
+    $("#ranking-container").empty()
+    target = document.getElementById('loading');
+    new Spinner({color:'#000', lines: 12}).spin(target);
+    )
+
   $("#new-ranking-request").on("ajax:success", (e, data, status, xhr) ->
     console.log data
     $("#ranking-container").empty().append(rankingHTML)
+    $("#evasion_text").empty()
+    $("#loading").empty()
     $("#ranking-container").show()
     listDistortionRanking(data, '#distortion')
     listEvasionRanking(data, '#evasion')
@@ -18,24 +27,32 @@ $(document).ready ->
 listIDEBRanking = (data, div) ->
 	console.log data
 	if data.ideb_list.status == "avaliable" 
-		console.log "OLAAAAAAAAAAAAAAAAAAAAA"
 		states = getNameList(data.ideb_list.ideb)
 		str = ""
 		i=0
 		for object in data.ideb_list.ideb by 1
-			str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.score + "</br>"
+			if object == data.ideb_list.ideb[0]
+				str = str + '&nbsp;</br><b><font color = "#00FF00" size = "3">' + (i+1) + '° ' + states[i] + ' - ' + object.score + ' pontos</font></b></br>'
+			else	
+				str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.score + " pontos</br>"
 			i++
 		console.log str
 		$(div).append "#{str}"
 	else 
-		$(div).append "Dado indisponível"
+		if data.ideb_list.year == '2013'
+			$(div).append '<font color = "red"> Não há dados disponibilizados referentes a prova IDEB de ' + data.ideb_list.year + '</font>'
+		else
+			$(div).append '<font color = "red"> No ano de ' + data.ideb_list.year + ' não houve aplicação da prova IDEB</font>'
 
 listDistortionRanking = (data, div) ->
 	states = getNameList(data.distortion_list)
 	str = ""
 	i=0
 	for object in data.distortion_list by 1
-		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.distortion + "</br>"
+		if object == data.distortion_list[0]
+			str = str + '&nbsp;</br><b><font color = "#00FF00" size = "3">' + (i+1) + '° ' + states[i] + ' - ' + object.distortion + ' %</font></b></br>'
+		else
+			str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.distortion + " %</br>"
 		i++ 
 	$(div).append "#{str}"
 
@@ -44,7 +61,10 @@ listEvasionRanking = (data, div) ->
 	str = ""
 	i=0
 	for object in data.evasion_list by 1
-		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.evasion + "</br>"
+		if object == data.evasion_list[0]
+			str = str + '&nbsp;</br><b><font color = "#00FF00" size = "3">' + (i+1) + '° ' + states[i] + ' - ' + object.evasion + ' %</font></b></br>'
+		else			
+			str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.evasion + " %</br>"
 		i++ 
 	$(div).append "#{str}"
 
@@ -53,7 +73,10 @@ listPeformanceRanking = (data, div) ->
 	str = ""
 	i=0
 	for object in data.peformance_list by 1
-		str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.peformance + "</br>"
+		if object == data.peformance_list[0]
+			str = str + '&nbsp;</br><b><font color = "#00FF00" size = "3">' + (i+1) + '° ' + states[i] + ' - ' + object.peformance + ' %</font></b></br>'
+		else
+			str = str + "&nbsp;</br><b>" + (i+1) + "°</b> " + states[i] + " - " + object.peformance + " %</br>"
 		i++ 
 	$(div).append "#{str}"
 
@@ -111,11 +134,7 @@ rankingHTML = '
 				<div class="TabControl"> 
 					<div id="header"> 
 						<ul class="abas"> 
-							<li> 
-								<div class="aba"> 
-										<span>IDEB </span> 
-								</div> 
-							</li> 
+							
 							<li> 
 								<div class="aba"> 
 										<span>Evasão </span> 
@@ -131,17 +150,70 @@ rankingHTML = '
 									<span>Distorção	</span> 
 								</div> 
 							</li> 
+							<li> 
+								<div class="aba"> 
+										<span>IDEB </span> 
+								</div> 
+							</li> 
 
 						</ul> 
 
-				</div> 
-					
-				<div id="content"> 
-					<div id="ideb" class="conteudo"></div> 
-					<div id ="evasion" class="conteudo"></div>
-					<div id = "peformance" class="conteudo"></div> 
-					<div id ="distortion"class="conteudo"></div> 
-				</div> 
+					</div> 
+						
+					<div id="content"> 
+						<div id ="evasion" class="conteudo">
+							<p style=" text-align: justify;"><font face="cursive"> &nbsp
+               O Índice de Evasão retrata o percentual de alunos que deixaram
+               de frequentar a escola, caracterizando dessa forma abandono escolar.
+               Tal índice é obtido por meio do Censo Escolar pelo Inep e
+               compõe o Índice de Desenvolvimento da Educação Brasileira (Ideb).
+             	</font></p>
+             	<b><font size = "4"> Ranking Brasileiro: </font></b></br>
+            </div>
+
+						<div id ="peformance" class="conteudo">
+							<p style=" text-align: justify;"><font face="cursive"> &nbsp
+               O Índice de Rendimento é baseado na Anresc. A Avaliação Nacional do Redimento
+               Escolar (Anresc) é uma avaliação criada pelo Ministério da Educação. Sendo
+               complementar ao Sistema Nacional de Educação Básica e um dos componentes para
+               o cálculo do Índice de Desenvolvimento da Educação Básica, a avaliação é realizada
+               a cada dois anos e participam todos os estudantes de escolas públicas urbanas do 5º
+               ao 9º ano em turmas com 20 ou mais alunos.
+               A avaliação é dividida em duas provas: Língua Portuguesa e Matemática.
+             	</font></p>
+             	<b><font size = "4"> Ranking Brasileiro: </font></b></br>
+						</div>
+
+						<div id ="distortion" class="conteudo">
+							<p style=" text-align: justify;"><font face="cursive"> &nbsp
+                O Índice de Distorção representa o percentual de alunos que se encontram em
+                condição de distorção idade-série.
+                O aluno que reprova ou abandona os estudos por dois anos ou mais
+                durante a trajetória de escolarização, repetindo por consequência uma mesma
+                série, se encontra em defasem em relação à idade considerada adequada para
+                cada ano de estudo, de acordo com o que propõe a legislação educacional do
+                país.
+             	</font></p>
+             	<b><font size = "4"> Ranking Brasileiro: </font></b></br>
+
+						</div> 
+						<div id="ideb" class="conteudo">
+							<p style=" text-align: justify;"><font face="cursive"> &nbsp
+                O Índice de Desenvolvimento da Educação Básica (Ideb) tem o objetivo de
+                reunir em um único indicador dois conceitos importantes para a qualidade
+                da educação: fluxo escolar e média de desempenho nas avaliações.
+                Ele agrega ao enfoque pedagógico dos resultados das avaliações em larga escala do
+                <a href="http://portal.inep.gov.br/" target="_blank">Inep</a>
+                a possibilidade de resultados sintéticos, facilmente assimiláveis, e que permitem
+                traçar metas de qualidade educacional para os sistemas. O indicador é calculado
+                a partir dos dados sobre aprovação, obtidos no Censo Escolar, e médias de desempenho
+                nas avaliações do Inep: o Seab (para unidades da federação e para o país) e a Prova
+                Brasil (para os municípios).
+             	</font></p>
+             	<b><font size = "4"> Ranking Brasileiro: </font></b></br>
+            </div>
+						
+					</div> 
 			</div>
 
 				
@@ -159,6 +231,7 @@ rankingHTML = '
 						 		indice++;
 						 		$("#content div").hide();
 						 		$("#content div:nth-child("+indice+")").show();
+    						$("#evasion_text div").show();
 						 });
 							$(".aba").hover( 
 								function(){$(this).addClass("ativa")},

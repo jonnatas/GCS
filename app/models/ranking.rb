@@ -36,16 +36,16 @@ class Ranking
 		end
 
 		if @ideb_status == "avaliable"
-			@listaIdeb.sort_by!{|ideb| ideb.score}
+			@listaIdeb.sort_by!{|ideb| -ideb.score}
 		end
 
 
 		@listaEvasion = @listaEvasion.sort_by!{|rates| rates.evasion}
-		@listaPeformance = @listaPeformance.sort_by!{|rates| rates.peformance}
+		@listaPeformance = @listaPeformance.sort_by!{|rates| -rates.peformance}
 		@listaDistortion = @listaDis.sort_by!{|distortion| distortion.distortion}
 
 		@ranking_result_hash = {
-			:ideb_list => {:status => @ideb_status ,:ideb => @listaIdeb},
+			:ideb_list => {:status => @ideb_status ,:ideb => @listaIdeb, :year => @year_ideb},
 			:peformance_list => @listaPeformance,
 			:evasion_list => @listaEvasion,
 			:distortion_list => @listaDistortion
@@ -70,6 +70,7 @@ class Ranking
 			return Ideb.where(:year => year, :state_id => state_id, :test_type => type).first
 		rescue
 			@ideb_status = "unavaliable"
+			@year_ideb = year
 		end
 
 	end
