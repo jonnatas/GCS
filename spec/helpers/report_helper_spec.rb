@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../app/helpers/report_helper'
+require 'rails_helper'
 
 describe ReportHelper do
 

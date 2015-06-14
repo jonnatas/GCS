@@ -1,3 +1,4 @@
+# :nocov:
 class ParsesController < ApplicationController
 
 	def index
@@ -28,3 +29,4 @@ class ParsesController < ApplicationController
 	end
 
 end
+# :nocov:

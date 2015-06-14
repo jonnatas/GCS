@@ -41,6 +41,7 @@ group :test do
 	gem 'mini_backtrace', '0.1.3'
 	gem 'guard-minitest', '2.3.1'
 	gem 'rspec', '~> 3.0'
+	gem 'rspec-rails'
 	gem 'simplecov', :require => false
 end
 

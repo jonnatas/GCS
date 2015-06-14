@@ -1,51 +1,49 @@
 require 'rspec'
-require_relative'../app/models/rate'
+require 'rails_helper'
 
 describe Report do
 	before :each do
-<<<<<<< Updated upstream
 		@rate = Rate.new(2008, 1, 1, "Total", "Total")
-=======
-		@rate = Rate.new(2008, 1, 1,"Total","Total")
->>>>>>> Stashed changes
 		@rate.request_rate_report
+		@rate.request_analise_data
+		@rate.generate_hash_result
+
 	end
 
 	describe "#initialize"
 		it "Take the arguments and set to the instace variables" do
 		 expect(@rate.instance_variable_get(:@year)).to eq(2008)
-	     expect(@rate.instance_variable_get(:@grade_id)).to eq(1)
-	     expect(@rate.instance_variable_get(:@state_id)).to eq(1)
-	     expect(@rate.instance_variable_get(:@test_type)).to eq("Total")
-	     expect(@rate.instance_variable_get(:@local)).to eq("Total")
+	              expect(@rate.instance_variable_get(:@grade_id)).to eq(1)
+	              expect(@rate.instance_variable_get(:@state_id)).to eq(1)
+	              expect(@rate.instance_variable_get(:@test_type)).to eq("Total")
+	              expect(@rate.instance_variable_get(:@local)).to eq("Total")
 		end
 
 	describe "#final_year_avaiable"
 		it "Find the last year available" do
-			expect(@rate.instance_variable_get(:@final_year)).to eq("2013")
+			expect(@rate.instance_variable_get(:@final_year)).to eq(Rate.final_year_avaiable(2008,1,1))
+
 		end
 
 	describe "#request_rate"
 	    it "Take de state, grade and year and return a Rate object from DB" do
-<<<<<<< Updated upstream
-	    	local_rate = @rate.request_rate(2008,1,1, "Total", "Total")
-	      	expect(local_rate.year).to eq(2008)
-	      	expect(local_rate.grade_id).to eq(1)
-	      	expect(local_rate.state_id).to eq(1)
-	      	expect(local_rate.test_type).to eq("Total")
-	      	expect(local_rate.local).to eq("Total")
-=======
-	      	expect{
+	    	expect{
 		local_rate = @rate.request_rate(2008,1,1,"Publica","Urbana")
 	      	}.to raise_error(Error::NullElementAtDB)
->>>>>>> Stashed changes
+	    end
+
+	    describe "#request_distortion"
+	    it "Take the year,state_id,grade_id,test_type,local and return the distortion object from DB" do
+	    	expect{
+		local_rate = @rate.request_rate(2008,1,1,"Publica","Urbana")
+	      	}.to raise_error(Error::NullElementAtDB)
 	    end
 
 	describe "#request_rate_report"
 		it "Request the rate report with the initial variable values" do
-			expect(@rate.instance_variable_get(:@evasion_result)).to eq([3.9, 3.5, 5.7, 2.4, 2.5, 3.5])
-			expect(@rate.instance_variable_get(:@performance_result)).to eq([87.4, 91.6, 86.5, 89.3, 91.8, 88.9])
-			expect(@rate.instance_variable_get(:@distortion_result)).to eq([9.8, 29.7, 33.8, 14.2, 27.5, 31.5])
+		  expect{
+		  local_rate = @rate.request_rate(2008,10,1,"Publica","Urbana")
+	      	  }.to raise_error(Error::NullElementAtDB)
 		end
 
 	describe "#request_average_to_evasion"
@@ -108,21 +106,8 @@ describe Report do
 
 	describe "#generate_hash_result"
 		it "Take the data result analise and create a hash for response result" do
-<<<<<<< Updated upstream
 			expected_hash_result = {:status=>"available",
-				:evasion=>[3.9, 3.5, 5.7, 2.4, 2.5, 3.5], 
-				:performance=>[87.4, 91.6, 86.5, 89.3, 91.8, 88.9], 
-				:distortion=>[9.8, 29.7, 33.8, 14.2, 27.5, 31.5], 
-				:evasion_average=>3.5833333333333335, 
-				:performance_average=>89.25, 
-				:distortion_average=>24.416666666666668, 
-				:evasion_standard_deviation=>1.0930334954713063, 
-				:performance_standard_deviation=>1.9636275953788493, 
-				:distortion_standard_deviation=>9.070725194578191, 
-				:evasion_variance=>1.1947222222222225, 
-				:performance_variance=>3.8558333333333223, 
-=======
-			expected_hash_result = {:evasion=>[3.9, 3.5, 5.7, 2.4, 2.5, 3.5],
+				:evasion=>[3.9, 3.5, 5.7, 2.4, 2.5, 3.5],
 				:performance=>[87.4, 91.6, 86.5, 89.3, 91.8, 88.9],
 				:distortion=>[9.8, 29.7, 33.8, 14.2, 27.5, 31.5],
 				:evasion_average=>3.5833333333333335,
@@ -133,7 +118,6 @@ describe Report do
 				:distortion_standard_deviation=>9.070725194578191,
 				:evasion_variance=>1.1947222222222225,
 				:performance_variance=>3.8558333333333223,
->>>>>>> Stashed changes
 				:distortion_variance=>82.27805555555555}
 
 			expect(@rate.instance_variable_get(:@rate_hash)).to eq(expected_hash_result)

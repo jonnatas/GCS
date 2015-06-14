@@ -1,3 +1,4 @@
+# :nocov:
 class Parse < ActiveRecord::Base
 	def self.import(file,type)
 		if type == 'IDEB'
@@ -45,3 +46,4 @@ class Parse < ActiveRecord::Base
 		end
 	end
 end
+# :nocov:
