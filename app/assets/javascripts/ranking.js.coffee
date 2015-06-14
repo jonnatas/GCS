@@ -97,7 +97,7 @@ getNameState = (idState) ->
 		when 4 then return "Amazonas"
 		when 5 then return "Bahia"
 		when 6 then return "Ceará"
-		when 7 then return "Destrito Federal"
+		when 7 then return "Distrito Federal"
 		when 8 then return "Espírito Santo"
 		when 9 then	return "Goiás"
 		when 10 then return "Maranhão"

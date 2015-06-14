@@ -2,7 +2,15 @@
 	margin:0;padding:0;
 } 
 html, body {
-	height: 100%;}
+	height: 100%;
+	}
+
+body{
+	background-image: url('background2.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	}
 
 #wrap {
 	min-height: 100%;}
@@ -39,19 +47,20 @@ border-radius:0;
 	display: inline;
 }
 
-.jumbotron{
+.hi{
 	background-image: asset-url("fundooo.jpg", image);
 	background-size: cover;
+	background-color: transparent;
 	height:750px;
-	border-bottom: solid black 1px;
+	
 }
 
-.jumbotron img{
+.hi img{
 	margin-top:45px;
 	transition:0.25s;
 }
 
-.jumbotron img:hover{
+.hi img:hover{
 	-webkit-transform: scale(1.2,1.2);
     -moz-transform:scale(1.2,1.2);
 
@@ -59,10 +68,8 @@ border-radius:0;
 
 .servicos{
 	height:750px;
-	background-color: rgb(51,51,51);
-	border-bottom: solid black 1px;
-	background-image: url('url.png');
-	background-size: cover;
+	background-color : transparent;
+	
 }
 
 .servicos h1{
@@ -97,11 +104,11 @@ border-radius:0;
 
 .sobre{
 	height: 750px;
-	background-color:rgb(102,102,102);
+	background-color : transparent;
+
 	position:relative;
 	border-bottom: solid black 1px;
-	background-image: url('background2.jpg');
-	background-size: cover;
+	
 }
 
 .sobre h1{
