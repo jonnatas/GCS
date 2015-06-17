@@ -1,3 +1,4 @@
+# :nocov:
 class Parse < ActiveRecord::Base
 # :nocov:
 	def self.import(file,type)
@@ -47,3 +48,4 @@ class Parse < ActiveRecord::Base
 	end
 # :nocov:
 end
+# :nocov:

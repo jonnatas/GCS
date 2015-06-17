@@ -1,7 +1,6 @@
 require 'rspec'
 require 'rails_helper'
 
-
 describe ReportController, :type =>:request do
     describe "GET #index"
     it "request index and return success" do
