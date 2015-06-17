@@ -1,3 +1,95 @@
 // Place all the styles related to the ranking controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.center-div{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+	font-family:Calibri, Tahoma, Arial
+	} 
+.TabControl{ 
+	width:60%; 
+	overflow:hidden; 
+	height:60%;
+	margin-left: auto;
+    margin-right: auto;
+	} 
+.TabControl #header{ 
+	width:100%;  
+	overflow:hidden; 
+	cursor:hand;
+	}
+
+.TabControl #content{ 
+	width:100%; 
+	border: solid 1px #ccc;
+	overflow:hidden; 
+	height:100%; 
+	}
+
+.TabControl .abas{
+	display:inline;
+	}
+
+.TabControl .abas li{
+	float:left
+	}
+
+.aba{
+	width:167px; 
+	height:30px; 
+	border:solid 1px #ccc; 
+	border-radius:5px 5px 0 0; 
+	text-align:center; 
+	padding-top:5px; 
+	background:white
+	} 
+
+.ativa{
+	width:167px; 
+	height:30px; 
+	border:solid 1 px; 
+	text-align:center;
+	padding-top:5px; 
+	background:#DCDCDC;
+	} 
+
+.ativa span, .selected span{
+	color:white;
+	} 
+
+.TabControl #content{
+	background:green;
+	}
+
+.TabControl .conteudo{
+	width:100%; 
+	background:white;
+	padding-left:20px; 
+	padding-right:20px;
+	padding-bottom:20px;
+	text-align:center; 
+	display:none; 
+	height:100%;
+	border: #ccc;
+	color:black;
+	}
+
+.selected{
+	width:183px; 
+	height:30px; 
+	border:solid 1 px; 
+	border-radius:5px 5px 0 0; 
+	text-align:center; 
+	padding-top:5px;
+	padding-back:5px; 
+	background:#337ab7;
+	color: #fff;
+	border-color: #2e6da4;
+	} 
+
+.green_div{
+	text-color:green;
+}

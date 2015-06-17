@@ -36,5 +36,5 @@ describe Report do
 			expect(@report.instance_variable_get(:@report_result_hash)).to eq(expected_hash)
 
 		end
-
 end
+
