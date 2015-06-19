@@ -5,12 +5,12 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(params[:contact])
-    if @contact
-      flash.now[:notice] = 'Thank you for your message. We will contact you soon!'
+    if @contact != nil
+      flash.now[:notice] = 'Obrigado por entrar em contato.'
       ContactMailer.send_email(@contact).deliver
+      ContactMailer.send_confirmation(@contact).deliver
     else
-      flash.now[:error] = 'Cannot send message.'
-      render :new
+      flash.now[:notice] = 'Não foi possível entrar em contato. Tente novamente mais tarde.'
     end
   end
 end

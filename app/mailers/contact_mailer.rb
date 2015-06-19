@@ -13,4 +13,11 @@ class ContactMailer < ActionMailer::Base
 
     mail to: "contatoenturma@gmail.com" , subject: "Contato EnTurma"
   end
+
+  def send_confirmation(contact)
+    @email =  contact.email
+    @name  = contact.name
+
+    mail to: @email , subject: "Recebemos seu email"
+  end
 end
