@@ -1,0 +1,16 @@
+class ContactMailer < ActionMailer::Base
+  default from: "contatoenturma@gmail.com"
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.contact_mailer.send_email.subject
+  #
+  def send_email(contact)
+    @name = contact.name
+    @email = contact.email
+    @message = contact.message
+
+    mail to: "contatoenturma@gmail.com" , subject: "Contato EnTurma"
+  end
+end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get ':controller(/:action(.:format)(/:id))'
 
   get '*unmatched_route', :to => 'application#raise_not_found!'
-
+  resources "contacts", only: [:new, :create]
   resources :parses do
   collection {post :import}
   end
