@@ -5,13 +5,5 @@ class Contact < MailForm::Base
   attribute :email,     :validate => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
   attribute :message
   attribute :subject , :validade => false
-
- def internet_connection?
-    begin
-      true if open("http://www.google.com/")
-    rescue
-      false
-    end
- end
-
+  
 end
