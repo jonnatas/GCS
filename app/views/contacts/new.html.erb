@@ -1,11 +1,16 @@
 <div align="left">
   <h3>Contato @ Enturma</h3>
 
-  <%= simple_form_for @contact, :html => {:class => 'form-horizontal' } do |f| %>
+  <%= simple_form_for @contact do |f| %>
     <p>Nome</p>
     <%= f.input :name, :label => "" , :required => true , :input_html => {:maxlength => 100, :size => 20}%>
      <p>Email</p>
     <%= f.input :email, :label => "" ,:required => true , :input_html => {:maxlength => 100, :size => 20} %>
+    <p>Assunto</p>
+    <div>
+      </br>
+      <%= f.input :subject,  :label => "" , :required => true , :input_html => {:maxlength => 50, :size => 20}%>
+    </div>
      <p>Mensagem</p>
     <%= f.input :message, :label => "" ,:as => :text, :required => true , :input_html => {:maxlength => 400, :size => 100} %>
     <div>
