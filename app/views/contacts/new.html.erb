@@ -9,7 +9,8 @@
     <p>Assunto</p>
     <div>
       </br>
-      <%= f.input :subject,  :label => "" , :required => true , :input_html => {:maxlength => 50, :size => 20}%>
+    <div>  
+      <%= f.select :subject,  ["Reportar Problema", "Sugestão de Melhoria" , "Fazer Elogio" , "Contato Comercial" , "Outro"], :label => "" ,  include_blank: false %>
     </div>
      <p>Mensagem</p>
     <%= f.input :message, :label => "" ,:as => :text, :required => true , :input_html => {:maxlength => 400, :size => 100} %>
