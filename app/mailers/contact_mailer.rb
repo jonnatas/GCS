@@ -11,7 +11,7 @@ class ContactMailer < ActionMailer::Base
     @email = contact.email
     @message = contact.message
     @subject = contact.subject
-    mail to: "contatoenturma@gmail.com" , subject: @subject
+    mail to: "contatoenturma@gmail.com" , subject: @subject.to_s
   end
 
   def send_confirmation(contact)
