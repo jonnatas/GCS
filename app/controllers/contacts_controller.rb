@@ -4,11 +4,14 @@ class ContactsController < ApplicationController
     @contact = Contact.new
   end
 
+  def sent
+  end
+
   def create
     @contact = Contact.new(params[:contact])
 
     if @contact
-      flash.now[:notice] = "Obrigado por entrar em contato."
+      render :sent
       ContactMailer.send_email(@contact).deliver
       ContactMailer.send_confirmation(@contact).deliver
     end

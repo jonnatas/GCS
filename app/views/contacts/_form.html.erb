@@ -1,0 +1,30 @@
+<%= simple_form_for @contact do |f| %>
+
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Nome</label>
+            <%= f.text_field :name, :label => "", :required => true, :class => 'form-control', :placeholder =>  'Seu nome aqui'%>
+            <p></p>
+          </div>
+
+          <div class="form-group col-xs-12 floating-label-form-group controls">                            
+           <label>E-mail</label>
+            <%= f.text_field :email, :label => "" , :required => true, :class => 'form-control', :placeholder =>  'Insira seu email' %>
+            <p></p>
+          </div>
+
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+          <label>Assunto</label>  
+            <%= f.select :subject,  ["Reportar Problema", "Sugestão" , "Elogio" , "Contato Comercial" , "Outro"], :label => "", include_blank: false, :class => 'dropit'  %>
+            <p></p>
+          </div>    
+
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Mensagem</label>
+            <%= f.text_area :message, :label => "" ,:as => :text, :required => true, :class => 'form-control', :placeholder =>  'Mensagem',:rows => 5 %>
+            <p></p>
+          </div>
+
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <%= f.button :submit, 'Enviar', :class=> 'btn btn-success btn-lg' %>
+          </div>
+        <% end %>

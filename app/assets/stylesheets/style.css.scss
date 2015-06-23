@@ -91,7 +91,7 @@ border-radius:0;
 
 .servicos img{
 	border-radius:100%;
-	opacity:0.30;
+	opacity:1;
 	transition: 0.25s;
 	position:relative;
 	
@@ -249,3 +249,18 @@ border-radius:0;
 .center-div {
 	margin-left: 25%;
 }
+
+
+#contact{
+
+	padding-bottom: 30px;
+}
+
+#contact h2{
+	padding-top: 20px;
+	padding-bottom: 10px;
+	font-family: 'Lato';
+	font-weight: bold;
+	font-size: 50px;
+}
+
