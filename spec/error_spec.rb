@@ -1,7 +1,7 @@
 require 'rspec'
 require 'rails_helper'
 
-require_relative'../app/Exceptions/Error'
+require_relative'../app/Exceptions/error'
 
 describe Error::FinalYearException do
 	before :each do
