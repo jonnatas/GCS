@@ -15,7 +15,7 @@ describe ContactsController, :type =>:request do
     describe "GET #create"
     it "should render the page and send the email" do
         get "contacts/create"
-        expect(flash.now[:notice]).to eq("Obrigado por entrar em contato.")
+        expect(response).to render_template("sent")
     end
 
 
