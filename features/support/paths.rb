@@ -13,6 +13,9 @@ module NavigationHelpers
     when /the homepage/
       'static_pages#home'
 
+      when /the report_page/
+        'report/index'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

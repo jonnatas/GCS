@@ -44,6 +44,7 @@ group :test do
 	gem 'rspec', '~> 3.0'
   	gem 'rspec-rails'
   	gem 'cucumber-rails', :require => false
+	gem 'selenium-webdriver'
   	# database_cleaner is not required, but highly recommended
   	gem 'database_cleaner'
 	gem 'simplecov', :require => false
