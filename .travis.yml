@@ -1,6 +1,6 @@
 language: ruby
 
-before_script: gem install rspec rspec-rails
+before_script: gem install rspec rspec-rails simplecov
 
 script: rspec spec
 
