@@ -25,7 +25,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
 
-gem 'json', '~> 1.8.2'
+gem 'json', '~> 1.8.3'
 
 gem 'mail_form'
 gem 'simple_form'
