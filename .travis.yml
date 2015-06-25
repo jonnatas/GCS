@@ -2,7 +2,7 @@ language: ruby
 
 before_script: gem install rspec rspec-rails simplecov
 
-script: rspec spec
+script: bundle exec rspec spec
 
 rvm:
   - 2.2.0 
