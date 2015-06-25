@@ -1,0 +1,19 @@
+language: ruby
+
+before_script: gem install rspec rspec-rails simplecov
+
+script: bundle exec rspec spec
+
+rvm:
+  - 2.2.0 
+notifications:
+  email:
+    recipients:
+      - johnnys.ribeiro@gmail.com
+      - icyrvnd@gmail.com
+      - simiaosimis@gmail.com
+      - tmb0710@gmail.com
+branches:
+  only:
+
+  - dev
