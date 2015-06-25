@@ -4,12 +4,10 @@
 
 $(document).ready ->
 
-	$("#contact_subject").on("change", ()->
-	     selectedValue = $("#contact_subject").val()
-	     console.log(selectedValue)
-	     if selectedValue == 'Outro'
-	       $("#outro").show()
-	     else
-	       $("#outro").hide()
-	    )
-	
+    $("#contact_subject").on("change", ()->
+        selectedValue = $("#contact_subject").val()
+        if selectedValue == 'Outro'
+            $("#outro").show()
+        else
+            $("#outro").hide()
+    )
