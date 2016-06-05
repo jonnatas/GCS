@@ -1,20 +1,21 @@
-language: ruby
+language:
+	- ruby
 
-before_script: gem install rspec rspec-rails simplecov
+before_script: 
+ 	- rake db:migrate RAILS_ENV=test
+	- gem install rspec rspec-rails simplecov
 
-script: bundle exec rspec spec
+script:
+	- bundle exec rspec spec
 
 rvm:
   - 2.2.0 
+
 notifications:
   email:
     recipients:
-      - johnnys.ribeiro@gmail.com
-      - icyrvnd@gmail.com
-      - simiaosimis@gmail.com
-      - tmb0710@gmail.com
-      - fazzolino29@gmail.com
+	- jonatas_lenon@hotmail.com.br
+	- danieelteles@gamil.com.br
 branches:
   only:
-
-  - dev
+  - devel
