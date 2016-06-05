@@ -1,5 +1,4 @@
-language:
-	- ruby
+language: ruby
 
 before_script: 
  	- rake db:migrate RAILS_ENV=test
@@ -18,4 +17,4 @@ notifications:
 	- danieelteles@gamil.com.br
 branches:
   only:
-  - devel
+  - dev
