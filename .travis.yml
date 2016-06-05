@@ -13,8 +13,8 @@ rvm:
 notifications:
   email:
     recipients:
-	- jonatas_lenon@hotmail.com.br
-	- danieelteles@gamil.com.br
+	- jonatas_lenon@hotmail.com
+	- danieelteles@gamil.com
 branches:
   only:
   - dev
