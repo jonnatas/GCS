@@ -4,11 +4,8 @@ script:
 - rake db:migrate RAILS_ENV=test
 - bundle exec rspec spec
 after_success:
-- cd scripts/
-- BRANCHES_TO_MERGE_REGEX='' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=jonnatas/GCS
-- chmod +x travis-automerge.sh 
-- cd ../
-
+- BRANCHES_TO_MERGE_REGEX='' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=jonnatas/GCS 
+script/travis-automerge.sh
 rvm:
 - 2.2.0
 notifications:
