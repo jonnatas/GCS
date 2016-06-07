@@ -1,9 +1,6 @@
 language: ruby
 rvm:
 - 2.2.0
-addons:
-    code_climate:
-    repo_token: 5655cc143b1d2c8e2a16c93c3e76f7d2907ba751950da6e623f23ba413ad5e7b
 before_script: gem install rspec rspec-rails simplecov
 script:
 - rake db:migrate RAILS_ENV=test
@@ -17,10 +14,8 @@ notifications:
     - danieelteles@gamil.com
 branches:
   only:
-  - dev
+  - master
 deploy:
   provider: heroku
   api_key:
     secure: nhpkyGyANKUYae0ncd/k37pjyGaz3eYDcGcFymQe6KVPSL04GTrzB6FsdbTi4rKxK6Q30JdbvM6Avf9nBl24SfSPhPgaX0+Isd7g2nMTPaZkbTldML8wLIBSj1xDz4eq841C4/I7CnZHlsvdGqgLSQyql5O6Jb/ZzCxrfIGS2gBSPayBMJ06x7FGeyp6hG1DpCk0Pu7TAJPZv/DM2C8PmaSHy6a8+Tsu8M3FdJymxMgFN2LUgi1ysr9IUiFoWejMYhOaoRaCBDXlnTtZ38Ic5IkfPYINpbNpvqcqkXkte7FB6LJ3ojeA8eakk6CY9/P3GtSf1hCqE+TNFqK1kCCibgBzm7pwIsUprUHPKv89nJrnb+XKS6neMk58UXyW37/hjwMwvfqeMTBgMfPkvbYnURpnj7Y3lEKkXiaElJQySviopmMqJQxLRyI7XKjYWaOkgij1n4gNJweS9kFroKcemXPs6vQ5me7EKZtUFBW5fNfvcBOuqP6Xm67W6Zo6XpbWRnqbRsMq7/rkAriT0IDAWjK4azN5RuLntGQgn5EnJH5DtDeBcRWTB1yT7dCGipKProiibDg6/lp3nkzECNQVkghIDRoFctIEj6UlqJBmEUX0Zq5ThAdz5JB7q6gpB6jy+ls3cOiZjXX+W0WneOETVcB7dudKiOnGovCpvsv3/+w=
-
-aac92e8fab85180e741585ed09742f7a0c8b17ee
