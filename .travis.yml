@@ -15,7 +15,7 @@ notifications:
     - danieelteles@gamil.com
 branches:
   only:
-  - master
+  - dev
 deploy:
   provider: heroku
   api_key:
