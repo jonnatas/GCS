@@ -5,8 +5,9 @@ before_script: gem install rspec rspec-rails simplecov
 script:
 - rake db:migrate RAILS_ENV=test
 - bundle exec rspec spec
+
 after_success:
-- BRANCHES_TO_MERGE_REGEX='' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=jonnatas/GCS script/travis-automerge.sh
+- GITHUB_SECRET_TOKEN="eCYMjHocnmgJhIpy2epD54MvzgKQRXrNnlBwgmo7mEljIvZyykNX7Van0V50LlEElK9HillzCJo9YNa/5dgSdoHJPrLFZqxXFVMrRX978HSUJHqOmKBd464uUQVIvsoDwyR9Aq6KahJeWJESlI+ymhXinrb1tmxb/juf5rUQkf0f6edC+YeymnI9tHdzA0eEWqiHMVp03aoNPT1dGOQ7AqRo1WSWRTd1ZGzjYC0EGWidmKaKdWK7dkKBvMv3IW7bUlAgA+RH/vV9YJG94pftRE24ffEfLpU7JaWgE63uev8Y7iBcU8b7srId1KLV/KqpGCTFM9SY7rs3oMZZ7fwU+eoQ/5odIB7IxpcI1O4Wt2IXvNNCg0q/6DqrCW5k91yWbf+M9JY74yTaftdqKEGAsSM1X8dTn1orL75Xfpms93nBRbLTX3ydAo6tfRCP9FbcSIsHeDRXxX+WaUY3l2KHI03Ii2k5oIr7Rm+dmZF8Qxo3FIU+jg6p28YWrfRODMg+Qsq4HkU6MiqK7bC1Jz9VPvuIkLPcXpxS+imYRg//1Dl01CCmaha4KipXMsD9cE7iVtARM3gKi55bfMbDL/jj9yTNDbt6flkpGnuxckM+YpMITAp00yqT7wFwdpWPn/1uGkoOaz+iQ/6HVVLg6zv8yZ4MmOwl4tMwxc8pRbVBLfs=" BRANCHES_TO_MERGE_REGEX='' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=jonnatas/GCS script/travis-automerge.sh
 notifications:
   email:
     recipients:
