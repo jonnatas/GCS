@@ -22,6 +22,9 @@ cd "$repo_temp"
 printf 'Checking out %s\n' "$BRANCH_TO_MERGE_INTO" >&2
 git checkout "$BRANCH_TO_MERGE_INTO"
 
+printf 'git branch ' >&2
+git branch
+
 printf 'Merging %s\n' "$TRAVIS_COMMIT" >&2
 git merge "$TRAVIS_COMMIT"
 
